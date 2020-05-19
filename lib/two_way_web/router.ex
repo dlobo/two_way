@@ -38,6 +38,10 @@ defmodule TwoWayWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/option_groups", OptionGroupController
+    resources "/option_values", OptionValueController
+    resources "/tags", TagController
+    resources "/session_messages", SessionMessageController
   end
 
   # Other scopes may use custom stacks.
