@@ -50,6 +50,6 @@ defmodule TwoWayWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug Pow.Plug.Session, otp_app: :my_app
+  plug Pow.Plug.Session, otp_app: :two_way
   plug TwoWayWeb.Router
 end
