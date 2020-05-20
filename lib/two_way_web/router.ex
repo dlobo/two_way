@@ -39,6 +39,7 @@ defmodule TwoWayWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
     resources "/option_groups", OptionGroupController
     resources "/option_values", OptionValueController
     resources "/tags", TagController
@@ -49,6 +50,10 @@ defmodule TwoWayWeb.Router do
   # scope "/api", TwoWayWeb do
   #   pipe_through :api
   # end
+
+  scope "/", TwoWayWeb do
+    forward("/gupshup", Plugs.GupshupShunt)
+  end
 
   # Enables LiveDashboard only for development
   #

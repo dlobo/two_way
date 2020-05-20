@@ -1,0 +1,23 @@
+defmodule TwoWayWeb.Plugs.GupshupShunt do
+  alias Plug.Conn
+  alias TwoWayWeb.GupshupRouter
+
+  def init(opts), do: opts
+
+  def call(%Conn{params: %{"type" => type}} = conn, opts) do
+    conn
+    |> change_path_info(["gupshup", type])
+    |> GupshupRouter.call(opts)
+  end
+
+  def call(conn, opts) do
+    conn
+    |> change_path_info(["gupshup", "unknown"])
+    |> GupshupRouter.call(opts)
+  end
+
+
+  def change_path_info(conn, new_path),
+    do: put_in(conn.path_info, new_path)
+
+end
