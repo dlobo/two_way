@@ -6,9 +6,33 @@ defmodule TwoWay.ContentTest do
   describe "session_messages" do
     alias TwoWay.Content.SessionMessage
 
-    @valid_attrs %{body: "some body", is_active: true, is_reserved: true, is_source: true, is_translated: true, label: "some label", language_id: 42}
-    @update_attrs %{body: "some updated body", is_active: false, is_reserved: false, is_source: false, is_translated: false, label: "some updated label", language_id: 43}
-    @invalid_attrs %{body: nil, is_active: nil, is_reserved: nil, is_source: nil, is_translated: nil, label: nil, language_id: nil}
+    @valid_attrs %{
+      body: "some body",
+      is_active: true,
+      is_reserved: true,
+      is_source: true,
+      is_translated: true,
+      label: "some label",
+      language_id: 42
+    }
+    @update_attrs %{
+      body: "some updated body",
+      is_active: false,
+      is_reserved: false,
+      is_source: false,
+      is_translated: false,
+      label: "some updated label",
+      language_id: 43
+    }
+    @invalid_attrs %{
+      body: nil,
+      is_active: nil,
+      is_reserved: nil,
+      is_source: nil,
+      is_translated: nil,
+      label: nil,
+      language_id: nil
+    }
 
     def session_message_fixture(attrs \\ %{}) do
       {:ok, session_message} =
@@ -30,7 +54,9 @@ defmodule TwoWay.ContentTest do
     end
 
     test "create_session_message/1 with valid data creates a session_message" do
-      assert {:ok, %SessionMessage{} = session_message} = Content.create_session_message(@valid_attrs)
+      assert {:ok, %SessionMessage{} = session_message} =
+               Content.create_session_message(@valid_attrs)
+
       assert session_message.body == "some body"
       assert session_message.is_active == true
       assert session_message.is_reserved == true
@@ -46,7 +72,10 @@ defmodule TwoWay.ContentTest do
 
     test "update_session_message/2 with valid data updates the session_message" do
       session_message = session_message_fixture()
-      assert {:ok, %SessionMessage{} = session_message} = Content.update_session_message(session_message, @update_attrs)
+
+      assert {:ok, %SessionMessage{} = session_message} =
+               Content.update_session_message(session_message, @update_attrs)
+
       assert session_message.body == "some updated body"
       assert session_message.is_active == false
       assert session_message.is_reserved == false
@@ -58,7 +87,10 @@ defmodule TwoWay.ContentTest do
 
     test "update_session_message/2 with invalid data returns error changeset" do
       session_message = session_message_fixture()
-      assert {:error, %Ecto.Changeset{}} = Content.update_session_message(session_message, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Content.update_session_message(session_message, @invalid_attrs)
+
       assert session_message == Content.get_session_message!(session_message.id)
     end
 

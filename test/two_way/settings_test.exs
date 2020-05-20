@@ -6,9 +6,33 @@ defmodule TwoWay.SettingsTest do
   describe "option_groups" do
     alias TwoWay.Settings.OptionGroup
 
-    @valid_attrs %{data_type: "some data_type", description: "some description", is_active: true, is_locked: true, is_reserved: true, label: "some label", name: "some name"}
-    @update_attrs %{data_type: "some updated data_type", description: "some updated description", is_active: false, is_locked: false, is_reserved: false, label: "some updated label", name: "some updated name"}
-    @invalid_attrs %{data_type: nil, description: nil, is_active: nil, is_locked: nil, is_reserved: nil, label: nil, name: nil}
+    @valid_attrs %{
+      data_type: "some data_type",
+      description: "some description",
+      is_active: true,
+      is_locked: true,
+      is_reserved: true,
+      label: "some label",
+      name: "some name"
+    }
+    @update_attrs %{
+      data_type: "some updated data_type",
+      description: "some updated description",
+      is_active: false,
+      is_locked: false,
+      is_reserved: false,
+      label: "some updated label",
+      name: "some updated name"
+    }
+    @invalid_attrs %{
+      data_type: nil,
+      description: nil,
+      is_active: nil,
+      is_locked: nil,
+      is_reserved: nil,
+      label: nil,
+      name: nil
+    }
 
     def option_group_fixture(attrs \\ %{}) do
       {:ok, option_group} =
@@ -46,7 +70,10 @@ defmodule TwoWay.SettingsTest do
 
     test "update_option_group/2 with valid data updates the option_group" do
       option_group = option_group_fixture()
-      assert {:ok, %OptionGroup{} = option_group} = Settings.update_option_group(option_group, @update_attrs)
+
+      assert {:ok, %OptionGroup{} = option_group} =
+               Settings.update_option_group(option_group, @update_attrs)
+
       assert option_group.data_type == "some updated data_type"
       assert option_group.description == "some updated description"
       assert option_group.is_active == false
@@ -58,7 +85,10 @@ defmodule TwoWay.SettingsTest do
 
     test "update_option_group/2 with invalid data returns error changeset" do
       option_group = option_group_fixture()
-      assert {:error, %Ecto.Changeset{}} = Settings.update_option_group(option_group, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Settings.update_option_group(option_group, @invalid_attrs)
+
       assert option_group == Settings.get_option_group!(option_group.id)
     end
 
@@ -77,9 +107,42 @@ defmodule TwoWay.SettingsTest do
   describe "option_values" do
     alias TwoWay.Settings.OptionValue
 
-    @valid_attrs %{description: "some description", filter: 42, grouping: "some grouping", is_active: true, is_default: true, is_optgroup: true, is_reserved: true, label: "some label", value: "some value", weight: 42}
-    @update_attrs %{description: "some updated description", filter: 43, grouping: "some updated grouping", is_active: false, is_default: false, is_optgroup: false, is_reserved: false, label: "some updated label", value: "some updated value", weight: 43}
-    @invalid_attrs %{description: nil, filter: nil, grouping: nil, is_active: nil, is_default: nil, is_optgroup: nil, is_reserved: nil, label: nil, value: nil, weight: nil}
+    @valid_attrs %{
+      description: "some description",
+      filter: 42,
+      grouping: "some grouping",
+      is_active: true,
+      is_default: true,
+      is_optgroup: true,
+      is_reserved: true,
+      label: "some label",
+      value: "some value",
+      weight: 42
+    }
+    @update_attrs %{
+      description: "some updated description",
+      filter: 43,
+      grouping: "some updated grouping",
+      is_active: false,
+      is_default: false,
+      is_optgroup: false,
+      is_reserved: false,
+      label: "some updated label",
+      value: "some updated value",
+      weight: 43
+    }
+    @invalid_attrs %{
+      description: nil,
+      filter: nil,
+      grouping: nil,
+      is_active: nil,
+      is_default: nil,
+      is_optgroup: nil,
+      is_reserved: nil,
+      label: nil,
+      value: nil,
+      weight: nil
+    }
 
     def option_value_fixture(attrs \\ %{}) do
       {:ok, option_value} =
@@ -120,7 +183,10 @@ defmodule TwoWay.SettingsTest do
 
     test "update_option_value/2 with valid data updates the option_value" do
       option_value = option_value_fixture()
-      assert {:ok, %OptionValue{} = option_value} = Settings.update_option_value(option_value, @update_attrs)
+
+      assert {:ok, %OptionValue{} = option_value} =
+               Settings.update_option_value(option_value, @update_attrs)
+
       assert option_value.description == "some updated description"
       assert option_value.filter == 43
       assert option_value.grouping == "some updated grouping"
@@ -135,7 +201,10 @@ defmodule TwoWay.SettingsTest do
 
     test "update_option_value/2 with invalid data returns error changeset" do
       option_value = option_value_fixture()
-      assert {:error, %Ecto.Changeset{}} = Settings.update_option_value(option_value, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Settings.update_option_value(option_value, @invalid_attrs)
+
       assert option_value == Settings.get_option_value!(option_value.id)
     end
 

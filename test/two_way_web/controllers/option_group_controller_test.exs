@@ -3,9 +3,33 @@ defmodule TwoWayWeb.OptionGroupControllerTest do
 
   alias TwoWay.Settings
 
-  @create_attrs %{data_type: "some data_type", description: "some description", is_active: true, is_locked: true, is_reserved: true, label: "some label", name: "some name"}
-  @update_attrs %{data_type: "some updated data_type", description: "some updated description", is_active: false, is_locked: false, is_reserved: false, label: "some updated label", name: "some updated name"}
-  @invalid_attrs %{data_type: nil, description: nil, is_active: nil, is_locked: nil, is_reserved: nil, label: nil, name: nil}
+  @create_attrs %{
+    data_type: "some data_type",
+    description: "some description",
+    is_active: true,
+    is_locked: true,
+    is_reserved: true,
+    label: "some label",
+    name: "some name"
+  }
+  @update_attrs %{
+    data_type: "some updated data_type",
+    description: "some updated description",
+    is_active: false,
+    is_locked: false,
+    is_reserved: false,
+    label: "some updated label",
+    name: "some updated name"
+  }
+  @invalid_attrs %{
+    data_type: nil,
+    description: nil,
+    is_active: nil,
+    is_locked: nil,
+    is_reserved: nil,
+    label: nil,
+    name: nil
+  }
 
   def fixture(:option_group) do
     {:ok, option_group} = Settings.create_option_group(@create_attrs)
@@ -56,7 +80,11 @@ defmodule TwoWayWeb.OptionGroupControllerTest do
     setup [:create_option_group]
 
     test "redirects when data is valid", %{conn: conn, option_group: option_group} do
-      conn = put(conn, Routes.option_group_path(conn, :update, option_group), option_group: @update_attrs)
+      conn =
+        put(conn, Routes.option_group_path(conn, :update, option_group),
+          option_group: @update_attrs
+        )
+
       assert redirected_to(conn) == Routes.option_group_path(conn, :show, option_group)
 
       conn = get(conn, Routes.option_group_path(conn, :show, option_group))
@@ -64,7 +92,11 @@ defmodule TwoWayWeb.OptionGroupControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, option_group: option_group} do
-      conn = put(conn, Routes.option_group_path(conn, :update, option_group), option_group: @invalid_attrs)
+      conn =
+        put(conn, Routes.option_group_path(conn, :update, option_group),
+          option_group: @invalid_attrs
+        )
+
       assert html_response(conn, 200) =~ "Edit Option group"
     end
   end
@@ -75,6 +107,7 @@ defmodule TwoWayWeb.OptionGroupControllerTest do
     test "deletes chosen option_group", %{conn: conn, option_group: option_group} do
       conn = delete(conn, Routes.option_group_path(conn, :delete, option_group))
       assert redirected_to(conn) == Routes.option_group_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.option_group_path(conn, :show, option_group))
       end

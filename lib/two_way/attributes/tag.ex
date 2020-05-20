@@ -5,10 +5,11 @@ defmodule TwoWay.Attributes.Tag do
   schema "tags" do
     field :label, :string
     field :description, :string
-    field :language_id, :integer
 
     field :is_active, :boolean, default: false
     field :is_reserved, :boolean, default: false
+
+    belongs_to :option_value, TwoWay.Settings.OptionValue, foreign_key: :language_id
 
     belongs_to :tag, TwoWay.Attributes.Tag, foreign_key: :parent_id
 

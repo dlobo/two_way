@@ -28,7 +28,8 @@ config :phoenix, :json_library, Jason
 
 # Configure to use UTC timestamp in tables
 config :two_way,
-  TwoWay.Repo, migration_timestamps: [type: :utc_datetime]
+       TwoWay.Repo,
+       migration_timestamps: [type: :utc_datetime]
 
 config :two_way, :pow,
   user: TwoWay.Users.User,

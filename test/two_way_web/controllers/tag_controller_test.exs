@@ -3,9 +3,27 @@ defmodule TwoWayWeb.TagControllerTest do
 
   alias TwoWay.Attributes
 
-  @create_attrs %{description: "some description", is_active: true, is_reserved: true, label: "some label", language_id: 42}
-  @update_attrs %{description: "some updated description", is_active: false, is_reserved: false, label: "some updated label", language_id: 43}
-  @invalid_attrs %{description: nil, is_active: nil, is_reserved: nil, label: nil, language_id: nil}
+  @create_attrs %{
+    description: "some description",
+    is_active: true,
+    is_reserved: true,
+    label: "some label",
+    language_id: 42
+  }
+  @update_attrs %{
+    description: "some updated description",
+    is_active: false,
+    is_reserved: false,
+    label: "some updated label",
+    language_id: 43
+  }
+  @invalid_attrs %{
+    description: nil,
+    is_active: nil,
+    is_reserved: nil,
+    label: nil,
+    language_id: nil
+  }
 
   def fixture(:tag) do
     {:ok, tag} = Attributes.create_tag(@create_attrs)
@@ -75,6 +93,7 @@ defmodule TwoWayWeb.TagControllerTest do
     test "deletes chosen tag", %{conn: conn, tag: tag} do
       conn = delete(conn, Routes.tag_path(conn, :delete, tag))
       assert redirected_to(conn) == Routes.tag_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.tag_path(conn, :show, tag))
       end

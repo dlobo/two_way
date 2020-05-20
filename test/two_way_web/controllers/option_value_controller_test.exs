@@ -3,9 +3,42 @@ defmodule TwoWayWeb.OptionValueControllerTest do
 
   alias TwoWay.Settings
 
-  @create_attrs %{description: "some description", filter: 42, grouping: "some grouping", is_active: true, is_default: true, is_optgroup: true, is_reserved: true, label: "some label", value: "some value", weight: 42}
-  @update_attrs %{description: "some updated description", filter: 43, grouping: "some updated grouping", is_active: false, is_default: false, is_optgroup: false, is_reserved: false, label: "some updated label", value: "some updated value", weight: 43}
-  @invalid_attrs %{description: nil, filter: nil, grouping: nil, is_active: nil, is_default: nil, is_optgroup: nil, is_reserved: nil, label: nil, value: nil, weight: nil}
+  @create_attrs %{
+    description: "some description",
+    filter: 42,
+    grouping: "some grouping",
+    is_active: true,
+    is_default: true,
+    is_optgroup: true,
+    is_reserved: true,
+    label: "some label",
+    value: "some value",
+    weight: 42
+  }
+  @update_attrs %{
+    description: "some updated description",
+    filter: 43,
+    grouping: "some updated grouping",
+    is_active: false,
+    is_default: false,
+    is_optgroup: false,
+    is_reserved: false,
+    label: "some updated label",
+    value: "some updated value",
+    weight: 43
+  }
+  @invalid_attrs %{
+    description: nil,
+    filter: nil,
+    grouping: nil,
+    is_active: nil,
+    is_default: nil,
+    is_optgroup: nil,
+    is_reserved: nil,
+    label: nil,
+    value: nil,
+    weight: nil
+  }
 
   def fixture(:option_value) do
     {:ok, option_value} = Settings.create_option_value(@create_attrs)
@@ -56,7 +89,11 @@ defmodule TwoWayWeb.OptionValueControllerTest do
     setup [:create_option_value]
 
     test "redirects when data is valid", %{conn: conn, option_value: option_value} do
-      conn = put(conn, Routes.option_value_path(conn, :update, option_value), option_value: @update_attrs)
+      conn =
+        put(conn, Routes.option_value_path(conn, :update, option_value),
+          option_value: @update_attrs
+        )
+
       assert redirected_to(conn) == Routes.option_value_path(conn, :show, option_value)
 
       conn = get(conn, Routes.option_value_path(conn, :show, option_value))
@@ -64,7 +101,11 @@ defmodule TwoWayWeb.OptionValueControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, option_value: option_value} do
-      conn = put(conn, Routes.option_value_path(conn, :update, option_value), option_value: @invalid_attrs)
+      conn =
+        put(conn, Routes.option_value_path(conn, :update, option_value),
+          option_value: @invalid_attrs
+        )
+
       assert html_response(conn, 200) =~ "Edit Option value"
     end
   end
@@ -75,6 +116,7 @@ defmodule TwoWayWeb.OptionValueControllerTest do
     test "deletes chosen option_value", %{conn: conn, option_value: option_value} do
       conn = delete(conn, Routes.option_value_path(conn, :delete, option_value))
       assert redirected_to(conn) == Routes.option_value_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.option_value_path(conn, :show, option_value))
       end

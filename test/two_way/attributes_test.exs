@@ -6,9 +6,27 @@ defmodule TwoWay.AttributesTest do
   describe "tags" do
     alias TwoWay.Attributes.Tag
 
-    @valid_attrs %{description: "some description", is_active: true, is_reserved: true, label: "some label", language_id: 42}
-    @update_attrs %{description: "some updated description", is_active: false, is_reserved: false, label: "some updated label", language_id: 43}
-    @invalid_attrs %{description: nil, is_active: nil, is_reserved: nil, label: nil, language_id: nil}
+    @valid_attrs %{
+      description: "some description",
+      is_active: true,
+      is_reserved: true,
+      label: "some label",
+      language_id: 42
+    }
+    @update_attrs %{
+      description: "some updated description",
+      is_active: false,
+      is_reserved: false,
+      label: "some updated label",
+      language_id: 43
+    }
+    @invalid_attrs %{
+      description: nil,
+      is_active: nil,
+      is_reserved: nil,
+      label: nil,
+      language_id: nil
+    }
 
     def tag_fixture(attrs \\ %{}) do
       {:ok, tag} =
