@@ -29,31 +29,34 @@ defmodule TwoWayWeb.GupshupRouter do
   scope "/gupshup", TwoWayWeb do
 
     scope "/user-event" do
-      post("/"             , GupshupController, :user_event)
-      post("/sandbox-start", GupshupController, :sandbox_start)
-      post("/opted-in"     , GupshupController, :opted_in)
-      post("/opted-out"    , GupshupController, :opted_out)
+      post("/"             , GupshupUserEventController, :user_event)
+      post("/sandbox-start", GupshupUserEventController, :sandbox_start)
+      post("/opted-in"     , GupshupUserEventController, :opted_in)
+      post("/opted-out"    , GupshupUserEventController, :opted_out)
+      post("/unknown"      , GupshupController, :unknown)
     end
 
     scope "/message-event" do
-      post("/"         , GupshupController, :message_event)
-      post("/enqueued" , GupshupController, :enqueued)
-      post("/failed"   , GupshupController, :failed)
-      post("/sent"     , GupshupController, :sent)
-      post("/delivered", GupshupController, :delivered)
+      post("/"         , GupshupMessageEventController, :message_event)
+      post("/enqueued" , GupshupMessageEventController, :enqueued)
+      post("/failed"   , GupshupMessageEventController, :failed)
+      post("/sent"     , GupshupMessageEventController, :sent)
+      post("/delivered", GupshupMessageEventController, :delivered)
+      post("/unknown"      , GupshupController, :unknown)
     end
 
     scope "/message" do
-      post("/"        , GupshupController, :message)
-      post("/text"    , GupshupController, :text)
-      post("/image"   , GupshupController, :image)
-      post("/file"    , GupshupController, :file)
-      post("/audio"   , GupshupController, :audio)
-      post("/video"   , GupshupController, :video)
-      post("/contact" , GupshupController, :contact)
-      post("/location", GupshupController, :location)
+      post("/"        , GupshupMessageController, :message)
+      post("/text"    , GupshupMessageController, :text)
+      post("/image"   , GupshupMessageController, :image)
+      post("/file"    , GupshupMessageController, :file)
+      post("/audio"   , GupshupMessageController, :audio)
+      post("/video"   , GupshupMessageController, :video)
+      post("/contact" , GupshupMessageController, :contact)
+      post("/location", GupshupMessageController, :location)
+      post("/unknown"      , GupshupController, :unknown)
     end
 
-    post("/unknown"      , GupshupController, :unknown)
+    post("/unknown/unknown"      , GupshupController, :unknown)
   end
 end
