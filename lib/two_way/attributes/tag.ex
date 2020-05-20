@@ -3,11 +3,14 @@ defmodule TwoWay.Attributes.Tag do
   import Ecto.Changeset
 
   schema "tags" do
+    field :label, :string
     field :description, :string
+    field :language_id, :integer
+
     field :is_active, :boolean, default: false
     field :is_reserved, :boolean, default: false
-    field :label, :string
-    field :language_id, :integer
+
+    belongs_to :tag, TwoWay.Attributes.Tag, foreign_key: :parent_id
 
     timestamps()
   end

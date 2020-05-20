@@ -22,7 +22,29 @@ defmodule TwoWay.Settings.OptionValue do
   @doc false
   def changeset(option_value, attrs) do
     option_value
-    |> cast(attrs, [:label, :description, :value, :grouping, :filter, :weight, :is_default, :is_optgroup, :is_reserved, :is_active])
-    |> validate_required([:label, :description, :value, :grouping, :filter, :weight, :is_default, :is_optgroup, :is_reserved, :is_active])
+    |> cast(attrs, [
+      :label,
+      :description,
+      :value,
+      :grouping,
+      :filter,
+      :weight,
+      :is_default,
+      :is_optgroup,
+      :is_reserved,
+      :is_active
+    ])
+    |> validate_required([
+      :label,
+      :description,
+      :value,
+      :grouping,
+      :filter,
+      :weight,
+      :is_default,
+      :is_optgroup,
+      :is_reserved,
+      :is_active
+    ])
   end
 end

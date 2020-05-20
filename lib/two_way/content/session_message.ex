@@ -17,7 +17,23 @@ defmodule TwoWay.Content.SessionMessage do
   @doc false
   def changeset(session_message, attrs) do
     session_message
-    |> cast(attrs, [:label, :body, :is_reserved, :is_active, :is_source, :is_translated, :language_id])
-    |> validate_required([:label, :body, :is_reserved, :is_active, :is_source, :is_translated, :language_id])
+    |> cast(attrs, [
+      :label,
+      :body,
+      :is_reserved,
+      :is_active,
+      :is_source,
+      :is_translated,
+      :language_id
+    ])
+    |> validate_required([
+      :label,
+      :body,
+      :is_reserved,
+      :is_active,
+      :is_source,
+      :is_translated,
+      :language_id
+    ])
   end
 end

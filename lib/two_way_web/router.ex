@@ -1,6 +1,7 @@
 defmodule TwoWayWeb.Router do
   use TwoWayWeb, :router
   use Pow.Phoenix.Router
+
   use Pow.Extension.Phoenix.Router,
     extensions: [PowResetPassword, PowEmailConfirmation]
 

@@ -73,7 +73,8 @@ defmodule TwoWayWeb do
 
   def mailer_view do
     quote do
-      use Phoenix.View, root: "lib/two_way_web/templates",
+      use Phoenix.View,
+        root: "lib/two_way_web/templates",
         namespace: TwoWayWeb
 
       use Phoenix.HTML

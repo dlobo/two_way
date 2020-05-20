@@ -18,6 +18,14 @@ defmodule TwoWay.Settings.OptionGroup do
   def changeset(option_group, attrs) do
     option_group
     |> cast(attrs, [:name, :label, :description, :data_type, :is_reserved, :is_active, :is_locked])
-    |> validate_required([:name, :label, :description, :data_type, :is_reserved, :is_active, :is_locked])
+    |> validate_required([
+      :name,
+      :label,
+      :description,
+      :data_type,
+      :is_reserved,
+      :is_active,
+      :is_locked
+    ])
   end
 end
