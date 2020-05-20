@@ -3,18 +3,20 @@ defmodule TwoWay.Settings.OptionValue do
   import Ecto.Changeset
 
   schema "option_values" do
-    field :description, :string
-    field :filter, :integer
-    field :grouping, :string
-    field :is_active, :boolean, default: false
-    field :is_default, :boolean, default: false
-    field :is_optgroup, :boolean, default: false
-    field :is_reserved, :boolean, default: false
     field :label, :string
     field :value, :string
     field :weight, :integer
+    field :description, :string
+    field :filter, :integer
+    field :grouping, :string
+    field :is_optgroup, :boolean, default: false
+    field :is_default, :boolean, default: false
+    field :is_active, :boolean, default: true
+    field :is_reserved, :boolean, default: false
 
     timestamps()
+
+    belongs_to :option_group, TwoWay.Settings.OptionGroup
   end
 
   @doc false

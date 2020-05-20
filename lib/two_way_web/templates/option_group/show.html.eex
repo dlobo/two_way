@@ -23,17 +23,17 @@
   </li>
 
   <li>
-    <strong>Is reserved:</strong>
+    <strong>Reserved?:</strong>
     <%= @option_group.is_reserved %>
   </li>
 
   <li>
-    <strong>Is active:</strong>
+    <strong>Active?:</strong>
     <%= @option_group.is_active %>
   </li>
 
   <li>
-    <strong>Is locked:</strong>
+    <strong>Locked?:</strong>
     <%= @option_group.is_locked %>
   </li>
 

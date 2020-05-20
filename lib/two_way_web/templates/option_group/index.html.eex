@@ -7,9 +7,9 @@
       <th>Label</th>
       <th>Description</th>
       <th>Data type</th>
-      <th>Is reserved</th>
-      <th>Is active</th>
-      <th>Is locked</th>
+      <th>Reserved?</th>
+      <th>Active?</th>
+      <th>Locked?</th>
 
       <th></th>
     </tr>

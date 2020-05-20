@@ -43,7 +43,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       add :label      , :string , null: false    # String displayed to the User
       add :description, :string , null: true     # Optional text describing the usage of this value
       add :value      , :string , null: false    # The actual value stored (as a foreign key) in the data record. Functions which need lookup option_value.label should use civicrm_option_value.option_group_id plus civicrm_option_value.value as the key
-      add :grouping   , :string , null: false    # Use to sort and/or set display properties for sub-set(s) of options within an option group
+      add :grouping   , :string , null: true     # Use to sort and/or set display properties for sub-set(s) of options within an option group
       add :filter     , :integer                 # Bitwise logic can be used to create subsets of options within an option_group for different uses.
       add :weight     , :integer, null: false    # Controls display order
       add :is_default , :boolean, default: false # Is this the default option for the group
@@ -53,6 +53,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
       add :option_group_id, references(:option_groups), null: false, on_delete: :restrict
 
+      timestamps()
     end
 
     create index(:option_values, [:label, :option_group_id], unique: true)

@@ -21,15 +21,15 @@
   <%= text_input f, :data_type %>
   <%= error_tag f, :data_type %>
 
-  <%= label f, :is_reserved %>
+  <%= label f, :is_reserved, "Reserved?" %>
   <%= checkbox f, :is_reserved %>
   <%= error_tag f, :is_reserved %>
 
-  <%= label f, :is_active %>
+  <%= label f, :is_active, "Active?" %>
   <%= checkbox f, :is_active %>
   <%= error_tag f, :is_active %>
 
-  <%= label f, :is_locked %>
+  <%= label f, :is_locked, "Locked?" %>
   <%= checkbox f, :is_locked %>
   <%= error_tag f, :is_locked %>
 
