@@ -49,7 +49,8 @@ defmodule TwoWay.MixProject do
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 0.8.8", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.18", only: [:dev], runtime: false},
-      {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false}
+      {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false},
+      {:mojito, "~> 0.6.4"}
     ]
   end
 
