@@ -1,23 +1,22 @@
 defmodule TwoWay.GupshupApi do
   def make_call(payload, destination) do
-
     request_body =
       %{"channel" => "whatsapp"}
       |> Map.merge(get_source)
       |> Map.put(:destination, destination)
-      |> Map.put("message", "Hello")
-      |> Poison.encode!
+      |> Map.put("message", payload)
+      |> URI.encode_query()
 
     url = System.get_env("GUPSHUP_API_URL") || "https://api.gupshup.io/sm/api/v1/msg"
     response = HTTPoison.post(url, request_body, get_headers())
     IO.inspect(response)
+  end
 
-    # case Mojito.post(url, get_headers(), Jason.encode!(request_body),
-    #        opts: [transport_opts: [verify: :verify_none]]
-    #      ) do
-    #   {:ok, response} -> success_response(response)
-    #   {:error, error} -> failed_response(error)
-    # end
+  def get_headers() do
+    [
+      {"Content-type", "application/x-www-form-urlencoded"},
+      {"apikey", System.get_env("GUPSHUP_API_KEY")}
+    ]
   end
 
   def success_response(response) do
@@ -63,12 +62,5 @@ defmodule TwoWay.GupshupApi do
 
   def get_source() do
     %{"source" => "917834811114", "src.name" => "NGO Name"}
-  end
-
-  def get_headers() do
-    [
-      {"content-type", "application/x-www-form-urlencoded"},
-      {"apikey", System.get_env("GUPSHUP_API_KEY") || "380a3225dc604909c9cb8406c7d49f75"}
-    ]
   end
 end
