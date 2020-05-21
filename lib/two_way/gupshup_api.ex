@@ -2,7 +2,7 @@ defmodule TwoWay.GupshupApi do
   def make_call(payload, destination) do
     request_body =
       %{"channel" => "whatsapp"}
-      |> Map.merge(get_source)
+      |> Map.merge(get_source())
       |> Map.put(:destination, destination)
       |> Map.put("message", payload)
       |> URI.encode_query()
