@@ -8,7 +8,11 @@ defmodule TwoWay.GupshupApi do
       |> URI.encode_query()
 
     url = System.get_env("GUPSHUP_API_URL") || "https://api.gupshup.io/sm/api/v1/msg"
-    response = HTTPoison.post(url, request_body, get_headers())
+    IO.inspect(url)
+    IO.inspect(request_body)
+    IO.inspect(get_headers())
+    options = [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 500]
+    response = HTTPoison.post(url, request_body, get_headers(), options)
     IO.inspect(response)
   end
 

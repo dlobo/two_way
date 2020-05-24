@@ -20,7 +20,7 @@ defmodule TwoWay.MixProject do
   def application do
     [
       mod: {TwoWay.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :absinthe_plug]
     ]
   end
 
@@ -51,6 +51,8 @@ defmodule TwoWay.MixProject do
       {:ex_doc, "~> 0.18", only: [:dev], runtime: false},
       {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 1.6"},
+      {:absinthe, "~> 1.5"},
+      {:absinthe_plug ,"~> 1.5"},
     ]
   end
 

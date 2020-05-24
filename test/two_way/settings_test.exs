@@ -219,4 +219,69 @@ defmodule TwoWay.SettingsTest do
       assert %Ecto.Changeset{} = Settings.change_option_value(option_value)
     end
   end
+
+  describe "languages" do
+    alias TwoWay.Settings.Language
+
+    @valid_attrs %{description: "some description", is_active: true, label: "some label", locale: "some locale"}
+    @update_attrs %{description: "some updated description", is_active: false, label: "some updated label", locale: "some updated locale"}
+    @invalid_attrs %{description: nil, is_active: nil, label: nil, locale: nil}
+
+    def language_fixture(attrs \\ %{}) do
+      {:ok, language} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Settings.create_language()
+
+      language
+    end
+
+    test "list_languages/0 returns all languages" do
+      language = language_fixture()
+      assert Settings.list_languages() == [language]
+    end
+
+    test "get_language!/1 returns the language with given id" do
+      language = language_fixture()
+      assert Settings.get_language!(language.id) == language
+    end
+
+    test "create_language/1 with valid data creates a language" do
+      assert {:ok, %Language{} = language} = Settings.create_language(@valid_attrs)
+      assert language.description == "some description"
+      assert language.is_active == true
+      assert language.label == "some label"
+      assert language.locale == "some locale"
+    end
+
+    test "create_language/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Settings.create_language(@invalid_attrs)
+    end
+
+    test "update_language/2 with valid data updates the language" do
+      language = language_fixture()
+      assert {:ok, %Language{} = language} = Settings.update_language(language, @update_attrs)
+      assert language.description == "some updated description"
+      assert language.is_active == false
+      assert language.label == "some updated label"
+      assert language.locale == "some updated locale"
+    end
+
+    test "update_language/2 with invalid data returns error changeset" do
+      language = language_fixture()
+      assert {:error, %Ecto.Changeset{}} = Settings.update_language(language, @invalid_attrs)
+      assert language == Settings.get_language!(language.id)
+    end
+
+    test "delete_language/1 deletes the language" do
+      language = language_fixture()
+      assert {:ok, %Language{}} = Settings.delete_language(language)
+      assert_raise Ecto.NoResultsError, fn -> Settings.get_language!(language.id) end
+    end
+
+    test "change_language/1 returns a language changeset" do
+      language = language_fixture()
+      assert %Ecto.Changeset{} = Settings.change_language(language)
+    end
+  end
 end

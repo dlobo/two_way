@@ -42,6 +42,7 @@ defmodule TwoWayWeb.Router do
 
     resources "/option_groups", OptionGroupController
     resources "/option_values", OptionValueController
+    resources "/languages", LanguageController
     resources "/tags", TagController
     resources "/session_messages", SessionMessageController
   end

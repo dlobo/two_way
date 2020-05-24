@@ -6,6 +6,8 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
     option_values()
 
+    languages()
+
     tags()
 
     session_messages()
@@ -80,6 +82,30 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
   end
 
   @doc """
+  Since Language is such an important part of the conversation, lets givve language its
+  own table. This allows us to optimize and switch languages relatively quickly
+  """
+  def languages() do
+    create table(:languages) do
+      # The language label, typically the full name, like English (US) or Hindi
+      add :label, :string, null: false
+      # An optional description
+      add :description, :string, null: true
+
+      # The locale name of the language dialect, e.g. en_US, or hi_IN
+      add :locale :string, null: false
+
+      # Is this language being currently used in the sysem
+      add :is_active, :boolean, default: true
+
+      timestamps()
+    end
+
+    create index(:languages, :label , unique: true)
+    create index(:languages, :locale, unique: true)
+end
+
+  @doc """
   Multiple entities within the system like to be tagged. For e.g. Messages and Message Templates
   can be either manually tagged or automatically tagged.
   """
@@ -96,7 +122,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       add :is_reserved, :boolean, default: false
 
       # foreign key to  option_value:value column with the option_group.name being "language"
-      add :language_id, references(:option_values), null: false, on_delete: :restrict
+      add :language_id, references(:languages), null: false, on_delete: :restrict
 
       # All child tags point to the parent tag, this allows us a to organize tags as needed
       add :parent_id, references(:tags), null: true, on_delete: :nilify_all
@@ -128,9 +154,8 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       # Is this translation machine-generated
       add :is_translated, :boolean, default: false
 
-      # Messages are in a specific language, this is an articial FK
-      # foreign key to  option_value:value column with the option_group.name being "language"
-      add :language_id, references(:option_values), null: false, on_delete: :restrict
+      # Messages are in a specific language
+      add :language_id, references(:languages), null: false, on_delete: :restrict
 
       # All child messages point to the root message, so we can propagate changes downstream
       add :parent_id, references(:session_messages), null: true, on_delete: :nilify_all
