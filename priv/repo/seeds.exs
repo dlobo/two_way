@@ -25,9 +25,12 @@ hi_in =
     locale: "hi_IN"
   })
 
-Repo.insert!(%Tag{label: "Welcome", language: en_us})
-Repo.insert!(%Tag{label: "Greeting", language: en_us})
-Repo.insert!(%Tag{label: "Thank You", language: en_us})
-Repo.insert!(%Tag{label: "Welcome", language: hi_in})
-Repo.insert!(%Tag{label: "Greeting", language: hi_in})
-Repo.insert!(%Tag{label: "Thank You", language: hi_in})
+messageTags_EN = Repo.insert!(%Tag{label: "Messages", language: en_us})
+messageTags_HI = Repo.insert!(%Tag{label: "Messages", language: hi_in})
+
+Repo.insert!(%Tag{label: "Welcome"  , language: en_us, tag: messageTags_EN})
+Repo.insert!(%Tag{label: "Greeting" , language: en_us, tag: messageTags_EN})
+Repo.insert!(%Tag{label: "Thank You", language: en_us, tag: messageTags_EN})
+Repo.insert!(%Tag{label: "Welcome"  , language: hi_in, tag: messageTags_HI})
+Repo.insert!(%Tag{label: "Greeting" , language: hi_in, tag: messageTags_HI})
+Repo.insert!(%Tag{label: "Thank You", language: hi_in, tag: messageTags_HI})
