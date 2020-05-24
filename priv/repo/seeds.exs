@@ -14,15 +14,15 @@ alias TwoWay.{Settings.OptionGroup, Settings.OptionValue, Attributes.Tag, Conten
 
 en_us =
   Repo.insert!(%Language{
-        label: "English (United States)",
-        name: "en_US",
- })
+    label: "English (United States)",
+    name: "en_US"
+  })
+
 hi_in =
   Repo.insert!(%Language{
     label: "Hindi (India)",
-    name: "hi_IN",
+    name: "hi_IN"
   })
-
 
 Repo.insert!(%Tag{label: "Welcome", language: en_us})
 Repo.insert!(%Tag{label: "Greeting", language: en_us})

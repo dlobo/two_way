@@ -11,7 +11,7 @@ defmodule TwoWay.GupshupApi do
     IO.inspect(url)
     IO.inspect(request_body)
     IO.inspect(get_headers())
-    options = [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 500]
+    options = [ssl: [{:versions, [:"tlsv1.2"]}], recv_timeout: 500]
     response = HTTPoison.post(url, request_body, get_headers(), options)
     IO.inspect(response)
   end

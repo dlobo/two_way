@@ -3,8 +3,18 @@ defmodule TwoWayWeb.LanguageControllerTest do
 
   alias TwoWay.Settings
 
-  @create_attrs %{description: "some description", is_active: true, label: "some label", locale: "some locale"}
-  @update_attrs %{description: "some updated description", is_active: false, label: "some updated label", locale: "some updated locale"}
+  @create_attrs %{
+    description: "some description",
+    is_active: true,
+    label: "some label",
+    locale: "some locale"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    is_active: false,
+    label: "some updated label",
+    locale: "some updated locale"
+  }
   @invalid_attrs %{description: nil, is_active: nil, label: nil, locale: nil}
 
   def fixture(:language) do
@@ -75,6 +85,7 @@ defmodule TwoWayWeb.LanguageControllerTest do
     test "deletes chosen language", %{conn: conn, language: language} do
       conn = delete(conn, Routes.language_path(conn, :delete, language))
       assert redirected_to(conn) == Routes.language_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.language_path(conn, :show, language))
       end

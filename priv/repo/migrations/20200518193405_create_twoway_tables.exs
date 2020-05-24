@@ -93,7 +93,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       add :description, :string, null: true
 
       # The locale name of the language dialect, e.g. en_US, or hi_IN
-      add :locale :string, null: false
+      add :locale, :string, null: false
 
       # Is this language being currently used in the sysem
       add :is_active, :boolean, default: true
@@ -101,9 +101,9 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       timestamps()
     end
 
-    create index(:languages, :label , unique: true)
+    create index(:languages, :label, unique: true)
     create index(:languages, :locale, unique: true)
-end
+  end
 
   @doc """
   Multiple entities within the system like to be tagged. For e.g. Messages and Message Templates

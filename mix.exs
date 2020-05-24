@@ -52,7 +52,7 @@ defmodule TwoWay.MixProject do
       {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 1.6"},
       {:absinthe, "~> 1.5"},
-      {:absinthe_plug ,"~> 1.5"},
+      {:absinthe_plug, "~> 1.5"}
     ]
   end
 

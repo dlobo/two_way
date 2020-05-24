@@ -223,8 +223,18 @@ defmodule TwoWay.SettingsTest do
   describe "languages" do
     alias TwoWay.Settings.Language
 
-    @valid_attrs %{description: "some description", is_active: true, label: "some label", locale: "some locale"}
-    @update_attrs %{description: "some updated description", is_active: false, label: "some updated label", locale: "some updated locale"}
+    @valid_attrs %{
+      description: "some description",
+      is_active: true,
+      label: "some label",
+      locale: "some locale"
+    }
+    @update_attrs %{
+      description: "some updated description",
+      is_active: false,
+      label: "some updated label",
+      locale: "some updated locale"
+    }
     @invalid_attrs %{description: nil, is_active: nil, label: nil, locale: nil}
 
     def language_fixture(attrs \\ %{}) do
