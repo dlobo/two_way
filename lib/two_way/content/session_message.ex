@@ -11,7 +11,7 @@ defmodule TwoWay.Content.SessionMessage do
     field :is_active, :boolean, default: false
     field :is_reserved, :boolean, default: false
 
-    belongs_to :option_value, TwoWay.Settings.OptionValue, foreign_key: :language_id
+    belongs_to :language, TwoWay.Settings.Language
 
     belongs_to :tag, TwoWay.Attributes.Tag
 

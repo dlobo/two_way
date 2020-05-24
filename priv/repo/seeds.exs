@@ -10,18 +10,19 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias TwoWay.Repo
-alias TwoWay.{Settings.OptionGroup, Settings.OptionValue, Attributes.Tag, Content.SessionMessage}
+alias TwoWay.Settings.{OptionGroup, OptionValue, Language}
+alias TwoWay.{Attributes.Tag, Content.SessionMessage}
 
 en_us =
   Repo.insert!(%Language{
     label: "English (United States)",
-    name: "en_US"
+    locale: "en_US"
   })
 
 hi_in =
   Repo.insert!(%Language{
     label: "Hindi (India)",
-    name: "hi_IN"
+    locale: "hi_IN"
   })
 
 Repo.insert!(%Tag{label: "Welcome", language: en_us})
