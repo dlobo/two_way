@@ -53,6 +53,8 @@ defmodule TwoWay.MixProject do
       {:httpoison, "~> 1.6"},
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"}
+      {:absinthe_phoenix, "~> 1.5"},
+      {:absinthe_relay, "~> 1.5"},
     ]
   end
 
