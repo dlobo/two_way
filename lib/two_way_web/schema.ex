@@ -3,6 +3,14 @@ defmodule TwoWayWeb.Schema do
 
   alias TwoWayWeb.Resolvers
   alias TwoWay.Attributes.Tag
+  alias TwoWayWeb.Schema.Middleware
+
+  def middleware(middleware, _field, %{identifier: :mutation}) do
+    middleware ++ [Middleware.ChangesetErrors]
+  end
+  def middleware(middleware, _field, _object) do
+    middleware
+  end
 
   import_types __MODULE__.GenericTypes
   import_types __MODULE__.TagTypes
@@ -22,6 +30,18 @@ defmodule TwoWayWeb.Schema do
 
   end
 
+  mutation do
+    field :create_language, :language_result do
+      arg :input, non_null(:language_input)
+      resolve &Resolvers.Settings.create_language/3
+    end
+
+    field :create_tag, :tag_result do
+      arg :input, non_null(:tag_input)
+      resolve &Resolvers.Attributes.create_tag/3
+    end
+
+  end
 
   def context(ctx) do
     loader =

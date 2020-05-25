@@ -15,11 +15,8 @@ defmodule TwoWayWeb.Resolvers.Attributes do
   end
 
   def create_tag(_, %{input: params}, _) do
-    case Attributes.create_tag(params) do
-      {:error, _} ->
-        {:error, "Could not create tag"}
-      {:ok, _} = success ->
-        success
+    with {:ok, tag} <- Attributes.create_tag(params) do
+      {:ok, %{tag: tag}}
     end
   end
 

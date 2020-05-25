@@ -1,7 +1,11 @@
 defmodule TwoWayWeb.Schema.GenericTypes do
   use Absinthe.Schema.Notation
 
-  alias TwoWay.Attributes.Tag
+  @desc "An error encountered trying to persist input"
+  object :input_error do
+    field :key, non_null(:string)
+    field :message, non_null(:string)
+  end
 
   enum :sort_order do
     value :asc
@@ -33,5 +37,6 @@ defmodule TwoWayWeb.Schema.GenericTypes do
 
     serialize &to_string/1
   end
+
 
 end

@@ -11,4 +11,10 @@ defmodule TwoWayWeb.Resolvers.Settings do
     {:ok, Attributes.search(term)}
   end
 
+  def create_language(_, %{input: params}, _) do
+    with {:ok, language} <- Settings.create_language(params) do
+      {:ok, %{language: language}}
+    end
+  end
+
 end
