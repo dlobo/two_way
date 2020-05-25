@@ -2,6 +2,7 @@ defmodule TwoWayWeb.Schema do
   use Absinthe.Schema
 
   alias TwoWayWeb.Resolvers
+  alias TwoWay.Attributes.Tag
 
   import_types __MODULE__.DataTypes
 
@@ -18,6 +19,18 @@ defmodule TwoWayWeb.Schema do
       resolve &Resolvers.Settings.languages/3
     end
 
+  end
+
+  def context(ctx) do
+    loader =
+      Dataloader.new
+      |> Dataloader.add_source(Tag, Tag.data())
+
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
   end
 
 end

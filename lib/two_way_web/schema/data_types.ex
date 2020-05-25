@@ -1,5 +1,6 @@
 defmodule TwoWayWeb.Schema.DataTypes do
   use Absinthe.Schema.Notation
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
   alias TwoWayWeb.Resolvers
   alias TwoWay.{Attributes.Tag, Settings.Language}
@@ -46,14 +47,9 @@ defmodule TwoWayWeb.Schema.DataTypes do
     field :is_reserved, :boolean
 
     field :language   , :language do
-      resolve fn tag, _, _ ->
-        batch({TwoWayWeb.Schema.Helpers, :by_id, Language},
-          tag.language_id,
-          fn batch_results ->
-            {:ok, Map.get(batch_results, tag.language_id)}
-          end)
-      end
+      resolve dataloader(Tag)
     end
+
   end
 
   enum :sort_order do

@@ -23,4 +23,13 @@ defmodule TwoWay.Attributes.Tag do
     |> cast(attrs, [:label, :description, :is_reserved, :is_active, :language_id])
     |> validate_required([:label, :description, :is_reserved, :is_active, :language_id])
   end
+
+  def data() do
+    Dataloader.Ecto.new(TwoWay.Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
+
 end
