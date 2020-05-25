@@ -17,7 +17,7 @@ defmodule TwoWay.Communications.BSP.Gupshup do
       |> Map.put(:destination, destination)
       |> Map.put("message", payload)
 
-    data = ApiClient.post("/msg", request_body)
+    ApiClient.post("/msg", request_body)
     {:ok, "message sent from gupshup"}
   end
 
