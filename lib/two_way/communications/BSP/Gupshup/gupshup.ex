@@ -5,7 +5,6 @@ defmodule TwoWay.Communications.BSP.Gupshup do
      make_call(payload, destination)
      IO.puts("Message sent from Gupshup")
      {:ok, "Fire event from gupshup"}
-
   end
 
   defp make_call(payload, destination) do

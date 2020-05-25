@@ -22,9 +22,14 @@ defmodule TwoWay.Commnunication do
 
   def bsp_per_organisation(), do: nil
 
-  def bsp_from_config(), do: nil
+  def bsp_from_config() do
+    case Application.get_env(:bsp, :provider, nil) do
+      nil -> nil
+      provider -> provider
+    end
+  end
 
   def bsp_default() do
-    TwoWay.Communications.BSP.Gupshup
+    TwoWay.Communications.BSP.Twilio
   end
 end
