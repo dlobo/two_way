@@ -50,7 +50,8 @@ defmodule TwoWay.MixProject do
       {:credo, "~> 0.8.8", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.18", only: [:dev], runtime: false},
       {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false},
-      {:httpoison, "~> 1.6"}
+      {:hackney, "~> 1.13"},
+      {:tesla, "~> 1.3.0"}
     ]
   end
 

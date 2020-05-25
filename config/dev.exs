@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :two_way, TwoWay.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "root",
+  password: "",
   database: "two_way_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

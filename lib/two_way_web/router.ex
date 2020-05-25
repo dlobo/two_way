@@ -40,6 +40,8 @@ defmodule TwoWayWeb.Router do
 
     get "/", PageController, :index
 
+    get "/test", PageController, :test
+
     resources "/option_groups", OptionGroupController
     resources "/option_values", OptionValueController
     resources "/tags", TagController
