@@ -1,10 +1,9 @@
 defmodule TwoWay.Commnunication do
-
- @spec __using__(any) :: {:def, [{:context, TwoWay.Communications.Commnunication} | {:import, Kernel}, ...], [[{any, any}, ...] | {:communication, [...], [...]}, ...]}
-
+  @spec __using__(any) ::
+          {:use, [{:context, TwoWay.Commnunication} | {:import, Kernel}, ...], [...]}
   defmacro __using__(opts \\ []) do
     quote do
-        use TwoWay.Communications.Builder, unquote(opts)
+      use TwoWay.Communications.Builder, unquote(opts)
     end
   end
 
@@ -23,7 +22,7 @@ defmodule TwoWay.Commnunication do
   def bsp_per_organisation(), do: nil
 
   def bsp_from_config() do
-    case Application.get_env(:bsp, :provider, nil) do
+    case Application.get_env(:two_way, :bsp, nil) do
       nil -> nil
       provider -> provider
     end
