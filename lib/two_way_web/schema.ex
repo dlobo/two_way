@@ -4,7 +4,8 @@ defmodule TwoWayWeb.Schema do
   alias TwoWayWeb.Resolvers
   alias TwoWay.Attributes.Tag
 
-  import_types __MODULE__.DataTypes
+  import_types __MODULE__.GenericTypes
+  import_types __MODULE__.TagTypes
 
   query do
 
@@ -20,6 +21,7 @@ defmodule TwoWayWeb.Schema do
     end
 
   end
+
 
   def context(ctx) do
     loader =
