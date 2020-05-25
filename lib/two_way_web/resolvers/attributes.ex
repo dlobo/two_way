@@ -11,7 +11,7 @@ defmodule TwoWayWeb.Resolvers.Attributes do
 
   def tags_for_language(language, _, _) do
     query = Ecto.assoc(language, :tags)
-    {:ok, TwoWayWeb.Repo.all(query)}
+    {:ok, TwoWay.Repo.all(query)}
   end
 
 end

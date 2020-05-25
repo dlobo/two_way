@@ -8,6 +8,8 @@ defmodule TwoWay.Settings.Language do
     field :label, :string
     field :locale, :string
 
+    has_many :tags, TwoWay.Attributes.Tag
+
     timestamps()
   end
 

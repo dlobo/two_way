@@ -2,6 +2,7 @@ defmodule TwoWayWeb.Schema.DataTypes do
   use Absinthe.Schema.Notation
 
   alias TwoWayWeb.Resolvers
+  alias TwoWay.{Attributes.Tag, Settings.Language}
 
   object :language do
     interfaces [:search_result]
@@ -17,9 +18,9 @@ defmodule TwoWayWeb.Schema.DataTypes do
   interface :search_result do
     field :label, :string
     resolve_type fn
-      %TwoWay.Attributes.Tag{}, _ ->
+      %Tag{}, _ ->
         :tag
-      %TwoWay.Settings.Language{}, _ ->
+      %Language{}, _ ->
         :language
       _, _ ->
         nil
@@ -43,6 +44,16 @@ defmodule TwoWayWeb.Schema.DataTypes do
     field :description, :string
     field :is_active  , :boolean
     field :is_reserved, :boolean
+
+    field :language   , :language do
+      resolve fn tag, _, _ ->
+        batch({TwoWayWeb.Schema.Helpers, :by_id, Language},
+          tag.language_id,
+          fn batch_results ->
+            {:ok, Map.get(batch_results, tag.language_id)}
+          end)
+      end
+    end
   end
 
   enum :sort_order do
