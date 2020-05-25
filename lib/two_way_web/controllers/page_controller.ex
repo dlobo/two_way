@@ -21,9 +21,7 @@ defmodule TwoWayWeb.PageController do
   end
 
   def test(conn, _params) do
-    # TwoWay.Commnunication.fire(:send_message, "Hello from Communication", "919917443994")
-    # data = communication(:send_message, "Heio from Communication", "919917443994")
-    data = send_message("Hello from send", "919917443994")
+    data = send_message(%{type: :text, text: "Hello from here"}, "919917443994")
     handle(data, conn)
   end
 end

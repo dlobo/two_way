@@ -4,11 +4,12 @@ defmodule TwoWay.Communications.BSP do
 
   ## Arguments
 
-  - `method` - `method` event name for the api
   - `payload` - payload for the event
   - `destination` - destination number for communication
   """
 
-  @callback call(method :: String.t(), payload :: Map.t(), destination :: String.t() ) :: {:ok, response :: Map.t()} | {:error, message :: String.t()}
+  # @callback call(method :: String.t(), payload :: Map.t(), destination :: String.t() ) :: {:ok, response :: Map.t()} | {:error, message :: String.t()}
+  @callback send_message(payload :: Map.t(), sender :: String.t(), receiver :: String.t() ) :: {:ok, response :: Map.t()} | {:error, message :: String.t()}
+
 
 end
