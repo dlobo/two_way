@@ -53,7 +53,7 @@ defmodule TwoWay.MixProject do
       {:httpoison, "~> 1.6"},
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
-      {:absinthe_phoenix, git: "https://github.com/absinthe-graphql/absinthe_phoenix.git", tag: "master"},
+      {:absinthe_phoenix, "~> 2.0"},
       {:absinthe_relay, "~> 1.5"},
       {:dataloader, "~> 1.0.0"},
     ]
