@@ -4,7 +4,7 @@ defmodule TwoWayWeb.GupshupUserEventController do
   def handler(conn, params, msg) do
     IO.puts(msg)
     IO.inspect(params)
-    json conn, nil
+    json(conn, nil)
   end
 
   def user_event(conn, params),
@@ -18,5 +18,4 @@ defmodule TwoWayWeb.GupshupUserEventController do
 
   def opted_out(conn, params),
     do: handler(conn, params, "Opted out handler")
-
 end

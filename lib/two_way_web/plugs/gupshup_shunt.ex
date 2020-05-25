@@ -22,8 +22,6 @@ defmodule TwoWayWeb.Plugs.GupshupShunt do
     |> GupshupRouter.call(opts)
   end
 
-
   def change_path_info(conn, new_path),
     do: put_in(conn.path_info, new_path)
-
 end

@@ -4,31 +4,30 @@ defmodule TwoWayWeb.GupshupMessageController do
   def handler(conn, params, msg) do
     IO.puts(msg)
     IO.inspect(params)
-    json conn, nil
+    json(conn, nil)
   end
 
   def message(conn, params),
     do: handler(conn, params, "message handler")
 
   def text(conn, params),
-    do:  handler(conn, params, "text handler")
+    do: handler(conn, params, "text handler")
 
   def image(conn, params),
-    do:  handler(conn, params, "image handler")
+    do: handler(conn, params, "image handler")
 
   def file(conn, params),
-    do:  handler(conn, params, "file handler")
+    do: handler(conn, params, "file handler")
 
   def audio(conn, params),
-    do:  handler(conn, params, "audio handler")
+    do: handler(conn, params, "audio handler")
 
   def video(conn, params),
-    do:  handler(conn, params, "video handler")
+    do: handler(conn, params, "video handler")
 
   def contact(conn, params),
-    do:  handler(conn, params, "contact handler")
+    do: handler(conn, params, "contact handler")
 
   def location(conn, params),
-    do:  handler(conn, params, "location handler")
-
+    do: handler(conn, params, "location handler")
 end

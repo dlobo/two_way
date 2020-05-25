@@ -44,14 +44,22 @@ defmodule TwoWayWeb.Router do
 
     resources "/option_groups", OptionGroupController
     resources "/option_values", OptionValueController
+    resources "/languages", LanguageController
     resources "/tags", TagController
     resources "/session_messages", SessionMessageController
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", TwoWayWeb do
-  #   pipe_through :api
-  # end
+  scope "/" do
+    pipe_through :api
+
+    forward "/api", Absinthe.Plug,
+      schema: TwoWayWeb.Schema
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: TwoWayWeb.Schema,
+      interface: :simple
+1  end
 
   scope "/", TwoWayWeb do
     forward("/gupshup", Plugs.GupshupShunt)

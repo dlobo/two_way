@@ -10,23 +10,27 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias TwoWay.Repo
-alias TwoWay.{Settings.OptionGroup, Settings.OptionValue, Attributes.Tag, Content.SessionMessage}
-
-language =
-  Repo.insert!(%OptionGroup{
-    name: "language",
-    label: "Language",
-    data_type: "String"
-  })
+alias TwoWay.Settings.{OptionGroup, OptionValue, Language}
+alias TwoWay.{Attributes.Tag, Content.SessionMessage}
 
 en_us =
-  Repo.insert!(%OptionValue{
+  Repo.insert!(%Language{
     label: "English (United States)",
-    value: "en_US",
-    weight: 1,
-    option_group: language
+    locale: "en_US"
   })
 
-Repo.insert!(%Tag{label: "Welcome", option_value: en_us})
-Repo.insert!(%Tag{label: "Greeting", option_value: en_us})
-Repo.insert!(%Tag{label: "Thank You", option_value: en_us})
+hi_in =
+  Repo.insert!(%Language{
+    label: "Hindi (India)",
+    locale: "hi_IN"
+  })
+
+messageTags_EN = Repo.insert!(%Tag{label: "Messages", language: en_us})
+messageTags_HI = Repo.insert!(%Tag{label: "Messages", language: hi_in})
+
+Repo.insert!(%Tag{label: "Welcome"  , language: en_us, tag: messageTags_EN})
+Repo.insert!(%Tag{label: "Greeting" , language: en_us, tag: messageTags_EN})
+Repo.insert!(%Tag{label: "Thank You", language: en_us, tag: messageTags_EN})
+Repo.insert!(%Tag{label: "Welcome"  , language: hi_in, tag: messageTags_HI})
+Repo.insert!(%Tag{label: "Greeting" , language: hi_in, tag: messageTags_HI})
+Repo.insert!(%Tag{label: "Thank You", language: hi_in, tag: messageTags_HI})

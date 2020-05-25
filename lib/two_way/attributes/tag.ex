@@ -2,6 +2,7 @@ defmodule TwoWay.Attributes.Tag do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias TwoWay.{Settings.Language, Attributes.Tag}
   schema "tags" do
     field :label, :string
     field :description, :string
@@ -9,9 +10,9 @@ defmodule TwoWay.Attributes.Tag do
     field :is_active, :boolean, default: false
     field :is_reserved, :boolean, default: false
 
-    belongs_to :option_value, TwoWay.Settings.OptionValue, foreign_key: :language_id
+    belongs_to :language, Language
 
-    belongs_to :tag, TwoWay.Attributes.Tag, foreign_key: :parent_id
+    belongs_to :tags, Tag, foreign_key: :parent_id
 
     timestamps()
   end
@@ -22,4 +23,13 @@ defmodule TwoWay.Attributes.Tag do
     |> cast(attrs, [:label, :description, :is_reserved, :is_active, :language_id])
     |> validate_required([:label, :description, :is_reserved, :is_active, :language_id])
   end
+
+  def data() do
+    Dataloader.Ecto.new(TwoWay.Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
+
 end
