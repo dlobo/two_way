@@ -10,4 +10,5 @@ defmodule TwoWay.Communications.BSP do
   """
 
   @callback call(method :: String.t(), payload :: Map.t(), destination :: String.t() ) :: {:ok, response :: Map.t()} | {:error, message :: String.t()}
+
 end
