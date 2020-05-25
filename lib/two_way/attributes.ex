@@ -17,8 +17,26 @@ defmodule TwoWay.Attributes do
       [%Tag{}, ...]
 
   """
-  def list_tags do
-    Repo.all(Tag)
+  def list_tags(args \\ %{}) do
+    args
+    |> Enum.reduce(Tag, fn
+      {:order, order}, query ->
+        query |> order_by({^order, :label})
+      {:filter, filter}, query ->
+        query |> filter_with(filter)
+     end)
+    |> Repo.all
+  end
+
+  defp filter_with(query, filter) do
+    Enum.reduce(filter, query, fn
+      {:label, label}, query ->
+        from q in query, where: ilike(q.label, ^"%#{label}%")
+      {:language, language}, query ->
+        from q in query,
+      join: l in assoc(q, :language),
+      where: ilike(l.label, ^"%#{language}%")
+    end)
   end
 
   @doc """
@@ -101,4 +119,16 @@ defmodule TwoWay.Attributes do
   def change_tag(%Tag{} = tag, attrs \\ %{}) do
     Tag.changeset(tag, attrs)
   end
+
+  @search [Tag, Language]
+  def search(term) do
+    pattern = "%#{term}%"
+    Enum.flat_map(@search, &search_ecto(&1, pattern))
+  end
+
+  defp search_ecto(ecto_schema, pattern) do
+    Repo.all from q in ecto_schema,
+      where: ilike(q.label, ^pattern) or ilike(q.description, ^pattern)
+  end
+
 end

@@ -209,7 +209,7 @@ defmodule TwoWay.Settings do
       [%Language{}, ...]
 
   """
-  def list_languages do
+  def list_languages(_args \\ %{}) do
     Repo.all(Language)
   end
 
