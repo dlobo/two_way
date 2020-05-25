@@ -1,15 +1,20 @@
 defmodule TwoWay.Communications.BSP.Twilio do
+
+  @behaviour TwoWay.Communications.BSP
   alias TwoWay.Communicatios.BSP.Twilio.ApiClient, as: ApiClient
 
-  def call(_method, payload, destination) do
-     make_call(payload, destination)
-     IO.puts("Message sent from Twilio")
-     {:ok, "Fire event from Twilio"}
+  @impl TwoWay.Communications.BSP
+  def call(method, payload, destination) do
+     make_call(method, payload, destination)
   end
 
-  defp make_call(_payload, _destination) do
-
+  defp make_call(:send_message, payload, destination) do
+    # Send message via Twilio
+    {:ok, "message sent from twilio"}
   end
 
+  defp make_call(_method, _payload, _destination) do
+    {:error, "Method not defined"}
+  end
 
 end

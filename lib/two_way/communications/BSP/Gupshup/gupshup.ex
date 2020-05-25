@@ -1,15 +1,18 @@
 defmodule TwoWay.Communications.BSP.Gupshup do
+
+  @channel "whatsapp"
+  @behaviour TwoWay.Communications.BSP
   alias TwoWay.Communicatios.BSP.Gupshup.ApiClient, as: ApiClient
 
-  def call(_method, payload, destination) do
-     make_call(payload, destination)
-     IO.puts("Message sent from Gupshup")
-     {:ok, "Fire event from gupshup"}
+
+  @impl TwoWay.Communications.BSP
+  def call(method, payload, destination) do
+     make_call(method, payload, destination)
   end
 
-  defp make_call(payload, destination) do
+  defp make_call(:send_message, payload, destination) do
     request_body =
-      %{"channel" => "whatsapp"}
+      %{"channel" => @channel}
       |> Map.merge(get_source())
       |> Map.put(:destination, destination)
       |> Map.put("message", payload)
@@ -18,7 +21,12 @@ defmodule TwoWay.Communications.BSP.Gupshup do
     {:ok, "message sent from gupshup"}
   end
 
+  defp make_call(_method, _payload, _destination) do
+    {:error, "Method not defined"}
+  end
+
   defp get_source() do
     %{"source" => "917834811114", "src.name" => "NGO Name"}
   end
+
 end

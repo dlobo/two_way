@@ -9,5 +9,5 @@ defmodule TwoWay.Communications.BSP do
   - `destination` - destination number for communication
   """
 
-  @callback call(method, payload, destination ) :: {:ok, response} | {:error, message}
+  @callback call(method :: String.t(), payload :: Map.t(), destination :: String.t() ) :: {:ok, response :: Map.t()} | {:error, message :: String.t()}
 end

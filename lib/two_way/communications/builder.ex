@@ -5,6 +5,11 @@ defmodule TwoWay.Communications.Builder do
       def communication(event, payload, destination) do
         TwoWay.Commnunication.fire(event, payload, destination)
       end
+
+      def send_message(payload, destination) do
+        communication(:send_message, payload, destination)
+      end
+
     end
   end
 
