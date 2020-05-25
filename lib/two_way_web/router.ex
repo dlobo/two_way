@@ -40,7 +40,7 @@ defmodule TwoWayWeb.Router do
 
     get "/", PageController, :index
 
-    get "/test", PageController, :test
+    get "/test-outbound", PageController, :test
 
     resources "/option_groups", OptionGroupController
     resources "/option_values", OptionValueController
@@ -53,13 +53,14 @@ defmodule TwoWayWeb.Router do
   scope "/" do
     pipe_through :api
 
-    forward "/api", Absinthe.Plug,
-      schema: TwoWayWeb.Schema
+    forward "/api", Absinthe.Plug, schema: TwoWayWeb.Schema
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: TwoWayWeb.Schema,
       interface: :simple
-1  end
+
+    1
+  end
 
   scope "/", TwoWayWeb do
     forward("/gupshup", Plugs.GupshupShunt)
