@@ -21,7 +21,9 @@ defmodule TwoWay.Attributes.Tag do
   def changeset(tag, attrs) do
     tag
     |> cast(attrs, [:label, :description, :is_reserved, :is_active, :language_id])
-    |> validate_required([:label, :description, :is_reserved, :is_active, :language_id])
+    |> validate_required([:label, :language_id])
+    |> foreign_key_constraint(:language)
+    |> unique_constraint([:label, :language_id])
   end
 
   def data() do
