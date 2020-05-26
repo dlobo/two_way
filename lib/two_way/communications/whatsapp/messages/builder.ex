@@ -11,19 +11,23 @@ defmodule TwoWay.WhatsApp.MessageBuilder do
        @sender TwoWay.WhatsApp.Message.effective_sender()
 
        def send_message(payload, receiver) do
-         apply(@bsp, :send_message, [payload, @sender, receiver])
+        @bsp
+        |> apply( :send_message, [payload, @sender, receiver])
        end
 
        def send_video_message(payload, receiver) do
-        apply(@bsp, :send_video, [payload, @sender, receiver])
+        @bsp
+        |> apply( :send_video_message, [payload, @sender, receiver])
        end
 
        def send_image_message(payload, receiver) do
-        apply(@bsp, :send_image, [payload, @sender, receiver])
+        @bsp
+        |> apply( :send_image_message, [payload, @sender, receiver])
        end
 
        def send_file_message(payload, receiver) do
-        apply(@bsp, :send_file, [payload, @sender, receiver])
+        @bsp
+        |> apply(:send_file_message, [payload, @sender, receiver])
        end
 
      end
