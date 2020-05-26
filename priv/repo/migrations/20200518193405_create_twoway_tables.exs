@@ -193,6 +193,9 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       # this is relevant only if wa_status is valid
       add :wa_id, :string
 
+      # Is this contact active (for some definition of active)
+      add :is_active, :boolean, default: true
+
       # this is our status, based on what the BSP tell us
       # the current options are: valid or invalid
       add :status     , :string     , null: false, default: "valid"

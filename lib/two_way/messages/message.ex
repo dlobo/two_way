@@ -2,10 +2,12 @@ defmodule TwoWay.Messages.Message do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias TwoWay.MessageTypesEnum
+
   schema "messages" do
-    field :body, :string
-    field :flow, :string
-    field :type, :string
+    field :body         , :string
+    field :flow         , :string
+    field :type         , MessageTypesEnum
     field :wa_message_id, :string
     field :wa_status, :string
     belongs_to :sender_id, TwoWay.Contacts.Contact
