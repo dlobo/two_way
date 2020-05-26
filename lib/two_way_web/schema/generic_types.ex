@@ -10,6 +10,9 @@ defmodule TwoWayWeb.Schema.GenericTypes do
   @desc "The Message Types enum"
   enum(:message_types_enum , values: TwoWay.Enums.message_types_const())
 
+  @desc "The Message Flow enum"
+  enum(:message_flow_enum , values: TwoWay.Enums.message_flow_const())
+
   @desc "An error encountered trying to persist input"
   object :input_error do
     field :key, non_null(:string)

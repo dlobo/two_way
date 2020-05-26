@@ -11,4 +11,7 @@ defmodule TwoWay.Enums do
   defmacro message_types_const,
     do: Macro.expand(@message_types_const, __CALLER__)
 
+  defmacro message_flow_const,
+    do: Macro.expand(@message_flow_const, __CALLER__)
+
 end

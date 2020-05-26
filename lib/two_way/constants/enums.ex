@@ -9,6 +9,7 @@ defmodule TwoWay.Constants.Enums do
     quote do
       @contact_status_const [:failed, :invalid, :processing, :valid]
       @message_types_const [:audio, :contact, :document, :hsm, :image, :location, :text, :video]
+      @message_flow_const [:inbound, :outbound]
     end
   end
 end

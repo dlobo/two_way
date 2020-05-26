@@ -10,3 +10,7 @@ defenum(TwoWay.ContactStatusEnum,
 defenum(TwoWay.MessageTypesEnum,
   :message_types_enum,
   TwoWay.Enums.message_types_const())
+
+defenum(TwoWay.MessageFlowEnum,
+  :message_flow_enum,
+  TwoWay.Enums.message_types_const())
