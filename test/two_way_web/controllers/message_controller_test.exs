@@ -3,9 +3,9 @@ defmodule TwoWayWeb.MessageControllerTest do
 
   alias TwoWay.Messages
 
-  @create_attrs %{body: "some body", flow: "some flow", type: "some type", wa_message_id: "some wa_message_id"}
-  @update_attrs %{body: "some updated body", flow: "some updated flow", type: "some updated type", wa_message_id: "some updated wa_message_id"}
-  @invalid_attrs %{body: nil, flow: nil, type: nil, wa_message_id: nil}
+  @create_attrs %{body: "some body", flow: "some flow", type: "some type", wa_message_id: "some wa_message_id", wa_status: "some wa_status"}
+  @update_attrs %{body: "some updated body", flow: "some updated flow", type: "some updated type", wa_message_id: "some updated wa_message_id", wa_status: "some updated wa_status"}
+  @invalid_attrs %{body: nil, flow: nil, type: nil, wa_message_id: nil, wa_status: nil}
 
   def fixture(:message) do
     {:ok, message} = Messages.create_message(@create_attrs)

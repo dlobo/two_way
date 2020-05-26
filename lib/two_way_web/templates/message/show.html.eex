@@ -22,6 +22,11 @@
     <%= @message.wa_message_id %>
   </li>
 
+  <li>
+    <strong>Wa status:</strong>
+    <%= @message.wa_status %>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: Routes.message_path(@conn, :edit, @message) %></span>

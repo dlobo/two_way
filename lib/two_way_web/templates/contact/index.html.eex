@@ -4,8 +4,12 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Phone number</th>
+      <th>Phone</th>
+      <th>Wa status</th>
+      <th>Wa</th>
       <th>Status</th>
+      <th>Optin time</th>
+      <th>Optout time</th>
 
       <th></th>
     </tr>
@@ -14,8 +18,12 @@
 <%= for contact <- @contacts do %>
     <tr>
       <td><%= contact.name %></td>
-      <td><%= contact.phone_number %></td>
+      <td><%= contact.phone %></td>
+      <td><%= contact.wa_status %></td>
+      <td><%= contact.wa_id %></td>
       <td><%= contact.status %></td>
+      <td><%= contact.optin_time %></td>
+      <td><%= contact.optout_time %></td>
 
       <td>
         <span><%= link "Show", to: Routes.contact_path(@conn, :show, contact) %></span>

@@ -6,100 +6,100 @@ defmodule TwoWay.Messages do
   import Ecto.Query, warn: false
   alias TwoWay.Repo
 
-  alias TwoWay.Messages.Contact
+  alias TwoWay.Messages.Message
 
   @doc """
-  Returns the list of contacts.
+  Returns the list of messages.
 
   ## Examples
 
-      iex> list_contacts()
-      [%Contact{}, ...]
+      iex> list_messages()
+      [%Message{}, ...]
 
   """
-  def list_contacts do
-    Repo.all(Contact)
+  def list_messages do
+    Repo.all(Message)
   end
 
   @doc """
-  Gets a single contact.
+  Gets a single message.
 
-  Raises `Ecto.NoResultsError` if the Contact does not exist.
+  Raises `Ecto.NoResultsError` if the Message does not exist.
 
   ## Examples
 
-      iex> get_contact!(123)
-      %Contact{}
+      iex> get_message!(123)
+      %Message{}
 
-      iex> get_contact!(456)
+      iex> get_message!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_contact!(id), do: Repo.get!(Contact, id)
+  def get_message!(id), do: Repo.get!(Message, id)
 
   @doc """
-  Creates a contact.
+  Creates a message.
 
   ## Examples
 
-      iex> create_contact(%{field: value})
-      {:ok, %Contact{}}
+      iex> create_message(%{field: value})
+      {:ok, %Message{}}
 
-      iex> create_contact(%{field: bad_value})
+      iex> create_message(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_contact(attrs \\ %{}) do
-    %Contact{}
-    |> Contact.changeset(attrs)
+  def create_message(attrs \\ %{}) do
+    %Message{}
+    |> Message.changeset(attrs)
     |> Repo.insert()
   end
 
   @doc """
-  Updates a contact.
+  Updates a message.
 
   ## Examples
 
-      iex> update_contact(contact, %{field: new_value})
-      {:ok, %Contact{}}
+      iex> update_message(message, %{field: new_value})
+      {:ok, %Message{}}
 
-      iex> update_contact(contact, %{field: bad_value})
+      iex> update_message(message, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_contact(%Contact{} = contact, attrs) do
-    contact
-    |> Contact.changeset(attrs)
+  def update_message(%Message{} = message, attrs) do
+    message
+    |> Message.changeset(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a contact.
+  Deletes a message.
 
   ## Examples
 
-      iex> delete_contact(contact)
-      {:ok, %Contact{}}
+      iex> delete_message(message)
+      {:ok, %Message{}}
 
-      iex> delete_contact(contact)
+      iex> delete_message(message)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_contact(%Contact{} = contact) do
-    Repo.delete(contact)
+  def delete_message(%Message{} = message) do
+    Repo.delete(message)
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking contact changes.
+  Returns an `%Ecto.Changeset{}` for tracking message changes.
 
   ## Examples
 
-      iex> change_contact(contact)
-      %Ecto.Changeset{data: %Contact{}}
+      iex> change_message(message)
+      %Ecto.Changeset{data: %Message{}}
 
   """
-  def change_contact(%Contact{} = contact, attrs \\ %{}) do
-    Contact.changeset(contact, attrs)
+  def change_message(%Message{} = message, attrs \\ %{}) do
+    Message.changeset(message, attrs)
   end
 
   alias TwoWay.Messages.MessageMedia
@@ -196,101 +196,5 @@ defmodule TwoWay.Messages do
   """
   def change_message_media(%MessageMedia{} = message_media, attrs \\ %{}) do
     MessageMedia.changeset(message_media, attrs)
-  end
-
-  alias TwoWay.Messages.Message
-
-  @doc """
-  Returns the list of messages.
-
-  ## Examples
-
-      iex> list_messages()
-      [%Message{}, ...]
-
-  """
-  def list_messages do
-    Repo.all(Message)
-  end
-
-  @doc """
-  Gets a single message.
-
-  Raises `Ecto.NoResultsError` if the Message does not exist.
-
-  ## Examples
-
-      iex> get_message!(123)
-      %Message{}
-
-      iex> get_message!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_message!(id), do: Repo.get!(Message, id)
-
-  @doc """
-  Creates a message.
-
-  ## Examples
-
-      iex> create_message(%{field: value})
-      {:ok, %Message{}}
-
-      iex> create_message(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_message(attrs \\ %{}) do
-    %Message{}
-    |> Message.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a message.
-
-  ## Examples
-
-      iex> update_message(message, %{field: new_value})
-      {:ok, %Message{}}
-
-      iex> update_message(message, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_message(%Message{} = message, attrs) do
-    message
-    |> Message.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a message.
-
-  ## Examples
-
-      iex> delete_message(message)
-      {:ok, %Message{}}
-
-      iex> delete_message(message)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_message(%Message{} = message) do
-    Repo.delete(message)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking message changes.
-
-  ## Examples
-
-      iex> change_message(message)
-      %Ecto.Changeset{data: %Message{}}
-
-  """
-  def change_message(%Message{} = message, attrs \\ %{}) do
-    Message.changeset(message, attrs)
   end
 end

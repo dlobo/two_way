@@ -47,6 +47,10 @@ defmodule TwoWayWeb.Router do
     resources "/languages", LanguageController
     resources "/tags", TagController
     resources "/session_messages", SessionMessageController
+
+    resources "/contacts", ContactController
+    resources "/message_media", MessageMediaController
+    resources "/messages", MessageController
   end
 
   # Other scopes may use custom stacks.

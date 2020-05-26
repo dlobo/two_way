@@ -8,13 +8,33 @@
   </li>
 
   <li>
-    <strong>Phone number:</strong>
-    <%= @contact.phone_number %>
+    <strong>Phone:</strong>
+    <%= @contact.phone %>
+  </li>
+
+  <li>
+    <strong>Wa status:</strong>
+    <%= @contact.wa_status %>
+  </li>
+
+  <li>
+    <strong>Wa:</strong>
+    <%= @contact.wa_id %>
   </li>
 
   <li>
     <strong>Status:</strong>
     <%= @contact.status %>
+  </li>
+
+  <li>
+    <strong>Optin time:</strong>
+    <%= @contact.optin_time %>
+  </li>
+
+  <li>
+    <strong>Optout time:</strong>
+    <%= @contact.optout_time %>
   </li>
 
 </ul>
