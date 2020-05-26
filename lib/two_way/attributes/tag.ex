@@ -22,7 +22,8 @@ defmodule TwoWay.Attributes.Tag do
     tag
     |> cast(attrs, [:label, :description, :is_reserved, :is_active, :language_id])
     |> validate_required([:label, :language_id])
-    |> foreign_key_constraint(:language)
+    |> foreign_key_constraint(:language_id)
+    |> foreign_key_constraint(:parent_id)
     |> unique_constraint([:label, :language_id])
   end
 

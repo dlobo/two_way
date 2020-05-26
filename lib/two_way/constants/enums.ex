@@ -8,6 +8,7 @@ defmodule TwoWay.Constants.Enums do
   defmacro __using__(_opts) do
     quote do
       @contact_status_const [:failed, :invalid, :processing, :valid]
+      @api_status_const [:ok, :error]
       @message_types_const [:audio, :contact, :document, :hsm, :image, :location, :text, :video]
       @message_flow_const [:inbound, :outbound]
     end

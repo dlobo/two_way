@@ -13,16 +13,30 @@ defmodule TwoWayWeb.Schema.GenericTypes do
   @desc "The Message Flow enum"
   enum(:message_flow_enum , values: TwoWay.Enums.message_flow_const())
 
+  @desc "API Function Status enum"
+  enum(:api_status_enum, values: TwoWay.Enums.api_status_const())
+
+  @desc "Enum for ordering results"
+  enum :sort_order do
+    value :asc
+    value :desc
+  end
+
   @desc "An error encountered trying to persist input"
   object :input_error do
     field :key, non_null(:string)
     field :message, non_null(:string)
   end
 
-  enum :sort_order do
-    value :asc
-    value :desc
+  @desc """
+  A generic status results for calls that dont return a value.
+  Typically this is for delete operations
+  """
+  object :generic_result do
+    field :status , non_null(:api_status_enum)
+    field :errors, list_of(:input_error)
   end
+
 
   scalar :date do
     parse fn input ->

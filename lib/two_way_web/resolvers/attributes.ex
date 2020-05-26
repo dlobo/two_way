@@ -27,4 +27,11 @@ defmodule TwoWayWeb.Resolvers.Attributes do
     end
   end
 
+  def delete_tag(_, %{id: id}, _) do
+    with {:ok, tag} <- Repo.fetch(Tag, id),
+         {:ok, tag} <- Attributes.delete_tag(tag)  do
+      {:ok, tag}
+    end
+  end
+
 end
