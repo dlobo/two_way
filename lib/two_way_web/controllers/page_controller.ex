@@ -1,7 +1,7 @@
 defmodule TwoWayWeb.PageController do
   use TwoWayWeb, :controller
 
-  use TwoWay.Commnunication
+  use TwoWay.WhatsApp.Message
 
   def index(conn, _params) do
     render(conn, "index.html")
@@ -16,7 +16,7 @@ defmodule TwoWayWeb.PageController do
     case data do
       {:ok, message} -> json(conn, message)
       {:error, message} -> json(conn, message)
-      true -> json(conn, [])
+      _ -> json(conn, [])
     end
   end
 

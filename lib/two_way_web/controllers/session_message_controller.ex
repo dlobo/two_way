@@ -1,6 +1,6 @@
 defmodule TwoWayWeb.SessionMessageController do
   use TwoWayWeb, :controller
-  use TwoWay.Commnunication
+  # use TwoWay.WhatsApp.Message
 
   alias TwoWay.Content
   alias TwoWay.Content.SessionMessage
@@ -18,7 +18,7 @@ defmodule TwoWayWeb.SessionMessageController do
 
   def create(conn, %{"session_message" => session_message_params}) do
 
-    send_message(session_message_params["body"], "919917443994")
+    # send_message(session_message_params["body"], "919917443994")
     index(conn, session_message_params)
     # case Content.create_session_message(session_message_params) do
     #   {:ok, session_message} ->

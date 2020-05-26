@@ -9,7 +9,7 @@ use Mix.Config
 
 config :two_way,
   ecto_repos: [TwoWay.Repo],
-  bsp: TwoWay.Communications.BSP.Gupshup
+  bsp: TwoWay.WhatsApp.BSP.Gupshup
 
 # Configures the endpoint
 config :two_way, TwoWayWeb.Endpoint,
