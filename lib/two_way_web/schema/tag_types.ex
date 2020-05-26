@@ -2,7 +2,6 @@ defmodule TwoWayWeb.Schema.TagTypes do
   use Absinthe.Schema.Notation
   import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
-  alias TwoWayWeb.Resolvers
   alias TwoWay.{Attributes.Tag, Settings.Language}
 
   interface :search_result do
@@ -15,31 +14,6 @@ defmodule TwoWayWeb.Schema.TagTypes do
       _, _ ->
         nil
     end
-  end
-
-  object :language do
-    interfaces [:search_result]
-    field :id         , :id
-    field :label      , :string
-    field :locale     , :string
-    field :is_active  , :boolean
-    field :is_reserved, :boolean
-
-    field :tags, list_of(:tag) do
-      resolve &Resolvers.Attributes.tags_for_language/3
-    end
-  end
-
-  input_object :language_input do
-    field :label      , non_null(:string)
-    field :locale     , non_null(:string)
-    field :is_active  , :boolean
-    field :is_reserved, :boolean
-  end
-
-  object :language_result do
-    field :language, :language
-    field :errors  , list_of(:input_error)
   end
 
   object :tag_result do
@@ -80,11 +54,11 @@ defmodule TwoWayWeb.Schema.TagTypes do
   end
 
   input_object :tag_input do
-    field :label      , non_null(:string)
+    field :label      , :string
     field :description, :string
     field :is_active  , :boolean
     field :is_reserved, :boolean
-    field :language_id, non_null(:id)
+    field :language_id, :id
   end
 
 end

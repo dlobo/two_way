@@ -14,6 +14,7 @@ defmodule TwoWayWeb.Schema do
 
   import_types __MODULE__.GenericTypes
   import_types __MODULE__.TagTypes
+  import_types __MODULE__.LanguageTypes
 
   query do
 
@@ -31,14 +32,20 @@ defmodule TwoWayWeb.Schema do
   end
 
   mutation do
-    field :create_language, :language_result do
-      arg :input, non_null(:language_input)
-      resolve &Resolvers.Settings.create_language/3
-    end
-
     field :create_tag, :tag_result do
       arg :input, non_null(:tag_input)
       resolve &Resolvers.Attributes.create_tag/3
+    end
+
+    field :update_tag, :tag_result do
+      arg :id   , non_null(:id)
+      arg :input, :tag_input
+      resolve &Resolvers.Attributes.update_tag/3
+    end
+
+    field :create_language, :language_result do
+      arg :input, non_null(:language_input)
+      resolve &Resolvers.Settings.create_language/3
     end
 
   end
