@@ -11,7 +11,10 @@ defmodule TwoWayWeb.OptionValueController do
 
   def new(conn, _params) do
     changeset = Settings.change_option_value(%OptionValue{})
-    render(conn, "new.html", changeset: changeset)
+
+    option_groups = Settings.list_option_groups()
+
+    render(conn, "new.html", changeset: changeset, option_groups: option_groups)
   end
 
   def create(conn, %{"option_value" => option_value_params}) do

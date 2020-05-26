@@ -8,7 +8,7 @@ use Mix.Config
 config :two_way, TwoWay.Repo,
   username: "postgres",
   password: "postgres",
-  database: "two_way_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "two_way_dev",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 

@@ -45,6 +45,21 @@
   <%= checkbox f, :is_active %>
   <%= error_tag f, :is_active %>
 
+  <br>
+
+  <select name="option_value[option_group_id]" id="option_value_option_group_id">
+
+      <option value="">Select Option Group ...</option>
+      <%= for option_group <- @option_groups do %>
+  
+          <option value="<%= option_group.id %>">
+          <%= option_group.name %>
+          </option>
+  
+      <% end %>
+  
+  </select>
+
   <div>
     <%= submit "Save" %>
   </div>
