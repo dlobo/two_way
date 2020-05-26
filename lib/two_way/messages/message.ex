@@ -7,9 +7,10 @@ defmodule TwoWay.Messages.Message do
     field :flow, :string
     field :type, :string
     field :wa_message_id, :string
-    field :sender_id, :id
-    field :receipient_id, :id
-    field :media_id, :id
+    field :wa_status, :string
+    belongs_to :sender_id, TwoWay.Contacts.Contact
+    belongs_to :receipient_id, TwoWay.Contacts.Contact
+    belongs_to :media_id, TwoWay.Messages.MessageMedia
 
     timestamps()
   end
@@ -17,7 +18,7 @@ defmodule TwoWay.Messages.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:type, :flow, :body, :wa_message_id])
-    |> validate_required([:type, :flow, :body, :wa_message_id])
+    |> cast(attrs, [:type, :flow, :body, :wa_message_id, :wa_status, :sender_id, :receipient_id])
+    |> validate_required([:type, :flow, :body, :wa_message_id, :wa_status, :sender_id, :receipient_id])
   end
 end

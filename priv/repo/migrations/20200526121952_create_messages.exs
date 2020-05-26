@@ -13,7 +13,10 @@ defmodule TwoWay.Repo.Migrations.CreateMessages do
       add :body, :text
 
       # whats app message id
-      add :wa_message_id, :string
+      add :wa_message_id, :string, null: true
+
+      # options: sent, delivered,read
+      add :wa_status, :string
 
       # sender id
       add :sender_id, references(:contacts, on_delete: :nothing)
@@ -22,7 +25,7 @@ defmodule TwoWay.Repo.Migrations.CreateMessages do
       add :receipient_id, references(:contacts, on_delete: :nothing)
 
       # message media ids
-      add :media_id, references(:message_media, on_delete: :nothing)
+      add :media_id, null: true,  references(:message_media, on_delete: :nothing)
 
       timestamps()
     end

@@ -1,21 +1,21 @@
 defmodule TwoWayWeb.ContactController do
   use TwoWayWeb, :controller
 
-  alias TwoWay.Messages
-  alias TwoWay.Messages.Contact
+  alias TwoWay.Contacts
+  alias TwoWay.Contacts.Contact
 
   def index(conn, _params) do
-    contacts = Messages.list_contacts()
+    contacts = Contacts.list_contacts()
     render(conn, "index.html", contacts: contacts)
   end
 
   def new(conn, _params) do
-    changeset = Messages.change_contact(%Contact{})
+    changeset = Contacts.change_contact(%Contact{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"contact" => contact_params}) do
-    case Messages.create_contact(contact_params) do
+    case Contacts.create_contact(contact_params) do
       {:ok, contact} ->
         conn
         |> put_flash(:info, "Contact created successfully.")
@@ -27,20 +27,20 @@ defmodule TwoWayWeb.ContactController do
   end
 
   def show(conn, %{"id" => id}) do
-    contact = Messages.get_contact!(id)
+    contact = Contacts.get_contact!(id)
     render(conn, "show.html", contact: contact)
   end
 
   def edit(conn, %{"id" => id}) do
-    contact = Messages.get_contact!(id)
-    changeset = Messages.change_contact(contact)
+    contact = Contacts.get_contact!(id)
+    changeset = Contacts.change_contact(contact)
     render(conn, "edit.html", contact: contact, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "contact" => contact_params}) do
-    contact = Messages.get_contact!(id)
+    contact = Contacts.get_contact!(id)
 
-    case Messages.update_contact(contact, contact_params) do
+    case Contacts.update_contact(contact, contact_params) do
       {:ok, contact} ->
         conn
         |> put_flash(:info, "Contact updated successfully.")
@@ -52,8 +52,8 @@ defmodule TwoWayWeb.ContactController do
   end
 
   def delete(conn, %{"id" => id}) do
-    contact = Messages.get_contact!(id)
-    {:ok, _contact} = Messages.delete_contact(contact)
+    contact = Contacts.get_contact!(id)
+    {:ok, _contact} = Contacts.delete_contact(contact)
 
     conn
     |> put_flash(:info, "Contact deleted successfully.")

@@ -21,6 +21,10 @@
   <%= text_input f, :wa_message_id %>
   <%= error_tag f, :wa_message_id %>
 
+  <%= label f, :wa_status %>
+  <%= text_input f, :wa_status %>
+  <%= error_tag f, :wa_status %>
+
   <div>
     <%= submit "Save" %>
   </div>

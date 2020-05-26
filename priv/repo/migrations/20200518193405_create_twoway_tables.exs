@@ -11,6 +11,8 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
     tags()
 
     session_messages()
+
+    contacts()
   end
 
   @doc """

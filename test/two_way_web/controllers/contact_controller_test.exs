@@ -1,14 +1,14 @@
 defmodule TwoWayWeb.ContactControllerTest do
   use TwoWayWeb.ConnCase
 
-  alias TwoWay.Messages
+  alias TwoWay.Contacts
 
-  @create_attrs %{name: "some name", phone_number: "some phone_number", status: "some status"}
-  @update_attrs %{name: "some updated name", phone_number: "some updated phone_number", status: "some updated status"}
-  @invalid_attrs %{name: nil, phone_number: nil, status: nil}
+  @create_attrs %{name: "some name", optin_time: "2010-04-17T14:00:00Z", optout_time: "2010-04-17T14:00:00Z", phone: "some phone", status: "some status", wa_id: "some wa_id", wa_status: "some wa_status"}
+  @update_attrs %{name: "some updated name", optin_time: "2011-05-18T15:01:01Z", optout_time: "2011-05-18T15:01:01Z", phone: "some updated phone", status: "some updated status", wa_id: "some updated wa_id", wa_status: "some updated wa_status"}
+  @invalid_attrs %{name: nil, optin_time: nil, optout_time: nil, phone: nil, status: nil, wa_id: nil, wa_status: nil}
 
   def fixture(:contact) do
-    {:ok, contact} = Messages.create_contact(@create_attrs)
+    {:ok, contact} = Contacts.create_contact(@create_attrs)
     contact
   end
 

@@ -7,6 +7,7 @@
       <th>Flow</th>
       <th>Body</th>
       <th>Wa message</th>
+      <th>Wa status</th>
 
       <th></th>
     </tr>
@@ -18,6 +19,7 @@
       <td><%= message.flow %></td>
       <td><%= message.body %></td>
       <td><%= message.wa_message_id %></td>
+      <td><%= message.wa_status %></td>
 
       <td>
         <span><%= link "Show", to: Routes.message_path(@conn, :show, message) %></span>
