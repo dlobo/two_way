@@ -1,6 +1,6 @@
 defmodule TwoWayWeb.Resolvers.Settings do
 
-  alias TwoWay.{Settings, Settings.Language}
+  alias TwoWay.{Repo, Settings, Settings.Language}
   alias TwoWay.Attributes
 
   def languages(_, args, _) do

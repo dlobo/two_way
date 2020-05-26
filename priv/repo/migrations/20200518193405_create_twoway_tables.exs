@@ -40,7 +40,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       timestamps()
     end
 
-    create index(:option_groups, :name, unique: true)
+    create unique_index(:option_groups, :name)
   end
 
   @doc """
@@ -78,7 +78,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       timestamps()
     end
 
-    create index(:option_values, [:label, :option_group_id], unique: true)
+    create unique_index(:option_values, [:label, :option_group_id])
   end
 
   @doc """
@@ -101,8 +101,9 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       timestamps()
     end
 
-    create index(:languages, :label, unique: true)
-    create index(:languages, :locale, unique: true)
+    create unique_index(:languages, :label )
+    create unique_index(:languages, :locale)
+
   end
 
   @doc """
@@ -130,7 +131,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       timestamps()
     end
 
-    create index(:tags, [:label, :language_id], unique: true)
+    create unique_index(:tags, [:label, :language_id])
   end
 
   @doc """
@@ -166,6 +167,41 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       timestamps()
     end
 
-    create index(:session_messages, [:label, :language_id], unique: true)
+    create unique_index(:session_messages, [:label, :language_id])
   end
+
+  @doc """
+  Minimal set of information to store for a Contact to record its interaction
+  at a high level. Typically messaging apps dont have detailed information, and if
+  they do, we'll redirect those requests to a future version of the CRMPlatform
+  """
+  def contacts() do
+    create table(:contacts) do
+      # Contact Name
+      add :name, :string, null: false
+
+      # Contact Phone (this is the primary point of identification)
+      add :phone, :string, null: false
+
+      # whatsapp status
+      # the current options are: processing, valid, invalid, failed
+      add :wa_status, :string, null: false
+
+      # whatsapp id
+      # this is relevant only if wa_status is valid
+      add :wa_id, :string
+
+      # this is our status, based on what the BSP tell us
+      # the current options are: valid or invalid
+      add :status     , :string     , null: false, default: "valid"
+      add :optin_time , :timestamptz
+      add :optout_time, :timestamptz
+
+      timestamps()
+    end
+
+    create unique_index(:contacts, :phone)
+    create unique_index(:contacts, :wa_id)
+  end
+
 end
