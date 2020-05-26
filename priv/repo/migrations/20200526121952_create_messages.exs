@@ -25,7 +25,7 @@ defmodule TwoWay.Repo.Migrations.CreateMessages do
       add :receipient_id, references(:contacts, on_delete: :nothing)
 
       # message media ids
-      add :media_id, null: true,  references(:message_media, on_delete: :nothing)
+      add :media_id,  references(:message_media, on_delete: :nothing), null: true
 
       timestamps()
     end
