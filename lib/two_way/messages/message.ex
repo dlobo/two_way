@@ -2,14 +2,16 @@ defmodule TwoWay.Messages.Message do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias TwoWay.MessageTypesEnum
+
   schema "messages" do
-    field :body, :string
-    field :flow, :string
-    field :type, :string
+    field :body         , :string
+    field :flow         , :string
+    field :type         , MessageTypesEnum
     field :wa_message_id, :string
-    field :sender_id, :id
+    field :sender_id    , :id
     field :receipient_id, :id
-    field :media_id, :id
+    field :media_id     , :id
 
     timestamps()
   end

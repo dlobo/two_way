@@ -1,6 +1,15 @@
 defmodule TwoWayWeb.Schema.GenericTypes do
   use Absinthe.Schema.Notation
 
+  require TwoWay.Enums
+
+  # define all enums specifically for absinthere
+  @desc "The Contact Status enum"
+  enum(:contact_status_enum, values: TwoWay.Enums.contact_status_const())
+
+  @desc "The Message Types enum"
+  enum(:message_types_enum , values: TwoWay.Enums.message_types_const())
+
   @desc "An error encountered trying to persist input"
   object :input_error do
     field :key, non_null(:string)

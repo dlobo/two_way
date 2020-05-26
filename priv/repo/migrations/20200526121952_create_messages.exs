@@ -4,7 +4,7 @@ defmodule TwoWay.Repo.Migrations.CreateMessages do
   def change do
     create table(:messages) do
       # Options are: text, audio, video, image
-      add :type, :string
+      add :type, :message_types_enum
 
       # Options are: inbound, outbound
       add :flow, :string
