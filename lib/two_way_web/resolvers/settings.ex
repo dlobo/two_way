@@ -1,6 +1,6 @@
 defmodule TwoWayWeb.Resolvers.Settings do
 
-  alias TwoWay.Settings
+  alias TwoWay.{Repo, Settings, Settings.Language}
   alias TwoWay.Attributes
 
   def languages(_, args, _) do
@@ -9,6 +9,19 @@ defmodule TwoWayWeb.Resolvers.Settings do
 
   def search(_, %{matching: term}, _) do
     {:ok, Attributes.search(term)}
+  end
+
+  def create_language(_, %{input: params}, _) do
+    with {:ok, language} <- Settings.create_language(params) do
+      {:ok, %{language: language}}
+    end
+  end
+
+  def update_language(_, %{id: id, input: params}, _) do
+    with {:ok, language} <- Repo.fetch(Language, id),
+         {:ok, language} <- Settings.update_language(language, params)  do
+      {:ok, %{language: language}}
+    end
   end
 
 end

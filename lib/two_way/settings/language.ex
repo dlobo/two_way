@@ -8,6 +8,8 @@ defmodule TwoWay.Settings.Language do
     field :label, :string
     field :locale, :string
 
+    has_many :tags, TwoWay.Attributes.Tag
+
     timestamps()
   end
 
@@ -15,6 +17,9 @@ defmodule TwoWay.Settings.Language do
   def changeset(language, attrs) do
     language
     |> cast(attrs, [:label, :description, :locale, :is_active])
-    |> validate_required([:label, :description, :locale, :is_active])
+    |> validate_required([:label, :locale])
+    |> unique_constraint(:label)
+    |> unique_constraint(:locale)
   end
+
 end

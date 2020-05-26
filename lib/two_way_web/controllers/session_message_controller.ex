@@ -1,9 +1,10 @@
 defmodule TwoWayWeb.SessionMessageController do
   use TwoWayWeb, :controller
+  use TwoWay.Commnunication
 
   alias TwoWay.Content
   alias TwoWay.Content.SessionMessage
-  alias TwoWay.GupshupApi
+
 
   def index(conn, _params) do
     session_messages = Content.list_session_messages()
@@ -16,17 +17,18 @@ defmodule TwoWayWeb.SessionMessageController do
   end
 
   def create(conn, %{"session_message" => session_message_params}) do
-    case Content.create_session_message(session_message_params) do
-      {:ok, session_message} ->
-        GupshupApi.message(session_message_params["body"], "14156139297")
 
-        conn
-        |> put_flash(:info, "Session message created successfully.")
-        |> redirect(to: Routes.session_message_path(conn, :show, session_message))
+    send_message(session_message_params["body"], "919917443994")
+    index(conn, session_message_params)
+    # case Content.create_session_message(session_message_params) do
+    #   {:ok, session_message} ->
+    #     conn
+    #     |> put_flash(:info, "Session message created successfully.")
+    #     |> redirect(to: Routes.session_message_path(conn, :show, session_message))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
+    #   {:error, %Ecto.Changeset{} = changeset} ->
+    #     render(conn, "new.html", changeset: changeset)
+    # end
   end
 
   def show(conn, %{"id" => id}) do
@@ -45,8 +47,6 @@ defmodule TwoWayWeb.SessionMessageController do
 
     case Content.update_session_message(session_message, session_message_params) do
       {:ok, session_message} ->
-        GupshupApi.message(session_message_params["body"], "14156139297")
-
         conn
         |> put_flash(:info, "Session message updated successfully.")
         |> redirect(to: Routes.session_message_path(conn, :show, session_message))

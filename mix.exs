@@ -42,7 +42,8 @@ defmodule TwoWay.MixProject do
       {:phoenix_live_dashboard, "~> 0.2.0"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
-      {:gettext, "~> 0.11"},
+      {:decimal, "~> 1.8"},
+      {:gettext, "~> 0.18"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:pow, "~> 1.0.20"},
@@ -53,8 +54,11 @@ defmodule TwoWay.MixProject do
       {:httpoison, "~> 1.6"},
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
-      {:absinthe_phoenix, git: "https://github.com/absinthe-graphql/absinthe_phoenix.git", tag: "master"},
+      {:absinthe_phoenix, "~> 2.0"},
       {:absinthe_relay, "~> 1.5"},
+      {:dataloader, "~> 1.0.0"},
+      {:hackney, "~> 1.13"},
+      {:tesla, "~> 1.3.0"}
     ]
   end
 
