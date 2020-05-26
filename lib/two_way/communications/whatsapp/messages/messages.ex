@@ -1,7 +1,5 @@
 defmodule TwoWay.WhatsApp.Message do
 
-  alias TwoWay.Commnunication
-
   defmacro __using__(opts \\ []) do
     quote do
       use TwoWay.WhatsApp.MessageBuilder, unquote(opts)

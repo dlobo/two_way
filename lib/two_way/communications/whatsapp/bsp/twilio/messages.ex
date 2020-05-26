@@ -1,7 +1,7 @@
 defmodule TwoWay.WhatsApp.BSP.Twilio.Messages do
 
   @behaviour TwoWay.WhatsApp.MessageBehaviour
-  alias TwoWay.Communicatios.BSP.Gupshup.ApiClient, as: ApiClient
+  alias TwoWay.WhatsApp.BSP.Twilio.ApiClient, as: ApiClient
 
 
   @impl TwoWay.WhatsApp.MessageBehaviour
@@ -10,15 +10,18 @@ defmodule TwoWay.WhatsApp.BSP.Twilio.Messages do
   end
 
   @impl TwoWay.WhatsApp.MessageBehaviour
-  defp send_video_message(_payload, _sender, _receiver) do
+  def send_video_message(_payload, _sender, _receiver) do
+    {:ok, "Sent messages form Twilio"}
   end
 
   @impl TwoWay.WhatsApp.MessageBehaviour
-  defp send_image_message(_payload, _sender, _receiver) do
+  def send_image_message(_payload, _sender, _receiver) do
+    {:ok, "Sent messages form Twilio"}
   end
 
   @impl TwoWay.WhatsApp.MessageBehaviour
-  defp send_file_message(_payload, _sender, _receiver) do
+  def send_file_message(_payload, _sender, _receiver) do
+    {:ok, "Sent messages form Twilio"}
   end
 
 end

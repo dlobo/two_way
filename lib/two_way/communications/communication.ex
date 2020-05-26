@@ -21,7 +21,7 @@ defmodule TwoWay.Commnunication do
     end
   end
 
-  defp bsp_default(), do: TwoWay.WhatsApp.BSP.Gupshup
+  defp bsp_default(), do: TwoWay.WhatsApp.BSP.Twilio
 
   defp sender_per_organisation(), do: nil
 
