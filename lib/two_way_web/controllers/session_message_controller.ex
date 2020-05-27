@@ -5,7 +5,6 @@ defmodule TwoWayWeb.SessionMessageController do
   alias TwoWay.Content
   alias TwoWay.Content.SessionMessage
 
-
   def index(conn, _params) do
     session_messages = Content.list_session_messages()
     render(conn, "index.html", session_messages: session_messages)
@@ -17,7 +16,6 @@ defmodule TwoWayWeb.SessionMessageController do
   end
 
   def create(conn, %{"session_message" => session_message_params}) do
-
     # send_message(session_message_params["body"], "919917443994")
     index(conn, session_message_params)
     # case Content.create_session_message(session_message_params) do

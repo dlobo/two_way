@@ -1,5 +1,4 @@
 defmodule TwoWay.Commnunication do
-
   def effective_bsp() do
     with nil <- bsp_per_organisation(),
          nil <- bsp_from_config(),

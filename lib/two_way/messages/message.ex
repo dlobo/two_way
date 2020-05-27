@@ -5,9 +5,9 @@ defmodule TwoWay.Messages.Message do
   alias TwoWay.MessageTypesEnum
 
   schema "messages" do
-    field :body         , :string
-    field :flow         , :string
-    field :type         , MessageTypesEnum
+    field :body, :string
+    field :flow, :string
+    field :type, MessageTypesEnum
     field :wa_message_id, :string
     field :wa_status, :string
     belongs_to :sender, TwoWay.Contacts.Contact
@@ -20,7 +20,15 @@ defmodule TwoWay.Messages.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:type, :flow, :body, :wa_message_id, :wa_status, :sender_id, :receipient_id])
-    |> validate_required([:type, :flow, :body, :wa_message_id, :wa_status, :sender_id, :receipient_id])
+    |> cast(attrs, [:type, :flow, :body, :wa_message_id, :wa_status, :sender_id, :recipient_id])
+    |> validate_required([
+      :type,
+      :flow,
+      :body,
+      :wa_message_id,
+      :wa_status,
+      :sender_id,
+      :recipient_id
+    ])
   end
 end

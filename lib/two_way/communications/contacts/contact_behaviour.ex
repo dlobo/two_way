@@ -8,6 +8,6 @@ defmodule TwoWay.Communication.ContactBehaviour do
   - `destination` - destination number for communication
   """
 
-  @callback status(args :: Map.t()) :: {:ok, response :: Map.t()} | {:error, message :: String.t()}
-
+  @callback status(args :: Map.t()) ::
+              {:ok, response :: Map.t()} | {:error, message :: String.t()}
 end
