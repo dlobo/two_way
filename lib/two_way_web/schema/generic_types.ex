@@ -7,10 +7,15 @@ defmodule TwoWayWeb.Schema.GenericTypes do
     field :message, non_null(:string)
   end
 
-  enum :sort_order do
-    value :asc
-    value :desc
+  @desc """
+  A generic status results for calls that dont return a value.
+  Typically this is for delete operations
+  """
+  object :generic_result do
+    field :status , non_null(:api_status_enum)
+    field :errors, list_of(:input_error)
   end
+
 
   scalar :date do
     parse fn input ->

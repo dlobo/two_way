@@ -12,6 +12,7 @@ defmodule TwoWayWeb.Schema do
     middleware
   end
 
+  import_types __MODULE__.EnumTypes
   import_types __MODULE__.GenericTypes
   import_types __MODULE__.TagTypes
   import_types __MODULE__.LanguageTypes
@@ -41,6 +42,11 @@ defmodule TwoWayWeb.Schema do
       arg :id   , non_null(:id)
       arg :input, :tag_input
       resolve &Resolvers.Attributes.update_tag/3
+    end
+
+    field :delete_tag, :tag_result do
+      arg :id   , non_null(:id)
+      resolve &Resolvers.Attributes.delete_tag/3
     end
 
     field :create_language, :language_result do

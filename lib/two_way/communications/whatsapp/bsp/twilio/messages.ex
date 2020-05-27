@@ -1,7 +1,7 @@
 defmodule TwoWay.WhatsApp.BSP.Twilio.Messages do
 
   @behaviour TwoWay.WhatsApp.MessageBehaviour
-  alias TwoWay.WhatsApp.BSP.Twilio.ApiClient, as: ApiClient
+  # alias TwoWay.WhatsApp.BSP.Twilio.ApiClient, as: ApiClient
 
 
   @impl TwoWay.WhatsApp.MessageBehaviour

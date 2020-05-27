@@ -2,11 +2,21 @@ defmodule TwoWayWeb.Schema.Middleware.ChangesetErrors do
   @behaviour Absinthe.Middleware
 
   def call(res, _) do
-    with %{errors: [%Ecto.Changeset{} = changeset]} <- res do
+    l = Map.get(res, :errors)
+    if length(l) == 2 do
+      [h | t] = l
       %{res |
-        value: %{errors: transform_errors(changeset)},
+        value: %{errors: [%{key: h, message: t}]},
         errors: [],
       }
+    else
+      with %{errors: [%Ecto.Changeset{} = changeset]} <- res do
+        IO.inspect( %{errors: transform_errors(changeset)})
+        %{res |
+          value: %{errors: transform_errors(changeset)},
+          errors: [],
+        }
+      end
     end
   end
 

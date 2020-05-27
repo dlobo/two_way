@@ -104,7 +104,9 @@ defmodule TwoWay.Attributes do
 
   """
   def delete_tag(%Tag{} = tag) do
-    Repo.delete(tag)
+    tag
+    |> Tag.changeset(%{})
+    |> Repo.delete()
   end
 
   @doc """

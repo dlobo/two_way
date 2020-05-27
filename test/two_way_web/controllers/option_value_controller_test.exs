@@ -13,7 +13,8 @@ defmodule TwoWayWeb.OptionValueControllerTest do
     is_reserved: true,
     label: "some label",
     value: "some value",
-    weight: 42
+    weight: 42,
+    option_group_id: 1
   }
   @update_attrs %{
     description: "some updated description",
@@ -25,7 +26,8 @@ defmodule TwoWayWeb.OptionValueControllerTest do
     is_reserved: false,
     label: "some updated label",
     value: "some updated value",
-    weight: 43
+    weight: 43,
+    option_group_id: 1
   }
   @invalid_attrs %{
     description: nil,

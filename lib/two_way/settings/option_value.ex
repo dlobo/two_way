@@ -32,7 +32,8 @@ defmodule TwoWay.Settings.OptionValue do
       :is_default,
       :is_optgroup,
       :is_reserved,
-      :is_active
+      :is_active,
+      :option_group_id
     ])
     |> validate_required([
       :label,
@@ -44,7 +45,8 @@ defmodule TwoWay.Settings.OptionValue do
       :is_default,
       :is_optgroup,
       :is_reserved,
-      :is_active
+      :is_active,
+      :option_group_id
     ])
   end
 end
