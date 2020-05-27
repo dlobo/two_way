@@ -12,6 +12,7 @@ defmodule TwoWayWeb.Schema do
     middleware
   end
 
+  import_types __MODULE__.EnumTypes
   import_types __MODULE__.GenericTypes
   import_types __MODULE__.TagTypes
   import_types __MODULE__.LanguageTypes
