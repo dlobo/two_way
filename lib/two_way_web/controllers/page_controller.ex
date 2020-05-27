@@ -21,7 +21,15 @@ defmodule TwoWayWeb.PageController do
   end
 
   def test(conn, _params) do
-    data = send_message(%{type: :text, text: "Hello from here"}, "919917443994")
+
+    data = TwoWay.Communications.Message.send_text(message, contact_id)
+    data = TwoWay.Communications.Message.receive_text(message, contact_id)
+
+    data = TwoWay.Communications.receive_text(payload) :: message, contact
+
+    #opted in info
+    data = TwoWay.Communications.Contact.status(message, contact_id)
+
     handle(data, conn)
   end
 end
