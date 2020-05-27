@@ -10,11 +10,6 @@ defmodule TwoWayWeb.Resolvers.Contacts do
     {:ok, Contacts.list_contacts(args)}
   end
 
-  def contacts_for_language(language, _, _) do
-    query = Ecto.assoc(language, :contacts)
-    {:ok, Repo.all(query)}
-  end
-
   def create_contact(_, %{input: params}, _) do
     with {:ok, contact} <- Contacts.create_contact(params) do
       {:ok, %{contact: contact}}

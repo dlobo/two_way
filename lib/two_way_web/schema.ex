@@ -21,6 +21,8 @@ defmodule TwoWayWeb.Schema do
   import_types __MODULE__.LanguageTypes
   import_types __MODULE__.TagTypes
   import_types __MODULE__.ContactTypes
+  import_types __MODULE__.MessageTypes
+  import_types __MODULE__.MessageMediaTypes
 
   query do
     import_fields :language_queries
@@ -28,7 +30,11 @@ defmodule TwoWayWeb.Schema do
     import_fields :tag_queries
 
     import_fields :contact_queries
-  end
+
+    import_fields :message_media_queries
+
+    import_fields :message_queries
+end
 
   mutation do
     import_fields :language_mutations
@@ -36,6 +42,10 @@ defmodule TwoWayWeb.Schema do
     import_fields :tag_mutations
 
     import_fields :contact_mutations
+
+    import_fields :message_media_mutations
+
+    import_fields :message_mutations
   end
 
   def context(ctx) do
