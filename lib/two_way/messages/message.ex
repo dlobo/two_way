@@ -10,9 +10,9 @@ defmodule TwoWay.Messages.Message do
     field :type         , MessageTypesEnum
     field :wa_message_id, :string
     field :wa_status, :string
-    belongs_to :sender_id, TwoWay.Contacts.Contact
-    belongs_to :receipient_id, TwoWay.Contacts.Contact
-    belongs_to :media_id, TwoWay.Messages.MessageMedia
+    belongs_to :sender, TwoWay.Contacts.Contact
+    belongs_to :recipient, TwoWay.Contacts.Contact
+    belongs_to :media, TwoWay.Messages.MessageMedia
 
     timestamps()
   end

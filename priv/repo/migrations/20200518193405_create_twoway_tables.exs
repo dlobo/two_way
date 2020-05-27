@@ -13,6 +13,11 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
     session_messages()
 
     contacts()
+
+    messageMedia()
+
+    messages()
+
   end
 
   @doc """
@@ -264,7 +269,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
     end
 
     create index(:messages, [:sender_id])
-    create index(:messages, [:receipient_id])
+    create index(:messages, [:recipient_id])
     create index(:messages, [:media_id])
   end
 
