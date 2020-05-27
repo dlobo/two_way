@@ -1,4 +1,4 @@
-defmodule TwoWay.WhatsApp.BSP.Twilio.ApiClient do
+defmodule TwoWay.Commnunication.BSP.Twilio.ApiClient do
   use Tesla
   plug Tesla.Middleware.BaseUrl, "https://api.twilio.io/sm/api/v1"
 

@@ -1,12 +1,12 @@
 defmodule TwoWay.Commnunication do
 
-  def effective_whats_app_bsp() do
+  def effective_bsp() do
     with nil <- bsp_per_organisation(),
          nil <- bsp_from_config(),
          do: bsp_default()
   end
 
-  def effective_whats_app_sender() do
+  def effective_sender() do
     with nil <- sender_per_organisation(),
          nil <- sender_from_config(),
          do: sender_default()
@@ -21,7 +21,7 @@ defmodule TwoWay.Commnunication do
     end
   end
 
-  defp bsp_default(), do: TwoWay.WhatsApp.BSP.Twilio
+  defp bsp_default(), do: TwoWay.Commnunication.BSP.Twilio
 
   defp sender_per_organisation(), do: nil
 

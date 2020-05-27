@@ -1,4 +1,4 @@
-defmodule TwoWay.WhatsApp.BSP.Gupshup.ApiClient do
+defmodule TwoWay.Commnunication.BSP.Gupshup.ApiClient do
   use Tesla
   plug Tesla.Middleware.BaseUrl, "https://api.gupshup.io/sm/api/v1"
 
