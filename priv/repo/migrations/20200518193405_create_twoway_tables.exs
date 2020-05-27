@@ -192,7 +192,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
       # whatsapp status
       # the current options are: processing, valid, invalid, failed
-      add :wa_status, :string, null: false
+      add :wa_status, :contact_status_enum, null: false, default: "valid"
 
       # whatsapp id
       # this is relevant only if wa_status is valid
@@ -203,7 +203,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
       # this is our status, based on what the BSP tell us
       # the current options are: valid or invalid
-      add :status     , :string     , null: false, default: "valid"
+      add :status     , :contact_status_enum, null: false, default: "valid"
       add :optin_time , :timestamptz
       add :optout_time, :timestamptz
 

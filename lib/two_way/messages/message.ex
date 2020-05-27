@@ -10,6 +10,7 @@ defmodule TwoWay.Messages.Message do
     field :type, MessageTypesEnum
     field :wa_message_id, :string
     field :wa_status, :string
+
     belongs_to :sender, TwoWay.Contacts.Contact
     belongs_to :recipient, TwoWay.Contacts.Contact
     belongs_to :media, TwoWay.Messages.MessageMedia
@@ -25,8 +26,6 @@ defmodule TwoWay.Messages.Message do
       :type,
       :flow,
       :body,
-      :wa_message_id,
-      :wa_status,
       :sender_id,
       :recipient_id
     ])

@@ -3,6 +3,8 @@ defmodule TwoWayWeb.Schema.Middleware.ChangesetErrors do
 
   def call(res, _) do
     l = Map.get(res, :errors)
+    IO.puts("In call")
+    IO.inspect(l)
     if length(l) == 2 do
       [h | t] = l
       %{res |

@@ -150,17 +150,22 @@ defmodule TwoWay.Repo.SeedScale do
     "worked."
   }
 
+  @doc """
+  Anshul: PLease rewrite this as an Enum.map statement, something like
+  Enum.map(contacts_list, fn c -> insert_contact(c) end  )
+  """
+
   def insert_contacts([], contacts_list) do
     contacts_list
   end
 
   def insert_contacts([head | tail], contacts_list) do
-
+    {name, phone} = head
     contact = Repo.insert!(%Contact{
-      name: elem(head, 0),
-      phone: "#{elem(head, 1)}",
+      name: name
+      phone: Integer.to_string(phone)
       wa_status: "valid",
-      wa_id: "test_wa_id_#{elem(head, 1)}",
+      wa_id: "test_wa_id_#{phone}",
       optin_time: DateTime.truncate(DateTime.utc_now(), :second),
       optout_time: DateTime.truncate(DateTime.utc_now(), :second),
       status: "opted_in"
@@ -170,20 +175,17 @@ defmodule TwoWay.Repo.SeedScale do
 
   end
 
-  def create_messages(0, contacts_list) do
-    contacts_list
-  end
+  defp create_message(),
+    do: elem(@message_words_1, Enum.random(0..4)) <>
+      elem(@message_words_2, Enum.random(0..4)) <>
+      elem(@message_words_3, Enum.random(0..4)) <>
+      elem(@message_words_4, Enum.random(0..4))
+
+  def create_messages(len, contacts_list) when len <= 0,
+    do: contacts_list
 
   def create_messages(len, messages_list) do
-    messages_list = [
-      elem(@message_words_1, Enum.random(0..4))
-      <> elem(@message_words_2, Enum.random(0..4))
-      <> elem(@message_words_3, Enum.random(0..4))
-      <> elem(@message_words_4, Enum.random(0..4))
-      | messages_list
-    ]
-
-    create_messages(len-1, messages_list)
+    create_messages(len - 1, [create_message() | messages_list])
   end
 
   def insert_messages(contacts, [], _) do
