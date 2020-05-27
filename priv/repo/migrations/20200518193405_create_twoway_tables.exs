@@ -257,13 +257,13 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       add :wa_status, :string
 
       # sender id
-      add :sender_id, references(:contacts, on_delete: :nothing)
+      add :sender_id, references(:contacts), on_delete: :nothing, null: false
 
       # recipient id
-      add :recipient_id, references(:contacts, on_delete: :nothing)
+      add :recipient_id, references(:contacts), on_delete: :nothing, null: false
 
       # message media ids
-      add :media_id,  references(:message_media, on_delete: :nothing), null: true
+      add :media_id,  references(:message_media), on_delete: :nothing, null: true
 
       timestamps()
     end

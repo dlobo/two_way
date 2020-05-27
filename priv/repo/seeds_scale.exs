@@ -13,7 +13,7 @@ alias TwoWay.Repo
 alias TwoWay.Messages.{MessageMedia, Message}
 alias TwoWay.Contacts.Contact
 
-contacts_names = [
+contacts_list = [
   {"Tarah Bensinger", Enum.random(1234567890..9876543210)},
   {"Ellamae Gwynn", Enum.random(1234567890..9876543210)},
   {"Mafalda Macdougall", Enum.random(1234567890..9876543210)},
@@ -116,15 +116,40 @@ contacts_names = [
   {"Adelle Cavin", Enum.random(123456789..9876543210)},
 ]
 
+messages_list = [
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+  {"Test message #{Enum.random(1234567890..9876543210)}"},
+]
+
 defmodule TwoWay.Repo.SeedScale do
 
-  def insert_contacts([]) do
-    "Inserted All Contacts"
+  def insert_contacts([], acc) do
+    acc
   end
 
-  def insert_contacts([head | tail]) do
+  def insert_contacts([head | tail], acc) do
 
-    Repo.insert!(%Contact{
+    contact = Repo.insert!(%Contact{
       name: elem(head, 0),
       phone: "#{elem(head, 1)}",
       wa_status: "valid",
@@ -134,10 +159,32 @@ defmodule TwoWay.Repo.SeedScale do
       status: "opted_in"
     })
 
-    insert_contacts(tail)
+    insert_contacts(tail, [contact.id | acc])
+
+  end
+
+  def insert_messages(contacts, []) do
+    "Inserted All Messages"
+  end
+
+  def insert_messages([contact_id | contacts_tail], [head | tail]) do
+
+    IO.inspect contact_id
+
+    Repo.insert!(%Message{
+      type: "text",
+      flow: "inbound",
+      body: elem(head, 0),
+      wa_status: "delivered",
+      sender_id: 1,
+      recipient_id: contact_id,
+    })
+
+    insert_messages(contacts_tail, tail)
 
   end
 
 end
 
-TwoWay.Repo.SeedScale.insert_contacts(contacts_names)
+TwoWay.Repo.SeedScale.insert_contacts(contacts_list, [])
+|> TwoWay.Repo.SeedScale.insert_messages(messages_list)
