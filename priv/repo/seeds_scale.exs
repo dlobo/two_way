@@ -121,25 +121,33 @@ defmodule TwoWay.Repo.SeedScale do
   @message_words_1 {
     "Hi, ",
     "Bye, ",
-    "Hello, "
+    "Hello, ",
+    "test ",
+    "when "
   }
 
   @message_words_2 {
     "this ",
     "try ",
-    "another "
+    "another ",
+    "test ",
+    "random "
   }
 
   @message_words_3 {
     "is ",
     "was ",
-    "not "
+    "not ",
+    "test ",
+    "did "
   }
 
   @message_words_4 {
     "true.",
     "important.",
-    "again."
+    "again.",
+    "test.",
+    "worked."
   }
 
   def insert_contacts([], contacts_list) do
@@ -168,10 +176,10 @@ defmodule TwoWay.Repo.SeedScale do
 
   def create_messages(len, messages_list) do
     messages_list = [
-      elem(@message_words_1, Enum.random(0..2))
-      <> elem(@message_words_2, Enum.random(0..2))
-      <> elem(@message_words_3, Enum.random(0..2))
-      <> elem(@message_words_4, Enum.random(0..2))
+      elem(@message_words_1, Enum.random(0..4))
+      <> elem(@message_words_2, Enum.random(0..4))
+      <> elem(@message_words_3, Enum.random(0..4))
+      <> elem(@message_words_4, Enum.random(0..4))
       | messages_list
     ]
 
@@ -182,7 +190,9 @@ defmodule TwoWay.Repo.SeedScale do
     "Inserted All Messages"
   end
 
-  def insert_messages([contact_id | contacts_tail], [head | tail], "ngo") do
+  def insert_messages(contacts_ids, [head | tail], "ngo") do
+
+    {:ok, contact_id} = Enum.fetch(contacts_ids, Enum.random(0..99))
 
     Repo.insert!(%Message{
       type: "text",
@@ -193,11 +203,13 @@ defmodule TwoWay.Repo.SeedScale do
       recipient_id: contact_id,
     })
 
-    insert_messages(contacts_tail, tail, "ngo")
+    insert_messages(contacts_ids, tail, "ngo")
 
   end
 
-  def insert_messages([contact_id | contacts_tail], [head | tail], "beneficiary") do
+  def insert_messages(contacts_ids, [head | tail], "beneficiary") do
+
+    {:ok, contact_id} = Enum.fetch(contacts_ids, Enum.random(0..99))
 
     Repo.insert!(%Message{
       type: "text",
@@ -208,13 +220,13 @@ defmodule TwoWay.Repo.SeedScale do
       recipient_id: 1,
     })
 
-    insert_messages(contacts_tail, tail, "beneficiary")
+    insert_messages(contacts_ids, tail, "beneficiary")
 
   end
 
 end
 
-messages_list = TwoWay.Repo.SeedScale.create_messages(100, [])
+messages_list = TwoWay.Repo.SeedScale.create_messages(10000, [])
 
 contacts_ids = TwoWay.Repo.SeedScale.insert_contacts(contacts_list, [])
 TwoWay.Repo.SeedScale.insert_messages(contacts_ids, messages_list, "ngo")
