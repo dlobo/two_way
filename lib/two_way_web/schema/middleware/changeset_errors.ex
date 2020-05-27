@@ -20,25 +20,6 @@ defmodule TwoWayWeb.Schema.Middleware.ChangesetErrors do
     end
   end
 
-  @doc """
-  def call(res, _) do
-    case res do
-      %{errors: [%Ecto.Changeset{} = changeset]} = res ->
-        %{res |
-          value: %{errors: transform_errors(changeset)},
-          errors: [],
-         }
-      %{errors: [:error, msg]} = res ->
-        %{res |
-          value: %{errors: [%{key: "No Key", message: msg}]},
-          errors: [],
-         }
-      true ->
-        res
-    end
-  end
-  """
-
   defp transform_errors(changeset) do
     changeset
     |> Ecto.Changeset.traverse_errors(&format_error/1)
