@@ -1,6 +1,5 @@
 defmodule TwoWay.Communication.Message do
   alias TwoWay.Messages
-  alias TwoWay.Contacts
 
   defmacro __using__(_opts \\ []) do
     quote do
@@ -24,6 +23,7 @@ defmodule TwoWay.Communication.Message do
       |> Map.put(:wa_status, "received")
 
     message = Messages.create_message(message_params)
+    message
     # contact  = Contacts.create_contact(contact_params)
   end
 

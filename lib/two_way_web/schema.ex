@@ -19,12 +19,7 @@ defmodule TwoWayWeb.Schema do
 
   query do
 
-    @desc "Get a list of all tags filtered by various criteria"
-    field :tags, list_of(:tag) do
-      arg :filter, :tag_filter
-      arg :order, type: :sort_order, default_value: :asc
-      resolve &Resolvers.Attributes.tags/3
-    end
+    import_fields :tag_queries
 
     field :languages, list_of(:language) do
       resolve &Resolvers.Settings.languages/3
@@ -33,21 +28,7 @@ defmodule TwoWayWeb.Schema do
   end
 
   mutation do
-    field :create_tag, :tag_result do
-      arg :input, non_null(:tag_input)
-      resolve &Resolvers.Attributes.create_tag/3
-    end
-
-    field :update_tag, :tag_result do
-      arg :id   , non_null(:id)
-      arg :input, :tag_input
-      resolve &Resolvers.Attributes.update_tag/3
-    end
-
-    field :delete_tag, :tag_result do
-      arg :id   , non_null(:id)
-      resolve &Resolvers.Attributes.delete_tag/3
-    end
+    import_fields :tag_mutations
 
     field :create_language, :language_result do
       arg :input, non_null(:language_input)

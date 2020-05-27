@@ -1,8 +1,6 @@
 defmodule TwoWayWeb.GupshupMessageController do
   use TwoWayWeb, :controller
 
-  alias TwoWay.Communication.Message
-
   def handler(conn, params, msg) do
     IO.puts(msg)
     IO.inspect(params)

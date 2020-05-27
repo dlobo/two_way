@@ -1,6 +1,11 @@
 defmodule TwoWayWeb.Resolvers.Attributes do
   alias TwoWay.{Attributes, Repo, Attributes.Tag}
 
+  def tag(_, %{id: id}, _) do
+    with {:ok, tag} <- Repo.fetch(Tag, id),
+      do: {:ok, %{tag: tag}}
+  end
+
   def tags(_, args, _) do
     {:ok, Attributes.list_tags(args)}
   end
