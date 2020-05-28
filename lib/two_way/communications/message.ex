@@ -17,17 +17,17 @@ defmodule TwoWay.Communications.Message do
 
   def send_text(message) do
     bsp_module()
-    |> apply(:send_text, [message, message.receipient, message.sender])
+    |> apply(:send_text, [message, message.recipient.phone, message.sender])
   end
 
   def send_image(message) do
     bsp_module()
-    |> apply(:send_image, [message.media, message.receipient, message.sender])
+    |> apply(:send_image, [message.media, message.recipient.phone, message.sender])
   end
 
   def send_media(message) do
     bsp_module()
-    |> apply(:send_media, [message.media, message.receipient, message.sender])
+    |> apply(:send_media, [message.media, message.recipient.phone, message.sender])
   end
 
   def receive_text(message_params) do
@@ -54,11 +54,6 @@ defmodule TwoWay.Communications.Message do
       recipient_id: get_recipient_id_for_inbound()
     })
     |> Messages.create_inbound_message()
-  end
-
-  def send_text(message, receipient) do
-    bsp_module()
-    |> apply(:send_text, [message, receipient, organisation_contact()])
   end
 
   def bsp_module() do

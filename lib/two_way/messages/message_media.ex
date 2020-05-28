@@ -4,7 +4,7 @@ defmodule TwoWay.Messages.MessageMedia do
 
   schema "message_media" do
     field :caption, :string
-    field :original_url, :string
+    field :source_url, :string
     field :thumbnail, :string
     field :url, :string
     field :wa_media_id, :string
@@ -15,7 +15,7 @@ defmodule TwoWay.Messages.MessageMedia do
   @doc false
   def changeset(message_media, attrs) do
     message_media
-    |> cast(attrs, [:url, :original_url, :thumbnail, :caption, :wa_media_id])
-    |> validate_required([:url,  :caption])
+    |> cast(attrs, [:url, :source_url, :thumbnail, :caption, :wa_media_id])
+    |> validate_required([:url, :caption])
   end
 end

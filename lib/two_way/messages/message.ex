@@ -4,16 +4,17 @@ defmodule TwoWay.Messages.Message do
 
   alias TwoWay.{MessageStatusEnum, MessageTypesEnum, MessageFlowEnum}
   alias TwoWay.{Contacts.Contact, Messages.MessageMedia}
-  schema "messages" do
-    field :body         , :string
-    field :flow         , MessageFlowEnum
-    field :type         , MessageTypesEnum
-    field :wa_message_id, :string
-    field :wa_status    , MessageStatusEnum
 
-    belongs_to :sender   , Contact
+  schema "messages" do
+    field :body, :string
+    field :flow, MessageFlowEnum
+    field :type, MessageTypesEnum
+    field :wa_message_id, :string
+    field :wa_status, MessageStatusEnum
+
+    belongs_to :sender, Contact
     belongs_to :recipient, Contact
-    belongs_to :media    , MessageMedia
+    belongs_to :media, MessageMedia
 
     timestamps()
   end
@@ -21,7 +22,16 @@ defmodule TwoWay.Messages.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:type, :flow, :body, :wa_message_id, :wa_status, :sender_id, :recipient_id, :media_id])
+    |> cast(attrs, [
+      :type,
+      :flow,
+      :body,
+      :wa_message_id,
+      :wa_status,
+      :sender_id,
+      :recipient_id,
+      :media_id
+    ])
     |> validate_required([
       :type,
       :flow,
@@ -38,5 +48,4 @@ defmodule TwoWay.Messages.Message do
   def query(queryable, _params) do
     queryable
   end
-
 end
