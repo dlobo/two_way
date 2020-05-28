@@ -28,6 +28,7 @@ defmodule TwoWay.Communications.Message do
     {contact, message}
   end
 
+  # I think this can be use as receive_media
   def receive_image(payload) do
     {message_params, contact_params} = bsp_module()
     |> apply(:receive_image, [payload])
