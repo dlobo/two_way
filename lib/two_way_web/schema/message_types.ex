@@ -3,6 +3,7 @@ defmodule TwoWayWeb.Schema.MessageTypes do
   import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
   alias TwoWayWeb.{Resolvers}
+  alias TwoWay.Messages.Message
 
   object :message_result do
     field :message, :message
@@ -22,12 +23,12 @@ defmodule TwoWayWeb.Schema.MessageTypes do
       resolve dataloader(Message)
     end
 
-    field :recipient_id , :contact do
+    field :recipient    , :contact do
       resolve dataloader(Message)
     end
 
-    field :media_id     , :message_media do
-      resolve dataloader(MessageMedia)
+    field :media        , :message_media do
+      resolve dataloader(Message)
     end
 
   end
@@ -35,16 +36,16 @@ defmodule TwoWayWeb.Schema.MessageTypes do
   @desc "Filtering options for messages"
   input_object :message_filter do
     @desc "Match the namebody"
-    field :body    , :string
+    field :body     , :string
 
     @desc "Match the sender"
-    field :sender  , :string
+    field :sender   , :string
 
-    @desc "Match the receiver"
-    field :receiver, :string
+    @desc "Match the recipient"
+    field :recipient, :string
 
     @desc "Match the phone with either the sender or receiver"
-    field :either  , :string
+    field :either   , :string
 
     @desc "Match the status"
     field :wa_status, :message_status_enum

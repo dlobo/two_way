@@ -25,4 +25,13 @@ defmodule TwoWay.Contacts.Contact do
     |> validate_required([:name, :phone])
     |> unique_constraint([:phone, :wa_id])
   end
+
+  def data() do
+    Dataloader.Ecto.new(TwoWay.Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
+
 end

@@ -2,6 +2,9 @@ defmodule TwoWayWeb.Schema do
   use Absinthe.Schema
 
   alias TwoWay.Attributes.Tag
+  alias TwoWay.Messages.Message
+  alias TwoWay.Contacts.Contact
+
   alias TwoWayWeb.Schema.Middleware
 
   def middleware(middleware, _field, %{identifier: :mutation}) do
@@ -51,7 +54,9 @@ end
   def context(ctx) do
     loader =
       Dataloader.new
-      |> Dataloader.add_source(Tag, Tag.data())
+      |> Dataloader.add_source(Tag    , Tag.data()    )
+      |> Dataloader.add_source(Message, Message.data())
+      |> Dataloader.add_source(Contact, Contact.data())
 
     Map.put(ctx, :loader, loader)
   end
