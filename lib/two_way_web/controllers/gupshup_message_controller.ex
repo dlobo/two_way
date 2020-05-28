@@ -1,6 +1,7 @@
 defmodule TwoWayWeb.GupshupMessageController do
   use TwoWayWeb, :controller
 
+  alias TwoWay.Commnunications.BSP.Gupshup.Message, as: GupshupMessage
   alias TwoWay.Communications.Message, as: Communications
 
   def handler(conn, params, msg) do
@@ -13,12 +14,15 @@ defmodule TwoWayWeb.GupshupMessageController do
     do: handler(conn, params, "message handler")
 
   def text(conn, params) do
-    {_message, _contact} = Communications.receive_text(params)
+    GupshupMessage.receive_text(params)
+    |> Communications.receive_text()
     handler(conn, params, "text handler")
   end
 
   def image(conn, params) do
-    {_message, _contact} = Communications.receive_image(params)
+    GupshupMessage.receive_image(params)
+    |> Communications.receive_image()
+
     handler(conn, params, "image handler")
   end
 

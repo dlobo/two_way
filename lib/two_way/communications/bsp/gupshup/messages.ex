@@ -24,36 +24,29 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
   def receive_text(params) do
     payload = params["payload"]
     message_payload = payload["payload"]
-
-    message_params = %{
+    %{
       wa_message_id: payload["id"],
-      body: message_payload["text"]
+      body: message_payload["text"],
+      sender: %{
+        phone: payload["sender"]["phone"],
+        name: payload["sender"]["name"]
+      }
     }
-
-    contact_params = %{
-      phone: payload["sender"]["phone"],
-      name: payload["sender"]["name"]
-    }
-
-    {message_params, contact_params}
   end
 
   @impl TwoWay.Communications.MessageBehaviour
   def receive_image(params) do
     payload = params["payload"]
     message_payload = payload["payload"]
-
-    message_params = %{
+    %{
       wa_message_id: payload["id"],
       caption: message_payload["caption"],
-      url: message_payload["url"]
+      url: message_payload["url"],
+      sender: %{
+        phone: payload["sender"]["phone"],
+        name: payload["sender"]["name"]
+      }
     }
 
-    contact_params = %{
-      phone: payload["sender"]["phone"],
-      name: payload["sender"]["name"]
-    }
-
-    {message_params, contact_params}
   end
 end

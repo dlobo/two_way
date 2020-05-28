@@ -63,7 +63,6 @@ defmodule TwoWayWeb.Router do
       schema: TwoWayWeb.Schema,
       interface: :simple
 
-    1
   end
 
   scope "/", TwoWayWeb do
