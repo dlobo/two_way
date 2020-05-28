@@ -17,6 +17,10 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
   end
 
   @impl TwoWay.Communications.MessageBehaviour
+  def send_message(_payload) do
+  end
+
+  @impl TwoWay.Communications.MessageBehaviour
   def receive_text(params) do
     payload = params["payload"]
     message_payload = payload["payload"]
