@@ -59,7 +59,7 @@ defmodule TwoWay.Messages do
   def create_inbound_message(attrs \\ %{}) do
     attrs
     |> Map.put(:flow, "inbound")
-    |> Map.put(:wa_status, "received")
+    |> Map.put(:wa_status, :delivered)
     |> create_message()
   end
 

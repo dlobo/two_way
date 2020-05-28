@@ -19,13 +19,13 @@ defmodule TwoWay.Communications.Message do
 
     contact = Contacts.find_or_create(contact_params)
 
-    message_params
+    {:ok, message } = message_params
     |> Map.put(:type, :text)
     |> Map.put(:sender_id, contact.id)
     |> Map.put(:recipient_id, 1)
     |> Messages.create_inbound_message()
 
-    {contact, message_params }
+    {contact, message }
   end
 
   def bsp_module() do

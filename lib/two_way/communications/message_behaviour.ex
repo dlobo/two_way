@@ -11,9 +11,9 @@ defmodule TwoWay.Communications.MessageBehaviour do
   @callback send_text(
               message :: TwoWay.Messages.Message.t(),
               receiver :: String.t(),
-              sender :: Map.t()
-            ) :: {:ok, response :: Map.t()} | {:error, message :: String.t()}
+              sender :: map()
+            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
 
-  @callback receive_text(payload :: Map.t()) ::
-              {message :: Map.t(), contact :: Map.t()}
+  @callback receive_text(payload :: map()) ::
+              {message :: map(), contact :: map()}
 end
