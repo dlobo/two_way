@@ -22,6 +22,7 @@ defmodule TwoWay.Communications.Message do
     {:ok, message } = message_params
     |> Map.put(:type, :text)
     |> Map.put(:sender_id, contact.id)
+    # TODO: Make this dynamic
     |> Map.put(:recipient_id, 1)
     |> Messages.create_inbound_message()
 
