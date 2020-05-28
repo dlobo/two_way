@@ -8,9 +8,8 @@ defmodule TwoWay.Communications.MessageBehaviour do
   - `destination` - destination number for communication
   """
 
-  @callback send_message(
-    message :: TwoWay.Messages.Message.t()
-  ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+  @callback send_message(message :: TwoWay.Messages.Message.t()) ::
+              {:ok, response :: map()} | {:error, message :: String.t()}
 
   @callback send_text(
               message :: TwoWay.Messages.Message.t(),

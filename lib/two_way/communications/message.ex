@@ -7,10 +7,9 @@ defmodule TwoWay.Communications.Message do
     end
   end
 
-
   def send_message(message) do
     case message.type do
-      :text ->  send_text(message)
+      :text -> send_text(message)
       :image -> send_image(message)
       :media -> send_media(message)
     end
@@ -31,53 +30,32 @@ defmodule TwoWay.Communications.Message do
     |> apply(:send_media, [message.media, message.receipient, message.sender])
   end
 
-  def receive_text(payload) do
-    {message_params, contact_params} =
-      bsp_module()
-      |> apply(:receive_text, [payload])
+  def receive_text(message_params) do
+    contact = Contacts.find_or_create(message_params.sender)
 
-    contact = Contacts.find_or_create(contact_params)
-
-    message_details = %{
+    message_params
+    |> Map.merge(%{
       type: :text,
       sender_id: contact.id,
       recipient_id: get_recipient_id_for_inbound()
-    }
-
-    {:ok, message} =
-      message_params
-      |> Map.merge(message_details)
-      |> Messages.create_inbound_message()
-
-    {contact, message}
+    })
+    |> Messages.create_inbound_message()
   end
 
-  # I think this can be use as receive_media
-  def receive_image(payload) do
-    {message_params, contact_params} = bsp_module()
-    |> apply(:receive_image, [payload])
-
-    contact = Contacts.find_or_create(contact_params)
-
+  def receive_image(message_params) do
+    contact = Contacts.find_or_create(message_params.sender)
     {:ok, message_media} = Messages.create_message_media(message_params)
 
-    message_details = %{
+    message_params
+    |> Map.merge(%{
       type: :image,
       sender_id: contact.id,
       media_id: message_media.id,
       recipient_id: get_recipient_id_for_inbound()
-    }
-
-    {:ok, message} =
-      message_params
-      |> Map.merge(message_details)
-      |> Messages.create_inbound_message()
-
-    {contact, message}
-
+    })
+    |> Messages.create_inbound_message()
   end
 
-   # Will update this message soon
   def send_text(message, receipient) do
     bsp_module()
     |> apply(:send_text, [message, receipient, organisation_contact()])
