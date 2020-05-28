@@ -55,6 +55,13 @@ defmodule TwoWay.Messages do
     |> Repo.insert()
   end
 
+  def create_inbound_message(attrs \\ %{}) do
+    attrs
+    |> Map.put(:flow, "inbound")
+    |> Map.put(:wa_status, "received")
+    |> create_message()
+  end
+
   @doc """
   Updates a message.
 

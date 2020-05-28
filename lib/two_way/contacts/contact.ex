@@ -4,13 +4,12 @@ defmodule TwoWay.Contacts.Contact do
 
   schema "contacts" do
     field :name, :string
-    field :optin_time, :utc_datetime
-    field :optout_time, :utc_datetime
+    field :optin_time, :utc_datetime, default: nil
+    field :optout_time, :utc_datetime, default: nil
     field :phone, :string
-    field :status, :string
-    field :wa_id, :string
-    field :wa_status, :string
-
+    field :status, :string, default: "active"
+    field :wa_id, :string, default: nil
+    field :wa_status, :string, default: "opted_in"
     timestamps()
   end
 
@@ -18,6 +17,7 @@ defmodule TwoWay.Contacts.Contact do
   def changeset(contact, attrs) do
     contact
     |> cast(attrs, [:name, :phone, :wa_status, :wa_id, :status, :optin_time, :optout_time])
-    |> validate_required([:name, :phone, :wa_status, :wa_id, :status, :optin_time, :optout_time])
+    |> validate_required([:name, :phone])
+    |> unique_constraint([:phone, :wa_id])
   end
 end

@@ -101,4 +101,11 @@ defmodule TwoWay.Contacts do
   def change_contact(%Contact{} = contact, attrs \\ %{}) do
     Contact.changeset(contact, attrs)
   end
+
+  def find_or_create(attrs \\ %{}) do
+    with nil <- Repo.get_by(Contact, %{phone: attrs.phone}),
+         {:ok, contact} <- create_contact(attrs) do
+      contact
+    end
+  end
 end

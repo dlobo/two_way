@@ -1,4 +1,4 @@
-defmodule TwoWay.Commnunication.BSP.Gupshup.ApiClient do
+defmodule TwoWay.Commnunications.BSP.Gupshup.ApiClient do
   use Tesla
   plug Tesla.Middleware.BaseUrl, "https://api.gupshup.io/sm/api/v1"
 

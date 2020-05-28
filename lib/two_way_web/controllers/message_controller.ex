@@ -22,7 +22,7 @@ defmodule TwoWayWeb.MessageController do
         |> redirect(to: Routes.message_path(conn, :show, message))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        json(conn, changeset)
     end
   end
 

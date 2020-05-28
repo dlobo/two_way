@@ -1,4 +1,4 @@
-defmodule TwoWay.Communication.ContactBehaviour do
+defmodule TwoWay.Communications.ContactBehaviour do
   @doc """
   Invoked when a request runs.
 

@@ -5,12 +5,12 @@ defmodule TwoWay.Communication.Contact do
   end
 
   def status(args) do
-    effective_bsp()
+    bsp_module()
     |> apply(:status, [args])
   end
 
-  def effective_bsp() do
-    bsp = TwoWay.Commnunication.effective_bsp()
+  def bsp_module() do
+    bsp = TwoWay.Commnunications.effective_bsp()
     String.to_existing_atom(to_string(bsp) <> ".Contact")
   end
 end

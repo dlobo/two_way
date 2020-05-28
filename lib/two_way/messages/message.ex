@@ -25,7 +25,6 @@ defmodule TwoWay.Messages.Message do
       :type,
       :flow,
       :body,
-      :wa_message_id,
       :wa_status,
       :sender_id,
       :recipient_id
