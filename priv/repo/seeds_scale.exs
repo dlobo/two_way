@@ -159,16 +159,17 @@ defmodule TwoWay.Repo.SeedScale do
     contacts_list
   end
 
+  # To fix: change status value
   def insert_contacts([head | tail], contacts_list) do
     {name, phone} = head
     contact = Repo.insert!(%Contact{
-      name: name
-      phone: Integer.to_string(phone)
+      name: name,
+      phone: Integer.to_string(phone),
       wa_status: "valid",
       wa_id: "test_wa_id_#{phone}",
       optin_time: DateTime.truncate(DateTime.utc_now(), :second),
       optout_time: DateTime.truncate(DateTime.utc_now(), :second),
-      status: "opted_in"
+      status: "valid"
     })
 
     insert_contacts(tail, [contact.id | contacts_list])
@@ -188,48 +189,65 @@ defmodule TwoWay.Repo.SeedScale do
     create_messages(len - 1, [create_message() | messages_list])
   end
 
-  def insert_messages(contacts, [], _) do
+  def insert_messages(_contacts, [], _, acc) do
+
     "Inserted All Messages"
-  end
 
-  def insert_messages(contacts_ids, [head | tail], "ngo") do
-
-    {:ok, contact_id} = Enum.fetch(contacts_ids, Enum.random(0..99))
-
-    Repo.insert!(%Message{
-      type: "text",
-      flow: "inbound",
-      body: head,
-      wa_status: "delivered",
-      sender_id: 1,
-      recipient_id: contact_id,
-    })
-
-    insert_messages(contacts_ids, tail, "ngo")
+    acc
 
   end
 
-  def insert_messages(contacts_ids, [head | tail], "beneficiary") do
+  def insert_messages(contacts_ids, [head | tail], "ngo", acc) do
 
-    {:ok, contact_id} = Enum.fetch(contacts_ids, Enum.random(0..99))
+    {:ok, contact_id} = Enum.fetch(contacts_ids, Enum.random(1..99))
 
-    Repo.insert!(%Message{
-      type: "text",
-      flow: "inbound",
-      body: head,
-      wa_status: "delivered",
-      sender_id: contact_id,
-      recipient_id: 1,
-    })
+    acc = [
+      %{
+        type: "text",
+        flow: "inbound",
+        body: head,
+        wa_status: "delivered",
+        sender_id: 1,
+        recipient_id: contact_id,
+        inserted_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second),
+        updated_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+      }
+      | acc
+    ]
 
-    insert_messages(contacts_ids, tail, "beneficiary")
+    insert_messages(contacts_ids, tail, "beneficiary", acc)
+
+  end
+
+  def insert_messages(contacts_ids, [head | tail], "beneficiary", acc) do
+
+    {:ok, contact_id} = Enum.fetch(contacts_ids, Enum.random(1..99))
+
+    acc = [
+      %{
+        type: "text",
+        flow: "inbound",
+        body: head,
+        wa_status: "delivered",
+        sender_id: contact_id,
+        recipient_id: 1,
+        inserted_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second),
+        updated_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+      }
+      | acc
+    ]
+
+    insert_messages(contacts_ids, tail, "ngo", acc)
 
   end
 
 end
 
-messages_list = TwoWay.Repo.SeedScale.create_messages(10000, [])
+#postgresql protocol can not handle more than 65535 parameters for bulk insert
+messages_list = TwoWay.Repo.SeedScale.create_messages(5000, [])
 
 contacts_ids = TwoWay.Repo.SeedScale.insert_contacts(contacts_list, [])
-TwoWay.Repo.SeedScale.insert_messages(contacts_ids, messages_list, "ngo")
-TwoWay.Repo.SeedScale.insert_messages(contacts_ids, messages_list, "beneficiary")
+
+message_entries = TwoWay.Repo.SeedScale.insert_messages(contacts_ids, messages_list, "ngo", [])
+
+Repo.insert_all(Message, message_entries)
