@@ -13,6 +13,7 @@ defmodule TwoWayWeb.Schema.MessageTypes do
     field :id           , :id
     field :body         , :string
     field :type         , :message_types_enum
+    field :flow         , :message_flow_enum
     field :wa_message_id, :string
 
     field :wa_status    , :message_status_enum
@@ -52,6 +53,7 @@ defmodule TwoWayWeb.Schema.MessageTypes do
   input_object :message_input do
     field :body         , :string
     field :type         , :message_types_enum
+    field :flow         , :message_flow_enum
     field :wa_message_id, :string
 
     field :wa_status    , :message_status_enum

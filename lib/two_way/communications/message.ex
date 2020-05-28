@@ -7,6 +7,30 @@ defmodule TwoWay.Communications.Message do
     end
   end
 
+
+  def send_message(message) do
+    case message.type do
+      :text ->  send_text(message)
+      :image -> send_image(message)
+      :media -> send_media(message)
+    end
+  end
+
+  def send_text(message) do
+    bsp_module()
+    |> apply(:send_text, [message, message.receipient, message.sender])
+  end
+
+  def send_image(message) do
+    bsp_module()
+    |> apply(:send_image, [message.media, message.receipient, message.sender])
+  end
+
+  def send_media(message) do
+    bsp_module()
+    |> apply(:send_media, [message.media, message.receipient, message.sender])
+  end
+
   def receive_text(payload) do
     {message_params, contact_params} =
       bsp_module()
@@ -34,6 +58,7 @@ defmodule TwoWay.Communications.Message do
     |> apply(:receive_image, [payload])
 
     contact = Contacts.find_or_create(contact_params)
+
     {:ok, message_media} = Messages.create_message_media(message_params)
 
     message_details = %{
