@@ -6,7 +6,7 @@ Install the following packages using your favorite package manager. Links are pr
 
   * [Install Elixir](https://elixir-lang.org/install.html#distributions)
   * [Install Postgres](https://www.postgresql.org/download/)
-  * For Postgres, for the development server, we default to using postgres/postgres as the username/password. This is configurable
+  ** For Postgres, for the development server, we default to using postgres/postgres as the username/password. This is configurable
 
 
 ## Download code from GitHub

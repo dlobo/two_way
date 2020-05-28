@@ -9,7 +9,7 @@ defmodule TwoWay.Communications.Message do
 
   def send_message(message) do
     case message.type do
-      :text -> send_text(message)
+      :text  -> send_text (message)
       :image -> send_image(message)
       :media -> send_media(message)
     end
@@ -31,7 +31,7 @@ defmodule TwoWay.Communications.Message do
   end
 
   def receive_text(message_params) do
-    contact = Contacts.find_or_create(message_params.sender)
+    contact = Contacts.get_or_create(message_params.sender)
 
     message_params
     |> Map.merge(%{
@@ -39,11 +39,11 @@ defmodule TwoWay.Communications.Message do
       sender_id: contact.id,
       recipient_id: get_recipient_id_for_inbound()
     })
-    |> Messages.create_inbound_message()
+    |> Messages.create_message()
   end
 
   def receive_image(message_params) do
-    contact = Contacts.find_or_create(message_params.sender)
+    contact = Contacts.get_or_create(message_params.sender)
     {:ok, message_media} = Messages.create_message_media(message_params)
 
     message_params
@@ -53,7 +53,7 @@ defmodule TwoWay.Communications.Message do
       media_id: message_media.id,
       recipient_id: get_recipient_id_for_inbound()
     })
-    |> Messages.create_inbound_message()
+    |> Messages.create_message()
   end
 
   def send_text(message, receipient) do

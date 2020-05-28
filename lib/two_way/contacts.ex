@@ -124,10 +124,15 @@ defmodule TwoWay.Contacts do
     Contact.changeset(contact, attrs)
   end
 
-  def find_or_create(attrs \\ %{}) do
-    with nil <- Repo.get_by(Contact, %{phone: attrs.phone}),
-         {:ok, contact} <- create_contact(attrs) do
-      contact
-    end
+  def get_or_create(attrs) do
+    Repo.insert!(
+      change_contact(%Contact{}, attrs),
+      on_conflict: [set: [phone: attrs.phone]],
+      conflict_target: :phone
+    )
+    # with nil            <- Repo.get_by(Contact, %{phone: attrs.phone}),
+    #   {:ok, contact} <- create_contact(attrs) do
+    #      contact
+    # end
   end
 end

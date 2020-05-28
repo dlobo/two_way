@@ -51,16 +51,13 @@ defmodule TwoWay.Messages do
 
   """
   def create_message(attrs \\ %{}) do
+    # Merge default values if not present in attributes
+    attrs =
+      %{flow: :inbound, wa_status: :delivered} |> Map.merge(attrs)
+
     %Message{}
     |> Message.changeset(attrs)
     |> Repo.insert()
-  end
-
-  def create_inbound_message(attrs \\ %{}) do
-    attrs
-    |> Map.put(:flow, "inbound")
-    |> Map.put(:wa_status, :delivered)
-    |> create_message()
   end
 
   @doc """
