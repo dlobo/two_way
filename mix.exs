@@ -59,7 +59,8 @@ defmodule TwoWay.MixProject do
       {:absinthe_relay, "~> 1.5"},
       {:dataloader, "~> 1.0.0"},
       {:hackney, "~> 1.13"},
-      {:tesla, "~> 1.3.0"}
+      {:tesla, "~> 1.3.0"},
+      {:faker, "~> 0.13", only: :dev}
     ]
   end
 
