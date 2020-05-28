@@ -14,27 +14,11 @@ defmodule TwoWayWeb.PageController do
     case data do
       {:ok, message} -> json(conn, message)
       {:error, message} -> json(conn, message)
-      _ -> json(conn, [])
+      _ -> json(conn, data)
     end
   end
 
   def test(conn, _params) do
-    # message =  %{body: "Hello world"}
-    # contact =  "+919917443994"
-    # data =  TwoWay.Communication.Message.send_text(message, contact
-
-    message = %{
-      body: "Hello 5",
-      flow: "inbound",
-      recipient_id: 1,
-      sender_id: 1,
-      type: :text,
-      wa_message_id: "ABEGkZkXRDmUAgo-sPQQyhtCyaLl",
-      wa_status: "received"
-    }
-
-    data = TwoWay.Messages.create_message(message)
-
-    handle(data, conn)
+    handle([], conn)
   end
 end
