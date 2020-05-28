@@ -7,11 +7,6 @@ defmodule TwoWay.Communications.Message do
     end
   end
 
-  def send_text(message, receipient) do
-    bsp_module()
-    |> apply(:send_text, [message, receipient, organisation_contact()])
-  end
-
   def receive_text(payload) do
     {message_params, contact_params} =
       bsp_module()
@@ -54,6 +49,12 @@ defmodule TwoWay.Communications.Message do
 
     {contact, message}
 
+  end
+
+   # Will update this message soon
+  def send_text(message, receipient) do
+    bsp_module()
+    |> apply(:send_text, [message, receipient, organisation_contact()])
   end
 
   def bsp_module() do
