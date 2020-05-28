@@ -8,8 +8,6 @@ defmodule TwoWay.Contacts.Contact do
     field :name, :string
     field :phone, :string
     field :wa_id, :string, default: nil
-    field :phone, :string
-    field :wa_id, :string
 
     field :status, ContactStatusEnum
     field :wa_status, ContactStatusEnum
