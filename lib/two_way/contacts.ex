@@ -17,8 +17,30 @@ defmodule TwoWay.Contacts do
       [%Contact{}, ...]
 
   """
-  def list_contacts do
-    Repo.all(Contact)
+  def list_contacts(args \\ %{}) do
+    args
+    |> Enum.reduce(Contact, fn
+      {:order, order}, query ->
+        query |> order_by({^order, :name})
+      {:filter, filter}, query ->
+        query |> filter_with(filter)
+    end)
+    |> Repo.all
+  end
+
+  defp filter_with(query, filter) do
+    Enum.reduce(filter, query, fn
+      {:name, name}, query ->
+        from q in query, where: ilike(q.name, ^"%#{name}%")
+      {:phone, phone }, query ->
+        from q in query, where: ilike(q.phone, ^"%#{phone}%")
+      {:wa_id, wa_id }, query ->
+        from q in query, where: ilike(q.wa_id, ^"%#{wa_id}%")
+      {:status, status }, query ->
+        from q in query, where: q.status ==  ^status
+      {:wa_status, wa_status }, query ->
+        from q in query, where: q.wa_status ==  ^wa_status
+    end)
   end
 
   @doc """

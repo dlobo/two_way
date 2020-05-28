@@ -14,7 +14,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
     contacts()
 
-    messageMedia()
+    message_media()
 
     messages()
 
@@ -192,7 +192,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
       # whatsapp status
       # the current options are: processing, valid, invalid, failed
-      add :wa_status, :string, null: false
+      add :wa_status, :contact_status_enum, null: false, default: "valid"
 
       # whatsapp id
       # this is relevant only if wa_status is valid
@@ -203,7 +203,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
       # this is our status, based on what the BSP tell us
       # the current options are: valid or invalid
-      add :status     , :string     , null: false, default: "valid"
+      add :status     , :contact_status_enum, null: false, default: "valid"
       add :optin_time , :timestamptz
       add :optout_time, :timestamptz
 
@@ -217,7 +217,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
   @doc """
   Information for all media messages sent and/or received by the system
   """
-  def messageMedia() do
+  def message_media() do
     create table(:message_media) do
       # url to be sent to BSP
       add :url, :text
@@ -241,29 +241,29 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
   def messages() do
     create table(:messages) do
-      # Options are: text, audio, video, image
+      # The body of the message
+      add :body, :text
+
+      # Options are: text, audio, video, image, contact, location, file
       add :type, :message_types_enum
 
       # Options are: inbound, outbound
       add :flow, :message_flow_enum
 
-      # The body of the message
-      add :body, :text
-
       # whats app message id
       add :wa_message_id, :string, null: true
 
-      # options: sent, delivered,read
-      add :wa_status, :string
+      # options: sent, delivered, read
+      add :wa_status, :message_status_enum
 
       # sender id
-      add :sender_id, references(:contacts), on_delete: :nothing, null: false
+      add :sender_id   , references(:contacts)      , on_delete: :nothing, null: false
 
       # recipient id
-      add :recipient_id, references(:contacts), on_delete: :nothing, null: false
+      add :recipient_id, references(:contacts)      , on_delete: :nothing, null: false
 
       # message media ids
-      add :media_id,  references(:message_media), on_delete: :nothing, null: true
+      add :media_id    ,  references(:message_media), on_delete: :nothing, null: true
 
       timestamps()
     end

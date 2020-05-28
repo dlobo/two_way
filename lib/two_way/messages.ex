@@ -17,8 +17,9 @@ defmodule TwoWay.Messages do
       [%Message{}, ...]
 
   """
-  def list_messages do
-    Repo.all(Message)
+  def list_messages(args \\ %{}) do
+    args
+    |> Repo.all(Message)
   end
 
   @doc """
@@ -120,8 +121,9 @@ defmodule TwoWay.Messages do
       [%MessageMedia{}, ...]
 
   """
-  def list_message_media do
-    Repo.all(MessageMedia)
+  def list_message_media(args \\ %{}) do
+    args
+    |> Repo.all(MessageMedia)
   end
 
   @doc """

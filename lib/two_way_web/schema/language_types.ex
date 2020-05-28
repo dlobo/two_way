@@ -27,4 +27,21 @@ defmodule TwoWayWeb.Schema.LanguageTypes do
     field :errors  , list_of(:input_error)
   end
 
+  object :language_queries do
+
+    field :languages, list_of(:language) do
+      resolve &Resolvers.Settings.languages/3
+    end
+
+  end
+
+  object :language_mutations do
+
+    field :create_language, :language_result do
+      arg :input, non_null(:language_input)
+      resolve &Resolvers.Settings.create_language/3
+    end
+
+  end
+
 end

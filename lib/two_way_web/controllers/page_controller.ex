@@ -1,11 +1,6 @@
 defmodule TwoWayWeb.PageController do
   use TwoWayWeb, :controller
 
-  # use TwoWay.Communication.Message
-
-  alias TwoWay.Messages
-  alias TwoWay.Messages.Message
-
   def index(conn, _params) do
     render(conn, "index.html")
   end

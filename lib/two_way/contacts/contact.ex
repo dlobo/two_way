@@ -2,14 +2,21 @@ defmodule TwoWay.Contacts.Contact do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias TwoWay.ContactStatusEnum
+
   schema "contacts" do
     field :name, :string
-    field :optin_time, :utc_datetime, default: nil
-    field :optout_time, :utc_datetime, default: nil
     field :phone, :string
-    field :status, :string, default: "active"
     field :wa_id, :string, default: nil
-    field :wa_status, :string, default: "opted_in"
+    field :phone, :string
+    field :wa_id, :string
+
+    field :status, ContactStatusEnum
+    field :wa_status, ContactStatusEnum
+
+    field :optin_time, :utc_datetime
+    field :optout_time, :utc_datetime
+
     timestamps()
   end
 
