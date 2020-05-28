@@ -16,6 +16,6 @@ defmodule TwoWay.Messages.MessageMedia do
   def changeset(message_media, attrs) do
     message_media
     |> cast(attrs, [:url, :original_url, :thumbnail, :caption, :wa_media_id])
-    |> validate_required([:url, :original_url, :thumbnail, :caption, :wa_media_id])
+    |> validate_required([:url,  :caption])
   end
 end

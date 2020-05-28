@@ -16,4 +16,7 @@ defmodule TwoWay.Communications.MessageBehaviour do
 
   @callback receive_text(payload :: map()) ::
               {message :: map(), contact :: map()}
+
+  @callback receive_image(payload :: map()) ::
+              {message :: map(), contact :: map()}
 end

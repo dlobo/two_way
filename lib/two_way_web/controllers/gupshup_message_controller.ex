@@ -17,8 +17,10 @@ defmodule TwoWayWeb.GupshupMessageController do
     handler(conn, params, "text handler")
   end
 
-  def image(conn, params),
-    do: handler(conn, params, "image handler")
+  def image(conn, params) do
+    {_message, _contact} = Communications.receive_image(params)
+    handler(conn, params, "image handler")
+  end
 
   def file(conn, params),
     do: handler(conn, params, "file handler")

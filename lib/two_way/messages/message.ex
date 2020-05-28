@@ -21,11 +21,10 @@ defmodule TwoWay.Messages.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:type, :flow, :body, :wa_message_id, :wa_status, :sender_id, :recipient_id])
+    |> cast(attrs, [:type, :flow, :body, :wa_message_id, :wa_status, :sender_id, :recipient_id, :media_id])
     |> validate_required([
       :type,
       :flow,
-      :body,
       :wa_status,
       :sender_id,
       :recipient_id

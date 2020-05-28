@@ -6,4 +6,7 @@ defmodule TwoWay.Commnunications.BSP.Twilio.Message do
 
   @impl TwoWay.Communications.MessageBehaviour
   def receive_text(_payload), do: {:message, :contact}
+
+  @impl TwoWay.Communications.MessageBehaviour
+  def receive_image(_payload), do: {:message, :contact}
 end
