@@ -16,9 +16,10 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
     %{
       type: :image,
       originalUrl: message_media.source_url,
-      previewUrl: message_media.thumbnail,
+      previewUrl: message_media.url,
       caption: message_media.caption
     }
+
     |> send(receiver, sender)
     |> handle_response()
   end

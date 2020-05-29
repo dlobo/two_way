@@ -8,25 +8,13 @@ defmodule TwoWay.Communications.Message do
   end
 
   def send_message(message) do
-    case message.type do
-      :text ->
+    cond do
+      message.type == :text ->
         send_text(message)
         |> handle_send_message_response(message)
 
-      :image ->
-        send_image(message)
-        |> handle_send_message_response(message)
-
-      :audio ->
-        send_audio(message)
-        |> handle_send_message_response(message)
-
-      :video ->
-        send_video(message)
-        |> handle_send_message_response(message)
-
-      _ ->
-        send_document(message)
+      message.type in [:image, :audio, :video, :document]  ->
+        send_media(message)
         |> handle_send_message_response(message)
     end
   end
@@ -36,24 +24,20 @@ defmodule TwoWay.Communications.Message do
     |> apply(:send_text, [message, message.recipient.phone, message.sender])
   end
 
-  defp send_image(message) do
-    bsp_module()
-    |> apply(:send_image, [message.media, message.recipient.phone, message.sender])
-  end
+  defp send_media(message) do
+    case message.type do
+       :image -> bsp_module()
+        |> apply(:send_image, [message.media, message.recipient.phone, message.sender])
 
-  defp send_audio(message) do
-    bsp_module()
-    |> apply(:send_audio, [message.media, message.recipient.phone, message.sender])
-  end
+       :audio -> bsp_module()
+          |> apply(:send_audio, [message.media, message.recipient.phone, message.sender])
 
-  defp send_video(message) do
-    bsp_module()
-    |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
-  end
+        :video -> bsp_module()
+          |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
 
-  defp send_document(message) do
-    bsp_module()
-    |> apply(:send_docuemnt, [message.media, message.recipient.phone, message.sender])
+        :document -> bsp_module()
+          |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
+    end
   end
 
   def receive_text(message_params) do
