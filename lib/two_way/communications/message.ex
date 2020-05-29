@@ -9,7 +9,7 @@ defmodule TwoWay.Communications.Message do
 
   def send_message(message) do
     case message.type do
-      :text  -> send_text (message)
+      :text -> send_text(message)
       :image -> send_image(message)
       :media -> send_media(message)
     end

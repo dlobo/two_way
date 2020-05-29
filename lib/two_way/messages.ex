@@ -53,7 +53,8 @@ defmodule TwoWay.Messages do
   def create_message(attrs \\ %{}) do
     # Merge default values if not present in attributes
     attrs =
-      %{flow: :inbound, wa_status: :delivered} |> Map.merge(attrs)
+      %{flow: :inbound, wa_status: :delivered}
+      |> Map.merge(attrs)
 
     %Message{}
     |> Message.changeset(attrs)
