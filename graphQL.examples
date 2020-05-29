@@ -20,6 +20,19 @@ query listContacts($filter: ContactFilter, $order: SortOrder) {
   }
 }
 
+query multipleOps() {
+  tags {
+    id
+    label
+  }
+  contacts {
+    id
+    name
+    phone
+    waId
+  }
+}
+
 query tag($id:ID!){
   tag(id: $id) {
     tag {
