@@ -1,30 +1,25 @@
 defmodule TwoWay.Communications.Message do
   alias TwoWay.Messages
+  alias TwoWay.Messages.Message
   alias TwoWay.Contacts
 
-  @media_message_types [:image, :audio, :video, :document]
 
   defmacro __using__(_opts \\ []) do
     quote do
     end
   end
 
-  def send_message(message) do
-    cond do
-      message.type == :text -> send_text(message) |> handle_send_message_response(message)
-      message.type in @media_message_types -> send_media(message) |> handle_send_message_response(message)
-    end
+  def send_message(%Message{type: :text} = message) do
+    message
+    |> send_text()
+    |> handle_send_message_response(message)
   end
 
-  # def send_message(message) when message.type == :text do
-  #   send_text(message) |> handle_send_message_response(message)
-  # end
-
-  # def send_message(message) when message.type in @media_message_types do
-  #    send_media(message) |> handle_send_message_response(message)
-  # end
-
-  # def send_message(_message), do: nil
+  def send_message(message) do
+     message
+     |> send_media()
+     |> handle_send_message_response(message)
+  end
 
 
   defp send_text(message) do
