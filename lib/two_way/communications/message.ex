@@ -36,7 +36,7 @@ defmodule TwoWay.Communications.Message do
           |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
 
         :document -> bsp_module()
-          |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
+          |> apply(:send_document, [message.media, message.recipient.phone, message.sender])
     end
   end
 
