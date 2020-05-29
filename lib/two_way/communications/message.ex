@@ -9,9 +9,14 @@ defmodule TwoWay.Communications.Message do
 
   def send_message(message) do
     case message.type do
-      :text -> send_text(message)
-      :image -> send_image(message)
+      :text ->
+        send_text(message)
+        |> handle_send_message_response(message)
+      :image ->
+          send_image(message)
+          |> handle_send_message_response(message)
       :media -> send_media(message)
+          |> handle_send_message_response(message)
     end
   end
 
@@ -68,5 +73,10 @@ defmodule TwoWay.Communications.Message do
   def get_recipient_id_for_inbound() do
     # TODO: Make this dynamic
     1
+  end
+
+  defp handle_send_message_response(response, message) do
+   message |>
+   Messages.update_message(%{wa_message_id: response.message_id, wa_status: :sent})
   end
 end

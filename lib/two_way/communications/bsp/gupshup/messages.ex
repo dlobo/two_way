@@ -12,7 +12,9 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
       |> Map.put(:destination, receiver)
       |> Map.put("message", message.body)
 
-    ApiClient.post("/msg", request_body)
+    {:ok, response} = ApiClient.post("/msg", request_body)
+    body = response.body |> Jason.decode!()
+    %{ message_id: body["messageId"] }
   end
 
   @impl TwoWay.Communications.MessageBehaviour
