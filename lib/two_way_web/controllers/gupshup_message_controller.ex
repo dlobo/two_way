@@ -20,20 +20,35 @@ defmodule TwoWayWeb.GupshupMessageController do
   end
 
   def image(conn, params) do
-    GupshupMessage.receive_image(params)
-    |> Communications.receive_image()
+    IO.inspect(params)
+    GupshupMessage.receive_media(params)
+    |> Map.merge(%{type: :image})
+    |> Communications.receive_media()
 
     handler(conn, params, "image handler")
   end
 
-  def file(conn, params),
-    do: handler(conn, params, "file handler")
+  def file(conn, params) do
+    GupshupMessage.receive_media(params)
+      |> Map.merge(%{type: :document})
+      |> Communications.receive_media()
+    handler(conn, params, "file handler")
+  end
 
-  def audio(conn, params),
-    do: handler(conn, params, "audio handler")
+  def audio(conn, params) do
+    GupshupMessage.receive_media(params)
+      |> Map.merge(%{type: :audio})
+      |> Communications.receive_media()
+    handler(conn, params, "file handler")
+  end
 
-  def video(conn, params),
-    do: handler(conn, params, "video handler")
+  def video(conn, params) do
+    GupshupMessage.receive_media(params)
+      |> Map.merge(%{type: :video})
+      |> Communications.receive_media()
+    handler(conn, params, "file handler")
+  end
+
 
   def contact(conn, params),
     do: handler(conn, params, "contact handler")

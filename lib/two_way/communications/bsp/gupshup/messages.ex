@@ -72,7 +72,7 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
   end
 
   @impl TwoWay.Communications.MessageBehaviour
-  def receive_image(params) do
+  def receive_media(params) do
     payload = params["payload"]
     message_payload = payload["payload"]
 

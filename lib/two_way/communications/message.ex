@@ -2,6 +2,8 @@ defmodule TwoWay.Communications.Message do
   alias TwoWay.Messages
   alias TwoWay.Contacts
 
+  @media_message_types [:image, :audio, :video, :document]
+
   defmacro __using__(_opts \\ []) do
     quote do
     end
@@ -9,15 +11,21 @@ defmodule TwoWay.Communications.Message do
 
   def send_message(message) do
     cond do
-      message.type == :text ->
-        send_text(message)
-        |> handle_send_message_response(message)
-
-      message.type in [:image, :audio, :video, :document]  ->
-        send_media(message)
-        |> handle_send_message_response(message)
+      message.type == :text -> send_text(message) |> handle_send_message_response(message)
+      message.type in @media_message_types -> send_media(message) |> handle_send_message_response(message)
     end
   end
+
+  # def send_message(message) when message.type == :text do
+  #   send_text(message) |> handle_send_message_response(message)
+  # end
+
+  # def send_message(message) when message.type in @media_message_types do
+  #    send_media(message) |> handle_send_message_response(message)
+  # end
+
+  # def send_message(_message), do: nil
+
 
   defp send_text(message) do
     bsp_module()
@@ -52,13 +60,12 @@ defmodule TwoWay.Communications.Message do
     |> Messages.create_message()
   end
 
-  def receive_image(message_params) do
+  def receive_media(message_params) do
     contact = Contacts.get_or_create(message_params.sender)
     {:ok, message_media} = Messages.create_message_media(message_params)
 
     message_params
     |> Map.merge(%{
-      type: :image,
       sender_id: contact.id,
       media_id: message_media.id,
       recipient_id: get_recipient_id_for_inbound()
