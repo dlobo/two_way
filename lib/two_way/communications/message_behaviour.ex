@@ -14,6 +14,30 @@ defmodule TwoWay.Communications.MessageBehaviour do
               sender :: map()
             ) :: {:ok, response :: map()} | {:error, message :: String.t()}
 
+  @callback send_image(
+              message_media :: TwoWay.Messages.MessageMedia.t(),
+              receiver :: String.t(),
+              sender :: map()
+            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+
+  @callback send_audio(
+              message_media :: TwoWay.Messages.MessageMedia.t(),
+              receiver :: String.t(),
+              sender :: map()
+            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+
+  @callback send_video(
+              message_media :: TwoWay.Messages.MessageMedia.t(),
+              receiver :: String.t(),
+              sender :: map()
+            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+
+  @callback send_document(
+              message_media :: TwoWay.Messages.MessageMedia.t(),
+              receiver :: String.t(),
+              sender :: map()
+            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+
   @callback receive_text(payload :: map()) ::
               {message :: map(), contact :: map()}
 

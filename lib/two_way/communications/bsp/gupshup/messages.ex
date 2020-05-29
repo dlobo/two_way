@@ -6,15 +6,53 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
 
   @impl TwoWay.Communications.MessageBehaviour
   def send_text(message, receiver, sender) do
-    request_body =
-      %{"channel" => @channel}
-      |> Map.merge(format_sender(sender))
-      |> Map.put(:destination, receiver)
-      |> Map.put("message", message.body)
+    %{type: :text, text: message.body}
+    |> send(receiver, sender)
+    |> handle_response()
+  end
 
-    {:ok, response} = ApiClient.post("/msg", request_body)
-    body = response.body |> Jason.decode!()
-    %{ message_id: body["messageId"] }
+  @impl TwoWay.Communications.MessageBehaviour
+  def send_image(message_media, receiver, sender) do
+    %{
+      type: :image,
+      originalUrl: message_media.source_url,
+      previewUrl: message_media.thumbnail,
+      caption: message_media.caption
+    }
+    |> send(receiver, sender)
+    |> handle_response()
+  end
+
+  @impl TwoWay.Communications.MessageBehaviour
+  def send_audio(message_media, receiver, sender) do
+    %{
+      type: :audio,
+      url: message_media.source_url
+    }
+    |> send(receiver, sender)
+    |> handle_response()
+  end
+
+  @impl TwoWay.Communications.MessageBehaviour
+  def send_video(message_media, receiver, sender) do
+    %{
+      type: :audio,
+      url: message_media.source_url,
+      caption: message_media.caption
+    }
+    |> send(receiver, sender)
+    |> handle_response()
+  end
+
+ @impl TwoWay.Communications.MessageBehaviour
+  def send_document(message_media, receiver, sender) do
+    %{
+      type: :file,
+      url: message_media.source_url,
+      filename: message_media.caption
+    }
+    |> send(receiver, sender)
+    |> handle_response()
   end
 
   @impl TwoWay.Communications.MessageBehaviour
@@ -50,5 +88,21 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
 
   defp format_sender(sender) do
     %{"source" => sender.phone, "src.name" => sender.name}
+  end
+
+  defp send(message_payload, receiver, sender) do
+    request_body =
+      %{"channel" => @channel}
+      |> Map.merge(format_sender(sender))
+      |> Map.put(:destination, receiver)
+      |> Map.put("message", Jason.encode!(message_payload))
+
+    ApiClient.post("/msg", request_body)
+  end
+
+  defp handle_response(response_data) do
+    {:ok, response} = response_data
+    body = response.body |> Jason.decode!()
+    %{message_id: body["messageId"]}
   end
 end

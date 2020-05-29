@@ -12,27 +12,48 @@ defmodule TwoWay.Communications.Message do
       :text ->
         send_text(message)
         |> handle_send_message_response(message)
+
       :image ->
-          send_image(message)
-          |> handle_send_message_response(message)
-      :media -> send_media(message)
-          |> handle_send_message_response(message)
+        send_image(message)
+        |> handle_send_message_response(message)
+
+      :audio ->
+        send_audio(message)
+        |> handle_send_message_response(message)
+
+      :video ->
+        send_video(message)
+        |> handle_send_message_response(message)
+
+      _ ->
+        send_document(message)
+        |> handle_send_message_response(message)
     end
   end
 
-  def send_text(message) do
+  defp send_text(message) do
     bsp_module()
     |> apply(:send_text, [message, message.recipient.phone, message.sender])
   end
 
-  def send_image(message) do
+  defp send_image(message) do
     bsp_module()
     |> apply(:send_image, [message.media, message.recipient.phone, message.sender])
   end
 
-  def send_media(message) do
+  defp send_audio(message) do
     bsp_module()
-    |> apply(:send_media, [message.media, message.recipient.phone, message.sender])
+    |> apply(:send_audio, [message.media, message.recipient.phone, message.sender])
+  end
+
+  defp send_video(message) do
+    bsp_module()
+    |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
+  end
+
+  defp send_document(message) do
+    bsp_module()
+    |> apply(:send_docuemnt, [message.media, message.recipient.phone, message.sender])
   end
 
   def receive_text(message_params) do
@@ -76,7 +97,7 @@ defmodule TwoWay.Communications.Message do
   end
 
   defp handle_send_message_response(response, message) do
-   message |>
-   Messages.update_message(%{wa_message_id: response.message_id, wa_status: :sent})
+    message
+    |> Messages.update_message(%{wa_message_id: response.message_id, wa_status: :sent})
   end
 end
