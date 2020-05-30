@@ -247,6 +247,7 @@ defmodule TwoWay.MessagesTest do
       wa_message_id: "some updated wa_message_id",
       wa_status: "some updated wa_status"
     }
+
     @invalid_attrs %{body: nil, flow: nil, type: nil, wa_message_id: nil, wa_status: nil}
 
     def message_fixture(attrs \\ %{}) do
