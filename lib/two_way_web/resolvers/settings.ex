@@ -1,5 +1,4 @@
 defmodule TwoWayWeb.Resolvers.Settings do
-
   alias TwoWay.{Repo, Settings, Settings.Language}
   alias TwoWay.Attributes
 
@@ -19,9 +18,8 @@ defmodule TwoWayWeb.Resolvers.Settings do
 
   def update_language(_, %{id: id, input: params}, _) do
     with {:ok, language} <- Repo.fetch(Language, id),
-         {:ok, language} <- Settings.update_language(language, params)  do
+         {:ok, language} <- Settings.update_language(language, params) do
       {:ok, %{language: language}}
     end
   end
-
 end

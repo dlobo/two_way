@@ -11,15 +11,14 @@ defmodule TwoWayWeb.Schema.EnumTypes do
   enum(:contact_status_enum, values: TwoWay.Enums.contact_status_const())
 
   @desc "The Message Flow enum"
-  enum(:message_flow_enum , values: TwoWay.Enums.message_flow_const())
+  enum(:message_flow_enum, values: TwoWay.Enums.message_flow_const())
 
   @desc "The Message Status enum"
-  enum(:message_status_enum , values: TwoWay.Enums.message_status_const())
+  enum(:message_status_enum, values: TwoWay.Enums.message_status_const())
 
   @desc "The Message Types enum"
-  enum(:message_types_enum , values: TwoWay.Enums.message_types_const())
+  enum(:message_types_enum, values: TwoWay.Enums.message_types_const())
 
   @desc "Enum for ordering results"
   enum(:sort_order, values: TwoWay.Enums.sort_order_const())
-
 end

@@ -7,7 +7,11 @@ defmodule TwoWay.MessagesTest do
     alias TwoWay.Messages.Contact
 
     @valid_attrs %{name: "some name", phone_number: "some phone_number", status: "some status"}
-    @update_attrs %{name: "some updated name", phone_number: "some updated phone_number", status: "some updated status"}
+    @update_attrs %{
+      name: "some updated name",
+      phone_number: "some updated phone_number",
+      status: "some updated status"
+    }
     @invalid_attrs %{name: nil, phone_number: nil, status: nil}
 
     def contact_fixture(attrs \\ %{}) do
@@ -69,8 +73,20 @@ defmodule TwoWay.MessagesTest do
   describe "message_media" do
     alias TwoWay.Messages.MessageMedia
 
-    @valid_attrs %{caption: "some caption", original_url: "some original_url", thumbnail: "some thumbnail", url: "some url", wa_media_id: "some wa_media_id"}
-    @update_attrs %{caption: "some updated caption", original_url: "some updated original_url", thumbnail: "some updated thumbnail", url: "some updated url", wa_media_id: "some updated wa_media_id"}
+    @valid_attrs %{
+      caption: "some caption",
+      original_url: "some original_url",
+      thumbnail: "some thumbnail",
+      url: "some url",
+      wa_media_id: "some wa_media_id"
+    }
+    @update_attrs %{
+      caption: "some updated caption",
+      original_url: "some updated original_url",
+      thumbnail: "some updated thumbnail",
+      url: "some updated url",
+      wa_media_id: "some updated wa_media_id"
+    }
     @invalid_attrs %{caption: nil, original_url: nil, thumbnail: nil, url: nil, wa_media_id: nil}
 
     def message_media_fixture(attrs \\ %{}) do
@@ -107,7 +123,10 @@ defmodule TwoWay.MessagesTest do
 
     test "update_message_media/2 with valid data updates the message_media" do
       message_media = message_media_fixture()
-      assert {:ok, %MessageMedia{} = message_media} = Messages.update_message_media(message_media, @update_attrs)
+
+      assert {:ok, %MessageMedia{} = message_media} =
+               Messages.update_message_media(message_media, @update_attrs)
+
       assert message_media.caption == "some updated caption"
       assert message_media.original_url == "some updated original_url"
       assert message_media.thumbnail == "some updated thumbnail"
@@ -117,7 +136,10 @@ defmodule TwoWay.MessagesTest do
 
     test "update_message_media/2 with invalid data returns error changeset" do
       message_media = message_media_fixture()
-      assert {:error, %Ecto.Changeset{}} = Messages.update_message_media(message_media, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Messages.update_message_media(message_media, @invalid_attrs)
+
       assert message_media == Messages.get_message_media!(message_media.id)
     end
 
@@ -136,8 +158,18 @@ defmodule TwoWay.MessagesTest do
   describe "messages" do
     alias TwoWay.Messages.Message
 
-    @valid_attrs %{body: "some body", flow: "some flow", type: "some type", wa_message_id: "some wa_message_id"}
-    @update_attrs %{body: "some updated body", flow: "some updated flow", type: "some updated type", wa_message_id: "some updated wa_message_id"}
+    @valid_attrs %{
+      body: "some body",
+      flow: "some flow",
+      type: "some type",
+      wa_message_id: "some wa_message_id"
+    }
+    @update_attrs %{
+      body: "some updated body",
+      flow: "some updated flow",
+      type: "some updated type",
+      wa_message_id: "some updated wa_message_id"
+    }
     @invalid_attrs %{body: nil, flow: nil, type: nil, wa_message_id: nil}
 
     def message_fixture(attrs \\ %{}) do
@@ -201,8 +233,20 @@ defmodule TwoWay.MessagesTest do
   describe "messages" do
     alias TwoWay.Messages.Message
 
-    @valid_attrs %{body: "some body", flow: "some flow", type: "some type", wa_message_id: "some wa_message_id", wa_status: "some wa_status"}
-    @update_attrs %{body: "some updated body", flow: "some updated flow", type: "some updated type", wa_message_id: "some updated wa_message_id", wa_status: "some updated wa_status"}
+    @valid_attrs %{
+      body: "some body",
+      flow: "some flow",
+      type: "some type",
+      wa_message_id: "some wa_message_id",
+      wa_status: "some wa_status"
+    }
+    @update_attrs %{
+      body: "some updated body",
+      flow: "some updated flow",
+      type: "some updated type",
+      wa_message_id: "some updated wa_message_id",
+      wa_status: "some updated wa_status"
+    }
     @invalid_attrs %{body: nil, flow: nil, type: nil, wa_message_id: nil, wa_status: nil}
 
     def message_fixture(attrs \\ %{}) do

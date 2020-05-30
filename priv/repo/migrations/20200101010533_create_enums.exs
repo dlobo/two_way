@@ -1,7 +1,14 @@
 defmodule TwoWay.Repo.Migrations.CreateEnums do
   use Ecto.Migration
 
-  alias TwoWay.{APIStatusEnum, ContactStatusEnum, MessageFlowEnum, MessageTypesEnum, MessageStatusEnum, SortOrderEnum}
+  alias TwoWay.{
+    APIStatusEnum,
+    ContactStatusEnum,
+    MessageFlowEnum,
+    MessageTypesEnum,
+    MessageStatusEnum,
+    SortOrderEnum
+  }
 
   def up do
     APIStatusEnum.create_type()
@@ -20,5 +27,4 @@ defmodule TwoWay.Repo.Migrations.CreateEnums do
     MessageTypesEnum.drop_type()
     SortOrderEnum.drop_type()
   end
-
 end

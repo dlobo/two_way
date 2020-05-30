@@ -6,9 +6,33 @@ defmodule TwoWay.ContactsTest do
   describe "contacts" do
     alias TwoWay.Contacts.Contact
 
-    @valid_attrs %{name: "some name", optin_time: ~N[2010-04-17 14:00:00], optout_time: ~N[2010-04-17 14:00:00], phone: "some phone", status: "some status", wa_id: "some wa_id", wa_status: "some wa_status"}
-    @update_attrs %{name: "some updated name", optin_time: ~N[2011-05-18 15:01:01], optout_time: ~N[2011-05-18 15:01:01], phone: "some updated phone", status: "some updated status", wa_id: "some updated wa_id", wa_status: "some updated wa_status"}
-    @invalid_attrs %{name: nil, optin_time: nil, optout_time: nil, phone: nil, status: nil, wa_id: nil, wa_status: nil}
+    @valid_attrs %{
+      name: "some name",
+      optin_time: ~N[2010-04-17 14:00:00],
+      optout_time: ~N[2010-04-17 14:00:00],
+      phone: "some phone",
+      status: "some status",
+      wa_id: "some wa_id",
+      wa_status: "some wa_status"
+    }
+    @update_attrs %{
+      name: "some updated name",
+      optin_time: ~N[2011-05-18 15:01:01],
+      optout_time: ~N[2011-05-18 15:01:01],
+      phone: "some updated phone",
+      status: "some updated status",
+      wa_id: "some updated wa_id",
+      wa_status: "some updated wa_status"
+    }
+    @invalid_attrs %{
+      name: nil,
+      optin_time: nil,
+      optout_time: nil,
+      phone: nil,
+      status: nil,
+      wa_id: nil,
+      wa_status: nil
+    }
 
     def contact_fixture(attrs \\ %{}) do
       {:ok, contact} =
@@ -77,9 +101,33 @@ defmodule TwoWay.ContactsTest do
   describe "contacts" do
     alias TwoWay.Contacts.Contact
 
-    @valid_attrs %{name: "some name", optin_time: "2010-04-17T14:00:00Z", optout_time: "2010-04-17T14:00:00Z", phone: "some phone", status: "some status", wa_id: "some wa_id", wa_status: "some wa_status"}
-    @update_attrs %{name: "some updated name", optin_time: "2011-05-18T15:01:01Z", optout_time: "2011-05-18T15:01:01Z", phone: "some updated phone", status: "some updated status", wa_id: "some updated wa_id", wa_status: "some updated wa_status"}
-    @invalid_attrs %{name: nil, optin_time: nil, optout_time: nil, phone: nil, status: nil, wa_id: nil, wa_status: nil}
+    @valid_attrs %{
+      name: "some name",
+      optin_time: "2010-04-17T14:00:00Z",
+      optout_time: "2010-04-17T14:00:00Z",
+      phone: "some phone",
+      status: "some status",
+      wa_id: "some wa_id",
+      wa_status: "some wa_status"
+    }
+    @update_attrs %{
+      name: "some updated name",
+      optin_time: "2011-05-18T15:01:01Z",
+      optout_time: "2011-05-18T15:01:01Z",
+      phone: "some updated phone",
+      status: "some updated status",
+      wa_id: "some updated wa_id",
+      wa_status: "some updated wa_status"
+    }
+    @invalid_attrs %{
+      name: nil,
+      optin_time: nil,
+      optout_time: nil,
+      phone: nil,
+      status: nil,
+      wa_id: nil,
+      wa_status: nil
+    }
 
     def contact_fixture(attrs \\ %{}) do
       {:ok, contact} =

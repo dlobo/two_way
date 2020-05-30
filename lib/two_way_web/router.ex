@@ -61,8 +61,8 @@ defmodule TwoWayWeb.Router do
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: TwoWayWeb.Schema,
-      interface: :simple
-
+      interface: :simple,
+      socket: TwoWayWeb.UserSocket
   end
 
   scope "/", TwoWayWeb do

@@ -22,5 +22,4 @@ defmodule TwoWay.Enums do
 
   defmacro sort_order_const,
     do: Macro.expand(@sort_order_const, __CALLER__)
-
 end

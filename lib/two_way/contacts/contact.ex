@@ -3,6 +3,7 @@ defmodule TwoWay.Contacts.Contact do
   import Ecto.Changeset
 
   alias TwoWay.ContactStatusEnum
+  alias TwoWay.Attributes.Tag
 
   schema "contacts" do
     field :name, :string
@@ -14,6 +15,8 @@ defmodule TwoWay.Contacts.Contact do
 
     field :optin_time, :utc_datetime
     field :optout_time, :utc_datetime
+
+    many_to_many :tags, Tag, join_through: "contacts_tags", on_replace: :delete
 
     timestamps()
   end
@@ -33,5 +36,4 @@ defmodule TwoWay.Contacts.Contact do
   def query(queryable, _params) do
     queryable
   end
-
 end

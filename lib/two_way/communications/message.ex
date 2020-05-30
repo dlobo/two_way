@@ -3,7 +3,6 @@ defmodule TwoWay.Communications.Message do
   alias TwoWay.Messages.Message
   alias TwoWay.Contacts
 
-
   defmacro __using__(_opts \\ []) do
     quote do
     end
@@ -16,11 +15,10 @@ defmodule TwoWay.Communications.Message do
   end
 
   def send_message(message) do
-     message
-     |> send_media()
-     |> handle_send_message_response(message)
+    message
+    |> send_media()
+    |> handle_send_message_response(message)
   end
-
 
   defp send_text(message) do
     bsp_module()
@@ -29,17 +27,21 @@ defmodule TwoWay.Communications.Message do
 
   defp send_media(message) do
     case message.type do
-       :image -> bsp_module()
+      :image ->
+        bsp_module()
         |> apply(:send_image, [message.media, message.recipient.phone, message.sender])
 
-       :audio -> bsp_module()
-          |> apply(:send_audio, [message.media, message.recipient.phone, message.sender])
+      :audio ->
+        bsp_module()
+        |> apply(:send_audio, [message.media, message.recipient.phone, message.sender])
 
-        :video -> bsp_module()
-          |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
+      :video ->
+        bsp_module()
+        |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
 
-        :document -> bsp_module()
-          |> apply(:send_document, [message.media, message.recipient.phone, message.sender])
+      :document ->
+        bsp_module()
+        |> apply(:send_document, [message.media, message.recipient.phone, message.sender])
     end
   end
 

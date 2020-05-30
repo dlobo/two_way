@@ -3,7 +3,7 @@ defmodule TwoWayWeb.Resolvers.MessageMedia do
 
   def message_media(_, %{id: id}, _) do
     with {:ok, message_media} <- Repo.fetch(MessageMedia, id),
-      do: {:ok, %{message_media: message_media}}
+         do: {:ok, %{message_media: message_media}}
   end
 
   def message_medias(_, args, _) do
@@ -18,16 +18,15 @@ defmodule TwoWayWeb.Resolvers.MessageMedia do
 
   def update_message_media(_, %{id: id, input: params}, _) do
     with {:ok, message_media} <- Repo.fetch(MessageMedia, id),
-         {:ok, message_media} <- Messages.update_message_media(message_media, params)  do
+         {:ok, message_media} <- Messages.update_message_media(message_media, params) do
       {:ok, %{message_media: message_media}}
     end
   end
 
   def delete_message_media(_, %{id: id}, _) do
     with {:ok, message_media} <- Repo.fetch(MessageMedia, id),
-         {:ok, message_media} <- Messages.delete_message_media(message_media)  do
+         {:ok, message_media} <- Messages.delete_message_media(message_media) do
       {:ok, message_media}
     end
   end
-
 end

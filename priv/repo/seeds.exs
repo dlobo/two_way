@@ -34,9 +34,24 @@ Repo.insert!(%Tag{label: "Welcome", language: hi_in, parent_id: messageTags_HI.i
 Repo.insert!(%Tag{label: "Greeting", language: hi_in, parent_id: messageTags_HI.id})
 Repo.insert!(%Tag{label: "Thank You", language: hi_in, parent_id: messageTags_HI.id})
 
-
 Repo.insert!(%Contact{phone: "917834811114", name: "Default Contact"})
-Repo.insert!(%Contact{name: "Adelle Cavin", phone: Integer.to_string(Enum.random(123456789..9876543210))})
-Repo.insert!(%Contact{name: "Margarita Quinteros", phone: Integer.to_string(Enum.random(123456789..9876543210))})
-Repo.insert!(%Contact{name: "Chrissy Cron", phone: Integer.to_string(Enum.random(123456789..9876543210))})
-Repo.insert!(%Contact{name: "Hailey Wardlaw", phone: Integer.to_string(Enum.random(123456789..9876543210))})
+
+Repo.insert!(%Contact{
+  name: "Adelle Cavin",
+  phone: Integer.to_string(Enum.random(123_456_789..9_876_543_210))
+})
+
+Repo.insert!(%Contact{
+  name: "Margarita Quinteros",
+  phone: Integer.to_string(Enum.random(123_456_789..9_876_543_210))
+})
+
+Repo.insert!(%Contact{
+  name: "Chrissy Cron",
+  phone: Integer.to_string(Enum.random(123_456_789..9_876_543_210))
+})
+
+Repo.insert!(%Contact{
+  name: "Hailey Wardlaw",
+  phone: Integer.to_string(Enum.random(123_456_789..9_876_543_210))
+})

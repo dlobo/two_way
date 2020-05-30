@@ -2,26 +2,39 @@
 import EctoEnum
 
 require TwoWay.Enums
-defenum(TwoWay.APIStatusEnum,
+
+defenum(
+  TwoWay.APIStatusEnum,
   :api_status_enum,
-  TwoWay.Enums.api_status_const())
+  TwoWay.Enums.api_status_const()
+)
 
-defenum(TwoWay.ContactStatusEnum,
+defenum(
+  TwoWay.ContactStatusEnum,
   :contact_status_enum,
-  TwoWay.Enums.contact_status_const())
+  TwoWay.Enums.contact_status_const()
+)
 
-defenum(TwoWay.MessageFlowEnum,
+defenum(
+  TwoWay.MessageFlowEnum,
   :message_flow_enum,
-  TwoWay.Enums.message_flow_const())
+  TwoWay.Enums.message_flow_const()
+)
 
-defenum(TwoWay.MessageStatusEnum,
+defenum(
+  TwoWay.MessageStatusEnum,
   :message_status_enum,
-  TwoWay.Enums.message_status_const())
+  TwoWay.Enums.message_status_const()
+)
 
-defenum(TwoWay.MessageTypesEnum,
+defenum(
+  TwoWay.MessageTypesEnum,
   :message_types_enum,
-  TwoWay.Enums.message_types_const())
+  TwoWay.Enums.message_types_const()
+)
 
-defenum(TwoWay.SortOrderEnum,
+defenum(
+  TwoWay.SortOrderEnum,
   :sort_order_enum,
-  TwoWay.Enums.sort_order_const())
+  TwoWay.Enums.sort_order_const()
+)

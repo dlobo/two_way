@@ -12,6 +12,5 @@ defmodule TwoWay.Repo.Migrations.CreateOrganizations do
 
       timestamps()
     end
-
   end
 end

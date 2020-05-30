@@ -19,7 +19,6 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
       previewUrl: message_media.url,
       caption: message_media.caption
     }
-
     |> send(receiver, sender)
     |> handle_response()
   end
@@ -45,7 +44,7 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
     |> handle_response()
   end
 
- @impl TwoWay.Communications.MessageBehaviour
+  @impl TwoWay.Communications.MessageBehaviour
   def send_document(message_media, receiver, sender) do
     %{
       type: :file,

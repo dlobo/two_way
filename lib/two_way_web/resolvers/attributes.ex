@@ -3,7 +3,7 @@ defmodule TwoWayWeb.Resolvers.Attributes do
 
   def tag(_, %{id: id}, _) do
     with {:ok, tag} <- Repo.fetch(Tag, id),
-      do: {:ok, %{tag: tag}}
+         do: {:ok, %{tag: tag}}
   end
 
   def tags(_, args, _) do
@@ -27,16 +27,15 @@ defmodule TwoWayWeb.Resolvers.Attributes do
 
   def update_tag(_, %{id: id, input: params}, _) do
     with {:ok, tag} <- Repo.fetch(Tag, id),
-         {:ok, tag} <- Attributes.update_tag(tag, params)  do
+         {:ok, tag} <- Attributes.update_tag(tag, params) do
       {:ok, %{tag: tag}}
     end
   end
 
   def delete_tag(_, %{id: id}, _) do
     with {:ok, tag} <- Repo.fetch(Tag, id),
-         {:ok, tag} <- Attributes.delete_tag(tag)  do
+         {:ok, tag} <- Attributes.delete_tag(tag) do
       {:ok, tag}
     end
   end
-
 end

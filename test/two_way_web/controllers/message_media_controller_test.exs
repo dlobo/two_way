@@ -3,8 +3,20 @@ defmodule TwoWayWeb.MessageMediaControllerTest do
 
   alias TwoWay.Messages
 
-  @create_attrs %{caption: "some caption", original_url: "some original_url", thumbnail: "some thumbnail", url: "some url", wa_media_id: "some wa_media_id"}
-  @update_attrs %{caption: "some updated caption", original_url: "some updated original_url", thumbnail: "some updated thumbnail", url: "some updated url", wa_media_id: "some updated wa_media_id"}
+  @create_attrs %{
+    caption: "some caption",
+    original_url: "some original_url",
+    thumbnail: "some thumbnail",
+    url: "some url",
+    wa_media_id: "some wa_media_id"
+  }
+  @update_attrs %{
+    caption: "some updated caption",
+    original_url: "some updated original_url",
+    thumbnail: "some updated thumbnail",
+    url: "some updated url",
+    wa_media_id: "some updated wa_media_id"
+  }
   @invalid_attrs %{caption: nil, original_url: nil, thumbnail: nil, url: nil, wa_media_id: nil}
 
   def fixture(:message_media) do
@@ -46,7 +58,10 @@ defmodule TwoWayWeb.MessageMediaControllerTest do
   describe "edit message_media" do
     setup [:create_message_media]
 
-    test "renders form for editing chosen message_media", %{conn: conn, message_media: message_media} do
+    test "renders form for editing chosen message_media", %{
+      conn: conn,
+      message_media: message_media
+    } do
       conn = get(conn, Routes.message_media_path(conn, :edit, message_media))
       assert html_response(conn, 200) =~ "Edit Message media"
     end
@@ -56,7 +71,11 @@ defmodule TwoWayWeb.MessageMediaControllerTest do
     setup [:create_message_media]
 
     test "redirects when data is valid", %{conn: conn, message_media: message_media} do
-      conn = put(conn, Routes.message_media_path(conn, :update, message_media), message_media: @update_attrs)
+      conn =
+        put(conn, Routes.message_media_path(conn, :update, message_media),
+          message_media: @update_attrs
+        )
+
       assert redirected_to(conn) == Routes.message_media_path(conn, :show, message_media)
 
       conn = get(conn, Routes.message_media_path(conn, :show, message_media))
@@ -64,7 +83,11 @@ defmodule TwoWayWeb.MessageMediaControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, message_media: message_media} do
-      conn = put(conn, Routes.message_media_path(conn, :update, message_media), message_media: @invalid_attrs)
+      conn =
+        put(conn, Routes.message_media_path(conn, :update, message_media),
+          message_media: @invalid_attrs
+        )
+
       assert html_response(conn, 200) =~ "Edit Message media"
     end
   end
@@ -75,6 +98,7 @@ defmodule TwoWayWeb.MessageMediaControllerTest do
     test "deletes chosen message_media", %{conn: conn, message_media: message_media} do
       conn = delete(conn, Routes.message_media_path(conn, :delete, message_media))
       assert redirected_to(conn) == Routes.message_media_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.message_media_path(conn, :show, message_media))
       end

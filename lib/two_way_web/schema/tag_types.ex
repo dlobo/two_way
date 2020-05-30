@@ -7,32 +7,35 @@ defmodule TwoWayWeb.Schema.TagTypes do
 
   interface :search_result do
     field :label, :string
-    resolve_type fn
+
+    resolve_type(fn
       %Tag{}, _ ->
         :tag
+
       %Language{}, _ ->
         :language
+
       _, _ ->
         nil
-    end
+    end)
   end
 
   object :tag_result do
-    field :tag   , :tag
+    field :tag, :tag
     field :errors, list_of(:input_error)
   end
 
   object :tag do
-    interfaces [:search_result]
+    interfaces([:search_result])
 
-    field :id         , :id
-    field :label      , :string
+    field :id, :id
+    field :label, :string
     field :description, :string
-    field :is_active  , :boolean
+    field :is_active, :boolean
     field :is_reserved, :boolean
 
-    field :language   , :language do
-      resolve dataloader(Tag)
+    field :language, :language do
+      resolve(dataloader(Tag))
     end
   end
 
@@ -55,47 +58,43 @@ defmodule TwoWayWeb.Schema.TagTypes do
   end
 
   input_object :tag_input do
-    field :label      , :string
+    field :label, :string
     field :description, :string
-    field :is_active  , :boolean
+    field :is_active, :boolean
     field :is_reserved, :boolean
     field :language_id, :id
   end
 
   object :tag_queries do
-
     @desc "get the details of one tag"
     field :tag, :tag_result do
-      arg :id, non_null(:id)
-      resolve &Resolvers.Attributes.tag/3
+      arg(:id, non_null(:id))
+      resolve(&Resolvers.Attributes.tag/3)
     end
 
     @desc "Get a list of all tags filtered by various criteria"
     field :tags, list_of(:tag) do
-      arg :filter, :tag_filter
-      arg :order, type: :sort_order, default_value: :asc
-      resolve &Resolvers.Attributes.tags/3
+      arg(:filter, :tag_filter)
+      arg(:order, type: :sort_order, default_value: :asc)
+      resolve(&Resolvers.Attributes.tags/3)
     end
-
   end
 
   object :tag_mutations do
-
     field :create_tag, :tag_result do
-      arg :input, non_null(:tag_input)
-      resolve &Resolvers.Attributes.create_tag/3
+      arg(:input, non_null(:tag_input))
+      resolve(&Resolvers.Attributes.create_tag/3)
     end
 
     field :update_tag, :tag_result do
-      arg :id   , non_null(:id)
-      arg :input, :tag_input
-      resolve &Resolvers.Attributes.update_tag/3
+      arg(:id, non_null(:id))
+      arg(:input, :tag_input)
+      resolve(&Resolvers.Attributes.update_tag/3)
     end
 
     field :delete_tag, :tag_result do
-      arg :id   , non_null(:id)
-      resolve &Resolvers.Attributes.delete_tag/3
+      arg(:id, non_null(:id))
+      resolve(&Resolvers.Attributes.delete_tag/3)
     end
-
   end
 end

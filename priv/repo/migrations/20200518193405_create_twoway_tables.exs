@@ -17,7 +17,6 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
     message_media()
 
     messages()
-
   end
 
   @doc """
@@ -108,9 +107,8 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       timestamps()
     end
 
-    create unique_index(:languages, :label )
+    create unique_index(:languages, :label)
     create unique_index(:languages, :locale)
-
   end
 
   @doc """
@@ -203,8 +201,8 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
       # this is our status, based on what the BSP tell us
       # the current options are: valid or invalid
-      add :status     , :contact_status_enum, null: false, default: "valid"
-      add :optin_time , :timestamptz
+      add :status, :contact_status_enum, null: false, default: "valid"
+      add :optin_time, :timestamptz
       add :optout_time, :timestamptz
 
       timestamps()
@@ -236,7 +234,6 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
 
       timestamps()
     end
-
   end
 
   def messages() do
@@ -257,13 +254,13 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       add :wa_status, :message_status_enum
 
       # sender id
-      add :sender_id   , references(:contacts)      , on_delete: :nothing, null: false
+      add :sender_id, references(:contacts), on_delete: :nothing, null: false
 
       # recipient id
-      add :recipient_id, references(:contacts)      , on_delete: :nothing, null: false
+      add :recipient_id, references(:contacts), on_delete: :nothing, null: false
 
       # message media ids
-      add :media_id    ,  references(:message_media), on_delete: :nothing, null: true
+      add :media_id, references(:message_media), on_delete: :nothing, null: true
 
       timestamps()
     end
@@ -272,5 +269,4 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
     create index(:messages, [:recipient_id])
     create index(:messages, [:media_id])
   end
-
 end

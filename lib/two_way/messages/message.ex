@@ -3,7 +3,7 @@ defmodule TwoWay.Messages.Message do
   import Ecto.Changeset
 
   alias TwoWay.{MessageStatusEnum, MessageTypesEnum, MessageFlowEnum}
-  alias TwoWay.{Contacts.Contact, Messages.MessageMedia}
+  alias TwoWay.{Contacts.Contact, Messages.MessageMedia, Attributes.Tag}
 
   schema "messages" do
     field :body, :string
@@ -15,6 +15,8 @@ defmodule TwoWay.Messages.Message do
     belongs_to :sender, Contact
     belongs_to :recipient, Contact
     belongs_to :media, MessageMedia
+
+    many_to_many :tags, Tag, join_through: "messages_tags", on_replace: :delete
 
     timestamps()
   end

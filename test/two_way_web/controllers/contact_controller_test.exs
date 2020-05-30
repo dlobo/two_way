@@ -3,9 +3,33 @@ defmodule TwoWayWeb.ContactControllerTest do
 
   alias TwoWay.Contacts
 
-  @create_attrs %{name: "some name", optin_time: "2010-04-17T14:00:00Z", optout_time: "2010-04-17T14:00:00Z", phone: "some phone", status: "some status", wa_id: "some wa_id", wa_status: "some wa_status"}
-  @update_attrs %{name: "some updated name", optin_time: "2011-05-18T15:01:01Z", optout_time: "2011-05-18T15:01:01Z", phone: "some updated phone", status: "some updated status", wa_id: "some updated wa_id", wa_status: "some updated wa_status"}
-  @invalid_attrs %{name: nil, optin_time: nil, optout_time: nil, phone: nil, status: nil, wa_id: nil, wa_status: nil}
+  @create_attrs %{
+    name: "some name",
+    optin_time: "2010-04-17T14:00:00Z",
+    optout_time: "2010-04-17T14:00:00Z",
+    phone: "some phone",
+    status: "some status",
+    wa_id: "some wa_id",
+    wa_status: "some wa_status"
+  }
+  @update_attrs %{
+    name: "some updated name",
+    optin_time: "2011-05-18T15:01:01Z",
+    optout_time: "2011-05-18T15:01:01Z",
+    phone: "some updated phone",
+    status: "some updated status",
+    wa_id: "some updated wa_id",
+    wa_status: "some updated wa_status"
+  }
+  @invalid_attrs %{
+    name: nil,
+    optin_time: nil,
+    optout_time: nil,
+    phone: nil,
+    status: nil,
+    wa_id: nil,
+    wa_status: nil
+  }
 
   def fixture(:contact) do
     {:ok, contact} = Contacts.create_contact(@create_attrs)
@@ -75,6 +99,7 @@ defmodule TwoWayWeb.ContactControllerTest do
     test "deletes chosen contact", %{conn: conn, contact: contact} do
       conn = delete(conn, Routes.contact_path(conn, :delete, contact))
       assert redirected_to(conn) == Routes.contact_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.contact_path(conn, :show, contact))
       end

@@ -12,8 +12,7 @@ defmodule TwoWayWeb.Schema.GenericTypes do
   Typically this is for delete operations
   """
   object :generic_result do
-    field :status , non_null(:api_status_enum)
+    field :status, non_null(:api_status_enum)
     field :errors, list_of(:input_error)
   end
-
 end

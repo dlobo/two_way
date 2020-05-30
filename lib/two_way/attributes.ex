@@ -22,20 +22,22 @@ defmodule TwoWay.Attributes do
     |> Enum.reduce(Tag, fn
       {:order, order}, query ->
         query |> order_by({^order, :label})
+
       {:filter, filter}, query ->
         query |> filter_with(filter)
-     end)
-    |> Repo.all
+    end)
+    |> Repo.all()
   end
 
   defp filter_with(query, filter) do
     Enum.reduce(filter, query, fn
       {:label, label}, query ->
         from q in query, where: ilike(q.label, ^"%#{label}%")
+
       {:language, language}, query ->
         from q in query,
-      join: l in assoc(q, :language),
-      where: ilike(l.label, ^"%#{language}%")
+          join: l in assoc(q, :language),
+          where: ilike(l.label, ^"%#{language}%")
     end)
   end
 
@@ -129,8 +131,9 @@ defmodule TwoWay.Attributes do
   end
 
   defp search_ecto(ecto_schema, pattern) do
-    Repo.all from q in ecto_schema,
-      where: ilike(q.label, ^pattern) or ilike(q.description, ^pattern)
+    Repo.all(
+      from q in ecto_schema,
+        where: ilike(q.label, ^pattern) or ilike(q.description, ^pattern)
+    )
   end
-
 end

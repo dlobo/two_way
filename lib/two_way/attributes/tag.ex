@@ -2,7 +2,8 @@ defmodule TwoWay.Attributes.Tag do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias TwoWay.{Settings.Language, Attributes.Tag}
+  alias TwoWay.{Settings.Language, Attributes.Tag, Contacts.Contact, Messages.Message}
+
   schema "tags" do
     field :label, :string
     field :description, :string
@@ -13,6 +14,9 @@ defmodule TwoWay.Attributes.Tag do
     belongs_to :language, Language
 
     belongs_to :tags, Tag, foreign_key: :parent_id
+
+    many_to_many :contacts, Contact, join_through: "contacts_tags", on_replace: :delete
+    many_to_many :messages, Message, join_through: "messages_tags", on_replace: :delete
 
     timestamps()
   end
@@ -34,5 +38,4 @@ defmodule TwoWay.Attributes.Tag do
   def query(queryable, _params) do
     queryable
   end
-
 end

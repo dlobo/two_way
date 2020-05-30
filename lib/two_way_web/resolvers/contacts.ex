@@ -3,7 +3,7 @@ defmodule TwoWayWeb.Resolvers.Contacts do
 
   def contact(_, %{id: id}, _) do
     with {:ok, contact} <- Repo.fetch(Contact, id),
-      do: {:ok, %{contact: contact}}
+         do: {:ok, %{contact: contact}}
   end
 
   def contacts(_, args, _) do
@@ -18,16 +18,15 @@ defmodule TwoWayWeb.Resolvers.Contacts do
 
   def update_contact(_, %{id: id, input: params}, _) do
     with {:ok, contact} <- Repo.fetch(Contact, id),
-         {:ok, contact} <- Contacts.update_contact(contact, params)  do
+         {:ok, contact} <- Contacts.update_contact(contact, params) do
       {:ok, %{contact: contact}}
     end
   end
 
   def delete_contact(_, %{id: id}, _) do
     with {:ok, contact} <- Repo.fetch(Contact, id),
-         {:ok, contact} <- Contacts.delete_contact(contact)  do
+         {:ok, contact} <- Contacts.delete_contact(contact) do
       {:ok, contact}
     end
   end
-
 end

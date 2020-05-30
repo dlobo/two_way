@@ -21,5 +21,4 @@ defmodule TwoWay.Settings.Language do
     |> unique_constraint(:label)
     |> unique_constraint(:locale)
   end
-
 end
