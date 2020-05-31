@@ -53,6 +53,7 @@ defmodule TwoWay.MixProject do
       {:ex_doc, "~> 0.18", only: [:dev], runtime: false},
       {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 1.6"},
+      {:poison, "~> 3.1"},
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
       {:absinthe_phoenix, "~> 2.0"},

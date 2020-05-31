@@ -5,7 +5,7 @@ defmodule TwoWay.Communications.BSP.Gupshup.Worker do
     priority: 0
 
   alias TwoWay.Communications.BSP.Gupshup.ApiClient
-  alias TwoWay.{Messages}
+  alias TwoWay.{Messages, Messages.Message}
 
   @impl Oban.Worker
   def perform(%{"message" => message, "payload" => payload}, _job) do
@@ -13,10 +13,7 @@ defmodule TwoWay.Communications.BSP.Gupshup.Worker do
       ApiClient.post("/msg", payload)
       |> handle_response()
 
-    # We should be able to optimize this and avoid the get. I spend a fair bit of time
-    # looking for libraries to convert maps to structs. there is: maptu, mapail and exconverter
-    # all quite old and not maintained?
-    Messages.get_message!(Map.get(message, "id"))
+    Poison.Decode.decode(message, as: %Message{})
     |> Messages.update_message(%{wa_message_id: response.message_id, wa_status: :enqueued})
 
     :ok
