@@ -97,7 +97,7 @@ defmodule TwoWay.Communications.BSP.Gupshup.Message do
     request_body =
       %{"channel" => @channel}
       |> Map.merge(format_sender(message.sender))
-      |> Map.put(:destination, message.receiver.phone)
+      |> Map.put(:destination, message.recipient.phone)
       |> Map.put("message", Jason.encode!(payload))
 
     %{message: message, payload: request_body}
