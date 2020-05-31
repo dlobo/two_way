@@ -80,14 +80,9 @@ defmodule TwoWay.Messages do
 
   """
   def update_message(%Message{} = message, attrs) do
-    IO.inspect(message)
-    IO.inspect(attrs)
-
     message
     |> Message.changeset(attrs)
     |> Repo.update()
-
-    IO.inspect(message)
   end
 
   @doc """

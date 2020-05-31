@@ -21,8 +21,6 @@ defmodule TwoWayWeb.GupshupMessageController do
   end
 
   def image(conn, params) do
-    IO.inspect(params)
-
     GupshupMessage.receive_media(params)
     |> Map.merge(%{type: :image})
     |> Communications.receive_media()
