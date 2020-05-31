@@ -35,4 +35,4 @@ npm-debug.log
 
 .env
 
-TODO
+**/*.secret.exs

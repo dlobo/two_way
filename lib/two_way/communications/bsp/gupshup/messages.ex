@@ -1,4 +1,4 @@
-defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
+defmodule TwoWay.Communications.BSP.Gupshup.Message do
   @channel "whatsapp"
   @behaviour TwoWay.Communications.MessageBehaviour
 

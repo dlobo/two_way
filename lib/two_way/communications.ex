@@ -1,4 +1,4 @@
-defmodule TwoWay.Commnunications do
+defmodule TwoWay.Communications do
   @spec effective_bsp :: any
   def effective_bsp() do
     with nil <- bsp_per_organisation(),
@@ -17,14 +17,14 @@ defmodule TwoWay.Commnunications do
   end
 
   defp bsp_from_config() do
-    case Application.get_env(:two_way, :bsp, nil) do
+    case Application.fetch_env!(:two_way, :bsp) do
       nil -> nil
       provider -> provider
     end
   end
 
   defp bsp_default() do
-    TwoWay.Commnunications.BSP.Twilio
+    TwoWay.Communications.BSP.Twilio
   end
 
   defp contact_per_organisation() do

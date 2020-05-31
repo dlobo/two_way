@@ -1,4 +1,4 @@
-defmodule TwoWay.Commnunications.BSP.Twilio.Message do
+defmodule TwoWay.Communications.BSP.Twilio.Message do
   @behaviour TwoWay.Communications.MessageBehaviour
 
   @impl TwoWay.Communications.MessageBehaviour

@@ -9,7 +9,7 @@ use Mix.Config
 
 config :two_way,
   ecto_repos: [TwoWay.Repo],
-  bsp: TwoWay.Commnunications.BSP.Gupshup
+  bsp: TwoWay.Communications.BSP.Gupshup
 
 # Configures the endpoint
 config :two_way, TwoWayWeb.Endpoint,
@@ -46,7 +46,7 @@ config :tesla, adapter: Tesla.Adapter.Hackney
 config :two_way, Oban,
   repo: TwoWay.Repo,
   prune: {:maxlen, 10_000},
-  queues: [gupshup: 10, webhook: 10]
+  queues: [default: 10, gupshup: 10, webhook: 10]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -10,7 +10,7 @@ defmodule TwoWay.Communication.Contact do
   end
 
   def bsp_module() do
-    bsp = TwoWay.Commnunications.effective_bsp()
+    bsp = TwoWay.Communications.effective_bsp()
     String.to_existing_atom(to_string(bsp) <> ".Contact")
   end
 end

@@ -69,12 +69,12 @@ defmodule TwoWay.Communications.Message do
   end
 
   def bsp_module() do
-    bsp = TwoWay.Commnunications.effective_bsp()
+    bsp = TwoWay.Communications.effective_bsp()
     String.to_existing_atom(to_string(bsp) <> ".Message")
   end
 
   def organisation_contact() do
-    TwoWay.Commnunications.organisation_contact()
+    TwoWay.Communications.organisation_contact()
   end
 
   def get_recipient_id_for_inbound() do

@@ -1,7 +1,7 @@
 defmodule TwoWayWeb.GupshupMessageController do
   use TwoWayWeb, :controller
 
-  alias TwoWay.Commnunications.BSP.Gupshup.Message, as: GupshupMessage
+  alias TwoWay.Communications.BSP.Gupshup.Message, as: GupshupMessage
   alias TwoWay.Communications.Message, as: Communications
 
   def handler(conn, params, msg) do

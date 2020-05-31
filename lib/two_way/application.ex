@@ -35,7 +35,7 @@ defmodule TwoWay.Application do
   end
 
   defp oban_config do
-    opts = Application.get_env(:my_app, Oban)
+    opts = Application.get_env(:two_way, Oban)
 
     # Prevent running queues or scheduling jobs from an iex console.
     if Code.ensure_loaded?(IEx) and IEx.started?() do

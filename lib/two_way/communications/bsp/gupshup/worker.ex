@@ -4,7 +4,7 @@ defmodule TwoWay.Communications.BSP.Gupshup.Worker do
     max_attempts: 10,
     priority: 1
 
-  alias TwoWay.Commnunications.BSP.Gupshup.ApiClient
+  alias TwoWay.Communications.BSP.Gupshup.ApiClient
   alias TwoWay.Messages
 
   @impl Oban.Worker
