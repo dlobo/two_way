@@ -13,7 +13,6 @@ defmodule TwoWay.Communications.BSP.Gupshup.Worker do
       ApiClient.post("/msg", payload)
       |> handle_response()
 
-
     # We should be able to optimize this and avoid the get. I spend a fair bit of time
     # looking for libraries to convert maps to structs. there is: maptu, mapail and exconverter
     # all quite old and not maintained?
@@ -28,5 +27,4 @@ defmodule TwoWay.Communications.BSP.Gupshup.Worker do
     body = response.body |> Jason.decode!()
     %{message_id: body["messageId"]}
   end
-
 end

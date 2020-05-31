@@ -40,8 +40,9 @@ defmodule TwoWay.Messages do
     do: Repo.get!(Message, id)
 
   def get_message_all!(id),
-    do: Repo.get!(Message, id)
-    |> Repo.preload([:recipient, :sender, :media])
+    do:
+      Repo.get!(Message, id)
+      |> Repo.preload([:recipient, :sender, :media])
 
   @doc """
   Creates a message.
