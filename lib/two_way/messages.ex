@@ -36,7 +36,12 @@ defmodule TwoWay.Messages do
       ** (Ecto.NoResultsError)
 
   """
-  def get_message!(id), do: Repo.get!(Message, id) |> Repo.preload([:recipient, :sender, :media])
+  def get_message!(id),
+    do: Repo.get!(Message, id)
+
+  def get_message_all!(id),
+    do: Repo.get!(Message, id)
+    |> Repo.preload([:recipient, :sender, :media])
 
   @doc """
   Creates a message.
@@ -74,9 +79,14 @@ defmodule TwoWay.Messages do
 
   """
   def update_message(%Message{} = message, attrs) do
+    IO.inspect(message)
+    IO.inspect(attrs)
+
     message
     |> Message.changeset(attrs)
     |> Repo.update()
+
+    IO.inspect(message)
   end
 
   @doc """

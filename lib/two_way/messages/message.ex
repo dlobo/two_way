@@ -5,6 +5,19 @@ defmodule TwoWay.Messages.Message do
   alias TwoWay.{MessageStatusEnum, MessageTypesEnum, MessageFlowEnum}
   alias TwoWay.{Contacts.Contact, Messages.MessageMedia, Attributes.Tag}
 
+  @required_fields [
+    :type,
+    :flow,
+    :wa_status,
+    :sender_id,
+    :recipient_id
+  ]
+  @optional_fields [
+    :body,
+    :wa_message_id,
+    :media_id
+  ]
+
   schema "messages" do
     field :body, :string
     field :flow, MessageFlowEnum
@@ -24,23 +37,12 @@ defmodule TwoWay.Messages.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [
-      :type,
-      :flow,
-      :body,
-      :wa_message_id,
-      :wa_status,
-      :sender_id,
-      :recipient_id,
-      :media_id
-    ])
-    |> validate_required([
-      :type,
-      :flow,
-      :wa_status,
-      :sender_id,
-      :recipient_id
-    ])
+    |> cast(attrs, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
+  end
+
+  def to_minimal_map(message) do
+    Map.take(message, [:id | @required_fields])
   end
 
   def data() do

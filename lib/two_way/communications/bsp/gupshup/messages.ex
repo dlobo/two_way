@@ -3,6 +3,7 @@ defmodule TwoWay.Communications.BSP.Gupshup.Message do
   @behaviour TwoWay.Communications.MessageBehaviour
 
   alias TwoWay.Communications.BSP.Gupshup.Worker
+  alias TwoWay.Messages.Message
 
   @impl TwoWay.Communications.MessageBehaviour
   def send_text(message) do
@@ -100,9 +101,7 @@ defmodule TwoWay.Communications.BSP.Gupshup.Message do
       |> Map.put(:destination, message.recipient.phone)
       |> Map.put("message", Jason.encode!(payload))
 
-    IO.inspect(request_body)
-
-    %{id: message.id, payload: request_body}
+    %{message: Message.to_minimal_map(message), payload: request_body}
     |> Worker.new()
     |> Oban.insert()
   end
