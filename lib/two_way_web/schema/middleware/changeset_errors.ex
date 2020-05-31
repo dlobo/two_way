@@ -3,6 +3,7 @@ defmodule TwoWayWeb.Schema.Middleware.ChangesetErrors do
 
   def call(res, _) do
     l = Map.get(res, :errors)
+
     if length(l) == 2 do
       [h | t] = l
       %{res | value: %{errors: [%{key: h, message: t}]}, errors: []}
