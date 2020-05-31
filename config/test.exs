@@ -20,3 +20,5 @@ config :two_way, TwoWayWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :two_way, Oban, crontab: false, queues: false, plugins: false

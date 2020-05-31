@@ -8,35 +8,20 @@ defmodule TwoWay.Communications.MessageBehaviour do
   - `destination` - destination number for communication
   """
 
-  @callback send_text(
-              message :: TwoWay.Messages.Message.t(),
-              receiver :: String.t(),
-              sender :: map()
-            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+  @callback send_text(message :: TwoWay.Messages.Message.t()) ::
+              {:ok, response :: map()} | {:error, message :: String.t()}
 
-  @callback send_image(
-              message_media :: TwoWay.Messages.MessageMedia.t(),
-              receiver :: String.t(),
-              sender :: map()
-            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+  @callback send_image(message :: TwoWay.Messages.Message.t()) ::
+              {:ok, response :: map()} | {:error, message :: String.t()}
 
-  @callback send_audio(
-              message_media :: TwoWay.Messages.MessageMedia.t(),
-              receiver :: String.t(),
-              sender :: map()
-            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+  @callback send_audio(message :: TwoWay.Messages.Message.t()) ::
+              {:ok, response :: map()} | {:error, message :: String.t()}
 
-  @callback send_video(
-              message_media :: TwoWay.Messages.MessageMedia.t(),
-              receiver :: String.t(),
-              sender :: map()
-            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+  @callback send_video(message :: TwoWay.Messages.MessageMedia.t()) ::
+              {:ok, response :: map()} | {:error, message :: String.t()}
 
-  @callback send_document(
-              message_media :: TwoWay.Messages.MessageMedia.t(),
-              receiver :: String.t(),
-              sender :: map()
-            ) :: {:ok, response :: map()} | {:error, message :: String.t()}
+  @callback send_document(message :: TwoWay.Messages.MessageMedia.t()) ::
+              {:ok, response :: map()} | {:error, message :: String.t()}
 
   @callback receive_text(payload :: map()) ::
               {message :: map(), contact :: map()}
