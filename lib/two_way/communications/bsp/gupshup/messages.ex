@@ -100,7 +100,9 @@ defmodule TwoWay.Communications.BSP.Gupshup.Message do
       |> Map.put(:destination, message.recipient.phone)
       |> Map.put("message", Jason.encode!(payload))
 
-    %{message: message, payload: request_body}
+    IO.inspect(request_body)
+
+    %{id: message.id, payload: request_body}
     |> Worker.new()
     |> Oban.insert()
   end
