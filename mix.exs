@@ -60,7 +60,7 @@ defmodule TwoWay.MixProject do
       {:absinthe_plug, "~> 1.5"},
       {:absinthe_phoenix, "~> 2.0"},
       {:absinthe_relay, "~> 1.5"},
-      {:dataloader, "~> 1.0.0"},
+      {:dataloader, "~> 1.0.7"},
       {:hackney, "~> 1.13"},
       {:tesla, "~> 1.3.0"},
       {:oban, "~> 1.2"},

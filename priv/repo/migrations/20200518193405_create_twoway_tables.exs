@@ -79,7 +79,7 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       # Is this a predefined system object?
       add :is_reserved, :boolean, default: false
 
-      add :option_group_id, references(:option_groups), null: false, on_delete: :restrict
+      add :option_group_id, references(:option_groups, on_delete: :restrict), null: false
 
       timestamps()
     end
@@ -128,10 +128,10 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       add :is_reserved, :boolean, default: false
 
       # foreign key to  option_value:value column with the option_group.name being "language"
-      add :language_id, references(:languages), null: false, on_delete: :restrict
+      add :language_id, references(:languages, on_delete: :restrict), null: false
 
       # All child tags point to the parent tag, this allows us a to organize tags as needed
-      add :parent_id, references(:tags), null: true, on_delete: :nilify_all
+      add :parent_id, references(:tags, on_delete: :nilify_all), null: true
 
       timestamps()
     end
@@ -161,13 +161,13 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       add :is_translated, :boolean, default: false
 
       # Messages are in a specific language
-      add :language_id, references(:languages), null: false, on_delete: :restrict
+      add :language_id, references(:languages, on_delete: :restrict), null: false
 
       # All child messages point to the root message, so we can propagate changes downstream
-      add :parent_id, references(:session_messages), null: true, on_delete: :nilify_all
+      add :parent_id, references(:session_messages, on_delete: :nilify_all), null: true
 
       # Message templates can be tagged
-      add :tag_id, references(:tags), null: true, on_delete: :nilify_all
+      add :tag_id, references(:tags, on_delete: :nilify_all), null: true
 
       timestamps()
     end
@@ -254,13 +254,13 @@ defmodule TwoWay.Repo.Migrations.AddTwowayTables do
       add :wa_status, :message_status_enum
 
       # sender id
-      add :sender_id, references(:contacts), on_delete: :nothing, null: false
+      add :sender_id, references(:contacts, on_delete: :delete_all), null: false
 
       # recipient id
-      add :recipient_id, references(:contacts), on_delete: :nothing, null: false
+      add :recipient_id, references(:contacts, on_delete: :delete_all), null: false
 
       # message media ids
-      add :media_id, references(:message_media), on_delete: :nothing, null: true
+      add :media_id, references(:message_media, on_delete: :delete_all), null: true
 
       timestamps()
     end

@@ -51,7 +51,6 @@ defmodule TwoWayWeb.Schema do
     import_fields(:organization_queries)
 
     import_fields(:bsp_queries)
-
   end
 
   mutation do
@@ -70,7 +69,6 @@ defmodule TwoWayWeb.Schema do
     import_fields(:organization_mutations)
 
     import_fields(:bsp_mutations)
-
   end
 
   subscription do

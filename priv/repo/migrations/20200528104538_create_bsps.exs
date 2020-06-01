@@ -9,6 +9,5 @@ defmodule TwoWay.Repo.Migrations.CreateBsps do
 
       timestamps()
     end
-
   end
 end

@@ -34,7 +34,6 @@ defmodule TwoWayWeb.Schema.MessageTypes do
     field :tags, list_of(:tag) do
       resolve(dataloader(Message))
     end
-
   end
 
   @desc "Filtering options for messages"
@@ -103,11 +102,9 @@ defmodule TwoWayWeb.Schema.MessageTypes do
 
   object :message_subscriptions do
     field :receive_message, :message do
-
-      config fn _args, _info ->
+      config(fn _args, _info ->
         {:ok, topic: "*"}
-      end
+      end)
     end
   end
-
 end

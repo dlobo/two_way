@@ -12,6 +12,7 @@ defmodule TwoWayWeb.Schema.MessageTagTypes do
 
   object :message_tag do
     field :id, :id
+
     field :message, :message do
       resolve(dataloader(MessageTag))
     end

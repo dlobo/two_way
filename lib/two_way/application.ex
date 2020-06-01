@@ -18,7 +18,7 @@ defmodule TwoWay.Application do
       # Add Oban to process jobs
       {Oban, oban_config()},
       # Add Absinthe's subscription
-      {Absinthe.Subscription, TwoWayWeb.Endpoint},
+      {Absinthe.Subscription, TwoWayWeb.Endpoint}
       # Start a worker by calling: TwoWay.Worker.start_link(arg)
       # {TwoWay.Worker, arg}
     ]

@@ -108,5 +108,4 @@ defmodule TwoWay.MessagesTags do
   def change_message(%MessageTag{} = message_tag, attrs \\ %{}) do
     MessageTag.changeset(message_tag, attrs)
   end
-
 end

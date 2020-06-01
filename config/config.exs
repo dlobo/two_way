@@ -13,7 +13,6 @@ config :two_way,
   bsp_id: "gupshup-bsp-23",
   bsp_limit: 10
 
-
 # Configures the endpoint
 config :two_way, TwoWayWeb.Endpoint,
   url: [host: "localhost"],

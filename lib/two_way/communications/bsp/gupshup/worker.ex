@@ -14,8 +14,8 @@ defmodule TwoWay.Communications.BSP.Gupshup.Worker do
   def perform(%{"message" => message, "payload" => payload}, _job) do
     # ensure that we are under the rate limit, all rate limits are in requests/minutes
     with {:ok, _} <- ExRated.check_rate(@rate_name, 60_000, @rate_limit) do
-        ApiClient.post("/msg", payload)
-        |> handle_response(message)
+      ApiClient.post("/msg", payload)
+      |> handle_response(message)
     else
       _ -> {:error, :rate_limit_exceeded}
     end

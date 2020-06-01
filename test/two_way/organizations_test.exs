@@ -105,7 +105,11 @@ defmodule TwoWay.OrganizationsTest do
     alias TwoWay.Organizations.BSP
 
     @valid_attrs %{api_end_point: "some api_end_point", name: "some name", url: "some url"}
-    @update_attrs %{api_end_point: "some updated api_end_point", name: "some updated name", url: "some updated url"}
+    @update_attrs %{
+      api_end_point: "some updated api_end_point",
+      name: "some updated name",
+      url: "some updated url"
+    }
     @invalid_attrs %{api_end_point: nil, name: nil, url: nil}
 
     def bsp_fixture(attrs \\ %{}) do

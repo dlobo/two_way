@@ -10,7 +10,14 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias TwoWay.Repo
-alias TwoWay.{Settings.Language, Attributes.Tag, Contacts.Contact, Organizations.BSP, Organizations.Organization}
+
+alias TwoWay.{
+  Settings.Language,
+  Attributes.Tag,
+  Contacts.Contact,
+  Organizations.BSP,
+  Organizations.Organization
+}
 
 en_us =
   Repo.insert!(%Language{
@@ -59,9 +66,8 @@ Repo.insert!(%Contact{
 Repo.insert!(%BSP{
   name: "gupshup",
   url: "test_url",
-  api_end_point: "test",
+  api_end_point: "test"
 })
-
 
 Repo.insert!(%Organization{
   name: "Random",

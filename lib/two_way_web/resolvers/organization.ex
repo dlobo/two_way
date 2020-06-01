@@ -12,7 +12,6 @@ defmodule TwoWayWeb.Resolvers.Organizations do
 
   def create_organization(_, %{input: params}, _) do
     with {:ok, organization} <- Organizations.create_organization(params) do
-
       {:ok, %{organization: organization}}
     end
   end
@@ -42,7 +41,6 @@ defmodule TwoWayWeb.Resolvers.Organizations do
 
   def create_bsp(_, %{input: params}, _) do
     with {:ok, bsp} <- Organizations.create_bsp(params) do
-
       {:ok, %{bsp: bsp}}
     end
   end
@@ -60,5 +58,4 @@ defmodule TwoWayWeb.Resolvers.Organizations do
       {:ok, bsp}
     end
   end
-
 end

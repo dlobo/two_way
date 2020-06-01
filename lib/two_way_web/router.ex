@@ -51,7 +51,6 @@ defmodule TwoWayWeb.Router do
     resources "/contacts", ContactController
     resources "/message_media", MessageMediaController
     resources "/messages", MessageController
-
   end
 
   # Other scopes may use custom stacks.
