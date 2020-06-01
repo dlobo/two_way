@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias TwoWay.Repo
-alias TwoWay.{Settings.Language, Attributes.Tag, Contacts.Contact, Organizations.Organization}
+alias TwoWay.{Settings.Language, Attributes.Tag, Contacts.Contact, Organizations.BSP, Organizations.Organization}
 
 en_us =
   Repo.insert!(%Language{
@@ -56,11 +56,18 @@ Repo.insert!(%Contact{
   phone: Integer.to_string(Enum.random(123_456_789..9_876_543_210))
 })
 
+Repo.insert!(%BSP{
+  name: "gupshup",
+  url: "test_url",
+  api_end_point: "test",
+})
+
+
 Repo.insert!(%Organization{
   name: "Random",
   contact_name: "Jacob Cron",
   email: "random",
-  bsp: "gupshup",
+  bsp_id: 1,
   bsp_key: "random",
   wa_number: Integer.to_string(Enum.random(123_456_789..9_876_543_210))
 })

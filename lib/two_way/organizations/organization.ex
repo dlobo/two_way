@@ -2,13 +2,15 @@ defmodule TwoWay.Organizations.Organization do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias TwoWay.Organizations.BSP
+
   schema "organizations" do
-    field :bsp, :string
-    field :bsp_key, :string
+    field :name, :string
     field :contact_name, :string
     field :email, :string
-    field :name, :string
     field :wa_number, :string
+    field :bsp_key, :string
+    belongs_to :bsp, BSP
 
     timestamps()
   end
@@ -16,8 +18,22 @@ defmodule TwoWay.Organizations.Organization do
   @doc false
   def changeset(organization, attrs) do
     organization
-    |> cast(attrs, [:name, :contact_name, :email, :bsp, :bsp_key, :wa_number])
-    |> validate_required([:name, :contact_name, :email, :bsp, :bsp_key, :wa_number])
+    |> cast(attrs, [
+      :name,
+      :contact_name,
+      :email,
+      :bsp_id,
+      :bsp_key,
+      :wa_number
+    ])
+    |> validate_required([
+      :name,
+      :contact_name,
+      :email,
+      :bsp_id,
+      :bsp_key,
+      :wa_number
+    ])
   end
 
   def data() do
