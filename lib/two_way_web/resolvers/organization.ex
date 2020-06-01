@@ -46,4 +46,19 @@ defmodule TwoWayWeb.Resolvers.Organizations do
       {:ok, %{bsp: bsp}}
     end
   end
+
+  def update_bsp(_, %{id: id, input: params}, _) do
+    with {:ok, bsp} <- Repo.fetch(Organization, id),
+         {:ok, bsp} <- Organizations.update_bsp(bsp, params) do
+      {:ok, %{bsp: bsp}}
+    end
+  end
+
+  def delete_bsp(_, %{id: id}, _) do
+    with {:ok, bsp} <- Repo.fetch(Organization, id),
+         {:ok, bsp} <- Organizations.delete_bsp(bsp) do
+      {:ok, bsp}
+    end
+  end
+
 end
