@@ -96,3 +96,26 @@ mutation creTag($input:TagInput!) {
     "languageId": "1"
   }
 }
+
+mutation createOrganization($input: OrganizationInput!) {
+  createOrganization(input: $input) {
+      organization {
+        id
+      }
+      errors {
+        key
+        message
+      }
+    }
+}
+
+{
+  "input": {
+    "name": "Org",
+    "contact_name": "Jason",
+    "email": "test@gmail.com",
+    "bsp": "gupshup",
+    "bsp_key": "random",
+    "wa_number": "10101010101"
+  }
+}
