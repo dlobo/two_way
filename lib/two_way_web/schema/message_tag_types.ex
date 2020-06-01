@@ -19,23 +19,7 @@ defmodule TwoWayWeb.Schema.MessageTagTypes do
     field :tag, :tag do
       resolve(dataloader(MessageTag))
     end
-
   end
-
-  # @desc "Filtering options for message media"
-  # input_object :message_tag_filter do
-  #   @desc "Match the url"
-  #   field :url, :string
-
-  #   @desc "Match the source url"
-  #   field :source_url, :string
-
-  #   @desc "Match the thumbnail"
-  #   field :thumbnail, :string
-
-  #   @desc "Match the caption"
-  #   field :caption, :string
-  # end
 
   input_object :message_tag_input do
     field :message_id, :id
@@ -48,13 +32,6 @@ defmodule TwoWayWeb.Schema.MessageTagTypes do
       arg(:id, non_null(:id))
       resolve(&Resolvers.MessageTag.message_tag/3)
     end
-
-    # @desc "Get a list of all message tag filtered by various criteria"
-    # field :message_tags, list_of(:message_tag) do
-    #   arg(:filter, :message_tag_filter)
-    #   arg(:order, type: :sort_order, default_value: :asc)
-    #   resolve(&Resolvers.MessageTag.message_tags/3)
-    # end
   end
 
   object :message_tag_mutations do
