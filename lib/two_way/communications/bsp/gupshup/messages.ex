@@ -1,58 +1,62 @@
-defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
+defmodule TwoWay.Communications.BSP.Gupshup.Message do
   @channel "whatsapp"
   @behaviour TwoWay.Communications.MessageBehaviour
 
-  alias TwoWay.Commnunications.BSP.Gupshup.ApiClient, as: ApiClient
+  alias TwoWay.Communications.BSP.Gupshup.Worker
+  alias TwoWay.Messages.Message
 
   @impl TwoWay.Communications.MessageBehaviour
-  def send_text(message, receiver, sender) do
+  def send_text(message) do
     %{type: :text, text: message.body}
-    |> send(receiver, sender)
-    |> handle_response()
+    |> send_message(message)
   end
 
   @impl TwoWay.Communications.MessageBehaviour
-  def send_image(message_media, receiver, sender) do
+  def send_image(message) do
+    message_media = message.media
+
     %{
       type: :image,
       originalUrl: message_media.source_url,
       previewUrl: message_media.url,
       caption: message_media.caption
     }
-    |> send(receiver, sender)
-    |> handle_response()
+    |> send_message(message)
   end
 
   @impl TwoWay.Communications.MessageBehaviour
-  def send_audio(message_media, receiver, sender) do
+  def send_audio(message) do
+    message_media = message.media
+
     %{
       type: :audio,
       url: message_media.source_url
     }
-    |> send(receiver, sender)
-    |> handle_response()
+    |> send_message(message)
   end
 
   @impl TwoWay.Communications.MessageBehaviour
-  def send_video(message_media, receiver, sender) do
+  def send_video(message) do
+    message_media = message.media
+
     %{
       type: :audio,
       url: message_media.source_url,
       caption: message_media.caption
     }
-    |> send(receiver, sender)
-    |> handle_response()
+    |> send_message(message)
   end
 
   @impl TwoWay.Communications.MessageBehaviour
-  def send_document(message_media, receiver, sender) do
+  def send_document(message) do
+    message_media = message.media
+
     %{
       type: :file,
       url: message_media.source_url,
       filename: message_media.caption
     }
-    |> send(receiver, sender)
-    |> handle_response()
+    |> send_message(message)
   end
 
   @impl TwoWay.Communications.MessageBehaviour
@@ -90,19 +94,15 @@ defmodule TwoWay.Commnunications.BSP.Gupshup.Message do
     %{"source" => sender.phone, "src.name" => sender.name}
   end
 
-  defp send(message_payload, receiver, sender) do
+  defp send_message(payload, message) do
     request_body =
       %{"channel" => @channel}
-      |> Map.merge(format_sender(sender))
-      |> Map.put(:destination, receiver)
-      |> Map.put("message", Jason.encode!(message_payload))
+      |> Map.merge(format_sender(message.sender))
+      |> Map.put(:destination, message.recipient.phone)
+      |> Map.put("message", Jason.encode!(payload))
 
-    ApiClient.post("/msg", request_body)
-  end
-
-  defp handle_response(response_data) do
-    {:ok, response} = response_data
-    body = response.body |> Jason.decode!()
-    %{message_id: body["messageId"]}
+    %{message: Message.to_minimal_map(message), payload: request_body}
+    |> Worker.new()
+    |> Oban.insert()
   end
 end

@@ -36,7 +36,13 @@ defmodule TwoWay.Messages do
       ** (Ecto.NoResultsError)
 
   """
-  def get_message!(id), do: Repo.get!(Message, id) |> Repo.preload([:recipient, :sender, :media])
+  def get_message!(id),
+    do: Repo.get!(Message, id)
+
+  def get_message_all!(id),
+    do:
+      Repo.get!(Message, id)
+      |> Repo.preload([:recipient, :sender, :media])
 
   @doc """
   Creates a message.

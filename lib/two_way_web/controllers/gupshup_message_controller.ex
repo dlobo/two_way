@@ -1,7 +1,7 @@
 defmodule TwoWayWeb.GupshupMessageController do
   use TwoWayWeb, :controller
 
-  alias TwoWay.Commnunications.BSP.Gupshup.Message, as: GupshupMessage
+  alias TwoWay.Communications.BSP.Gupshup.Message, as: GupshupMessage
   alias TwoWay.Communications.Message, as: Communications
 
   def handler(conn, params, msg) do
@@ -21,8 +21,6 @@ defmodule TwoWayWeb.GupshupMessageController do
   end
 
   def image(conn, params) do
-    IO.inspect(params)
-
     GupshupMessage.receive_media(params)
     |> Map.merge(%{type: :image})
     |> Communications.receive_media()

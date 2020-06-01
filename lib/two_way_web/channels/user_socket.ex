@@ -1,6 +1,7 @@
 defmodule TwoWayWeb.UserSocket do
   use Phoenix.Socket
-  use Absinthe.Phoenix.Socket, schema: TwoWayWeb.Schema
+  use Absinthe.Phoenix.Socket,
+    schema: TwoWayWeb.Schema
 
   ## Channels
   # channel "room:*", TwoWayWeb.RoomChannel

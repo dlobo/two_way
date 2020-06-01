@@ -5,8 +5,7 @@ defmodule TwoWayWeb.PageController do
     render(conn, "index.html")
   end
 
-  def hook(conn, params) do
-    IO.inspect(params)
+  def hook(conn, _params) do
     json(conn, nil)
   end
 

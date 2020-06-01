@@ -9,7 +9,10 @@ use Mix.Config
 
 config :two_way,
   ecto_repos: [TwoWay.Repo],
-  bsp: TwoWay.Commnunications.BSP.Gupshup
+  bsp: TwoWay.Communications.BSP.Gupshup,
+  bsp_id: "gupshup-bsp-23",
+  bsp_limit: 10
+
 
 # Configures the endpoint
 config :two_way, TwoWayWeb.Endpoint,
@@ -27,6 +30,9 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :absinthe,
+  log: true
+
 # Configure to use UTC timestamp in tables
 config :two_way,
        TwoWay.Repo,
@@ -43,6 +49,12 @@ config :two_way, :pow,
 
 config :tesla, adapter: Tesla.Adapter.Hackney
 
+config :two_way, Oban,
+  repo: TwoWay.Repo,
+  prune: {:maxlen, 10_000},
+  queues: [default: 10, gupshup: 10, webhook: 10]
+
 # Import environment specific config. This must remain at the bottom
+
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

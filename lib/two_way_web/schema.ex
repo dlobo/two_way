@@ -60,6 +60,10 @@ defmodule TwoWayWeb.Schema do
     import_fields(:organization_mutations)
   end
 
+  subscription do
+    import_fields(:message_subscriptions)
+  end
+
   def context(ctx) do
     loader =
       Dataloader.new()

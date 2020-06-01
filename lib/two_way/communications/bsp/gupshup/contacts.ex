@@ -1,4 +1,4 @@
-defmodule TwoWay.Commnunications.BSP.Gupshup.Contact do
+defmodule TwoWay.Communications.BSP.Gupshup.Contact do
   @behaviour TwoWay.Communications.ContactBehaviour
 
   @impl TwoWay.Communications.ContactBehaviour

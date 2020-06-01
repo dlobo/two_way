@@ -11,37 +11,35 @@ defmodule TwoWay.Communications.Message do
   def send_message(%Message{type: :text} = message) do
     message
     |> send_text()
-    |> handle_send_message_response(message)
   end
 
   def send_message(message) do
     message
     |> send_media()
-    |> handle_send_message_response(message)
   end
 
   defp send_text(message) do
     bsp_module()
-    |> apply(:send_text, [message, message.recipient.phone, message.sender])
+    |> apply(:send_text, [message])
   end
 
   defp send_media(message) do
     case message.type do
       :image ->
         bsp_module()
-        |> apply(:send_image, [message.media, message.recipient.phone, message.sender])
+        |> apply(:send_image, [message])
 
       :audio ->
         bsp_module()
-        |> apply(:send_audio, [message.media, message.recipient.phone, message.sender])
+        |> apply(:send_audio, [message])
 
       :video ->
         bsp_module()
-        |> apply(:send_video, [message.media, message.recipient.phone, message.sender])
+        |> apply(:send_video, [message])
 
       :document ->
         bsp_module()
-        |> apply(:send_document, [message.media, message.recipient.phone, message.sender])
+        |> apply(:send_document, [message])
     end
   end
 
@@ -71,21 +69,16 @@ defmodule TwoWay.Communications.Message do
   end
 
   def bsp_module() do
-    bsp = TwoWay.Commnunications.effective_bsp()
+    bsp = TwoWay.Communications.effective_bsp()
     String.to_existing_atom(to_string(bsp) <> ".Message")
   end
 
   def organisation_contact() do
-    TwoWay.Commnunications.organisation_contact()
+    TwoWay.Communications.organisation_contact()
   end
 
   def get_recipient_id_for_inbound() do
     # TODO: Make this dynamic
     1
-  end
-
-  defp handle_send_message_response(response, message) do
-    message
-    |> Messages.update_message(%{wa_message_id: response.message_id, wa_status: :sent})
   end
 end

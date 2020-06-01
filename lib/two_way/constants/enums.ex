@@ -10,7 +10,7 @@ defmodule TwoWay.Constants.Enums do
       @api_status_const [:ok, :error]
       @contact_status_const [:failed, :invalid, :processing, :valid]
       @message_flow_const [:inbound, :outbound]
-      @message_status_const [:sent, :delivered, :read, :received]
+      @message_status_const [:sent, :delivered, :enqueued, :read, :received]
       @message_types_const [:audio, :contact, :document, :hsm, :image, :location, :text, :video]
       @sort_order_const [:asc, :desc]
     end

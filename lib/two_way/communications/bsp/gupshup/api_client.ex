@@ -1,9 +1,10 @@
-defmodule TwoWay.Commnunications.BSP.Gupshup.ApiClient do
+defmodule TwoWay.Communications.BSP.Gupshup.ApiClient do
   use Tesla
-  plug Tesla.Middleware.BaseUrl, "https://api.gupshup.io/sm/api/v1"
+  plug Tesla.Middleware.BaseUrl, Application.fetch_env!(:two_way, :bsp_url)
+  plug Tesla.Middleware.Logger, log_level: :debug
 
   plug Tesla.Middleware.Headers, [
-    {"apikey", System.get_env("GUPSHUP_API_KEY") || "380a3225dc604909c9cb8406c7d49f75"}
+    {"apikey", Application.fetch_env!(:two_way, :bsp_key)}
   ]
 
   plug Tesla.Middleware.FormUrlencoded,

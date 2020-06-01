@@ -41,6 +41,7 @@ defmodule TwoWay.MixProject do
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.2.0"},
+      {:phoenix_pubsub, "~> 2.0"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:decimal, "~> 1.8"},
@@ -53,6 +54,8 @@ defmodule TwoWay.MixProject do
       {:ex_doc, "~> 0.18", only: [:dev], runtime: false},
       {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 1.6"},
+      {:poison, "~> 3.1"},
+      {:ex_rated, "~> 1.2"},
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
       {:absinthe_phoenix, "~> 2.0"},
@@ -60,6 +63,7 @@ defmodule TwoWay.MixProject do
       {:dataloader, "~> 1.0.0"},
       {:hackney, "~> 1.13"},
       {:tesla, "~> 1.3.0"},
+      {:oban, "~> 1.2"},
       {:faker, "~> 0.13", only: :dev}
     ]
   end
@@ -73,6 +77,7 @@ defmodule TwoWay.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
+      reset: ["deps.get", "compile", "ecto.reset", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]

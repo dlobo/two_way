@@ -14,7 +14,11 @@ defmodule TwoWay.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: TwoWay.PubSub},
       # Start the Endpoint (http/https)
-      TwoWayWeb.Endpoint
+      TwoWayWeb.Endpoint,
+      # Add Oban to process jobs
+      {Oban, oban_config()},
+      # Add Absinthe's subscription
+      {Absinthe.Subscription, TwoWayWeb.Endpoint},
       # Start a worker by calling: TwoWay.Worker.start_link(arg)
       # {TwoWay.Worker, arg}
     ]
@@ -30,5 +34,18 @@ defmodule TwoWay.Application do
   def config_change(changed, _new, removed) do
     TwoWayWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp oban_config do
+    opts = Application.get_env(:two_way, Oban)
+
+    # Prevent running queues or scheduling jobs from an iex console.
+    if Code.ensure_loaded?(IEx) and IEx.started?() do
+      opts
+      |> Keyword.put(:crontab, false)
+      |> Keyword.put(:queues, false)
+    else
+      opts
+    end
   end
 end

@@ -3,15 +3,12 @@ defmodule TwoWayWeb.Schema.Middleware.ChangesetErrors do
 
   def call(res, _) do
     l = Map.get(res, :errors)
-    IO.puts("In call")
-    IO.inspect(l)
 
     if length(l) == 2 do
       [h | t] = l
       %{res | value: %{errors: [%{key: h, message: t}]}, errors: []}
     else
       with %{errors: [%Ecto.Changeset{} = changeset]} <- res do
-        IO.inspect(%{errors: transform_errors(changeset)})
         %{res | value: %{errors: transform_errors(changeset)}, errors: []}
       end
     end
