@@ -1,7 +1,7 @@
 defmodule TwoWay.Communications.BSP.Gupshup.Worker do
   use Oban.Worker,
     queue: :gupshup,
-    max_attempts: 2,
+    max_attempts: 3,
     priority: 0
 
   alias TwoWay.Communications.BSP.Gupshup.ApiClient
