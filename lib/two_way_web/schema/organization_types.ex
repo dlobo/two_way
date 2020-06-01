@@ -2,7 +2,7 @@ defmodule TwoWayWeb.Schema.OrganizationTypes do
   use Absinthe.Schema.Notation
   import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
-  alias TwoWay.{Organizations.BSP}
+  alias TwoWay.Organizations.BSP
   alias TwoWayWeb.{Resolvers}
 
   object :organization_result do
@@ -18,9 +18,7 @@ defmodule TwoWayWeb.Schema.OrganizationTypes do
     field :email, :string
     field :wa_number, :string
 
-    field :bsp, :bsp do
-      resolve(dataloader(BSP))
-    end
+    field :bsp_id, :id
   end
 
   @desc "Filtering options for organizations"
@@ -32,7 +30,6 @@ defmodule TwoWayWeb.Schema.OrganizationTypes do
     field :email, :string
 
     field :contact_name, :string
-    field :bsp, :string
     field :bsp_key, :string
     field :wa_number, :string
   end
@@ -41,9 +38,10 @@ defmodule TwoWayWeb.Schema.OrganizationTypes do
     field :name, :string
     field :contact_name, :string
     field :email, :string
-    field :bsp, :string
     field :bsp_key, :string
     field :wa_number, :string
+
+    field :bsp_id, :id
   end
 
   object :organization_queries do
