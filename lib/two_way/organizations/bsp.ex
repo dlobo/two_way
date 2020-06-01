@@ -24,4 +24,12 @@ defmodule TwoWay.Organizations.BSP do
       :api_end_point
     ])
   end
+
+  def data() do
+    Dataloader.Ecto.new(TwoWay.Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
 end

@@ -1,5 +1,5 @@
 defmodule TwoWayWeb.Resolvers.Organizations do
-  alias TwoWay.{Organizations, Repo, Organizations.Organization}
+  alias TwoWay.{Organizations, Repo, Organizations.Organization, Organizations.BSP}
 
   def organization(_, %{id: id}, _) do
     with {:ok, organization} <- Repo.fetch(Organization, id),
@@ -28,6 +28,22 @@ defmodule TwoWayWeb.Resolvers.Organizations do
     with {:ok, organization} <- Repo.fetch(Organization, id),
          {:ok, organization} <- Organizations.delete_organization(organization) do
       {:ok, organization}
+    end
+  end
+
+  def bsp(_, %{id: id}, _) do
+    with {:ok, bsp} <- Repo.fetch(BSP, id),
+         do: {:ok, %{bsp: bsp}}
+  end
+
+  def bsps(_, args, _) do
+    {:ok, Organizations.list_bsps(args)}
+  end
+
+  def create_bsp(_, %{input: params}, _) do
+    with {:ok, bsp} <- Organizations.create_bsp(params) do
+
+      {:ok, %{bsp: bsp}}
     end
   end
 end

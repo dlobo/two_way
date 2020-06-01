@@ -113,7 +113,7 @@ defmodule TwoWay.Organizations do
       [%BSP{}, ...]
 
   """
-  def list_bsps do
+  def list_bsps(_args \\ %{}) do
     Repo.all(BSP)
   end
 
