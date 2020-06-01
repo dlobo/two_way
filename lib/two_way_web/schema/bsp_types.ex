@@ -15,10 +15,6 @@ defmodule TwoWayWeb.Schema.BSPTypes do
     field :name, :string
     field :url, :string
     field :api_end_point, :string
-
-    field :bsp, :bsp do
-      resolve(dataloader(BSP))
-    end
   end
 
   @desc "Filtering options for bsps"
