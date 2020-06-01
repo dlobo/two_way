@@ -64,7 +64,8 @@ defmodule TwoWay.MixProject do
       {:hackney, "~> 1.13"},
       {:tesla, "~> 1.3.0"},
       {:oban, "~> 1.2"},
-      {:faker, "~> 0.13", only: :dev}
+      {:faker, "~> 0.13", only: :dev},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 
