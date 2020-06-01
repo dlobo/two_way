@@ -95,4 +95,14 @@ defmodule TwoWayWeb.Schema.MessageTypes do
       resolve(&Resolvers.Messages.delete_message/3)
     end
   end
+
+  object :message_subscriptions do
+    field :receive_message, :message do
+
+      config fn _args, _info ->
+        {:ok, topic: "*"}
+      end
+    end
+  end
+
 end

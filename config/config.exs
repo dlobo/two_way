@@ -30,6 +30,9 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :absinthe,
+  log: true
+
 # Configure to use UTC timestamp in tables
 config :two_way,
        TwoWay.Repo,
