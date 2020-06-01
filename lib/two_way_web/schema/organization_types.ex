@@ -18,7 +18,9 @@ defmodule TwoWayWeb.Schema.OrganizationTypes do
     field :email, :string
     field :wa_number, :string
 
-    field :bsp_id, :id
+    field :bsp, :bsp do
+      resolve(dataloader(BSP))
+    end
   end
 
   @desc "Filtering options for organizations"
