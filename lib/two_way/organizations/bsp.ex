@@ -13,7 +13,15 @@ defmodule TwoWay.Organizations.BSP do
   @doc false
   def changeset(bsp, attrs) do
     bsp
-    |> cast(attrs, [:name, :url, :api_end_point])
-    |> validate_required([:name, :url, :api_end_point])
+    |> cast(attrs, [
+      :name,
+      :url,
+      :api_end_point
+    ])
+    |> validate_required([
+      :name,
+      :url,
+      :api_end_point
+    ])
   end
 end
