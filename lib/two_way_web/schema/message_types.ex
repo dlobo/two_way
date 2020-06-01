@@ -30,6 +30,11 @@ defmodule TwoWayWeb.Schema.MessageTypes do
     field :media, :message_media do
       resolve(dataloader(Message))
     end
+
+    field :tags, list_of(:tag) do
+      resolve(dataloader(Message))
+    end
+
   end
 
   @desc "Filtering options for messages"
