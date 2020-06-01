@@ -17,7 +17,7 @@ defmodule TwoWay.Organizations do
       [%Organization{}, ...]
 
   """
-  def list_organizations do
+  def list_organizations(_args \\ %{}) do
     Repo.all(Organization)
   end
 
