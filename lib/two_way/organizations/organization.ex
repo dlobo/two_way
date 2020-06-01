@@ -19,4 +19,12 @@ defmodule TwoWay.Organizations.Organization do
     |> cast(attrs, [:name, :contact_name, :email, :bsp, :bsp_key, :wa_number])
     |> validate_required([:name, :contact_name, :email, :bsp, :bsp_key, :wa_number])
   end
+
+  def data() do
+    Dataloader.Ecto.new(TwoWay.Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
 end

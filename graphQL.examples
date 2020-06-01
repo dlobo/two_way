@@ -33,6 +33,13 @@ query multipleOps() {
   }
 }
 
+query multipleOps() {
+  organizations {
+    id
+    name
+  }
+}
+
 query tag($id:ID!){
   tag(id: $id) {
     tag {

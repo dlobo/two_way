@@ -4,6 +4,7 @@ defmodule TwoWayWeb.Schema do
   alias TwoWay.Attributes.Tag
   alias TwoWay.Messages.Message
   alias TwoWay.Contacts.Contact
+  alias TwoWay.Organizations.Organization
 
   alias TwoWayWeb.Schema.Middleware
 
@@ -28,6 +29,7 @@ defmodule TwoWayWeb.Schema do
   import_types(__MODULE__.ContactTypes)
   import_types(__MODULE__.MessageTypes)
   import_types(__MODULE__.MessageMediaTypes)
+  import_types(__MODULE__.OrganizationTypes)
 
   query do
     import_fields(:language_queries)
@@ -39,6 +41,9 @@ defmodule TwoWayWeb.Schema do
     import_fields(:message_media_queries)
 
     import_fields(:message_queries)
+
+    import_fields(:organization_queries)
+
   end
 
   mutation do
@@ -51,6 +56,8 @@ defmodule TwoWayWeb.Schema do
     import_fields(:message_media_mutations)
 
     import_fields(:message_mutations)
+
+    import_fields(:organization_mutations)
   end
 
   def context(ctx) do
@@ -59,6 +66,7 @@ defmodule TwoWayWeb.Schema do
       |> Dataloader.add_source(Tag, Tag.data())
       |> Dataloader.add_source(Message, Message.data())
       |> Dataloader.add_source(Contact, Contact.data())
+      |> Dataloader.add_source(Organization, Organization.data())
 
     Map.put(ctx, :loader, loader)
   end
