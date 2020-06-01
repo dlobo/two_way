@@ -9,7 +9,10 @@ use Mix.Config
 
 config :two_way,
   ecto_repos: [TwoWay.Repo],
-  bsp: TwoWay.Communications.BSP.Gupshup
+  bsp: TwoWay.Communications.BSP.Gupshup,
+  bsp_id: "gupshup-bsp-23",
+  bsp_limit: 1
+
 
 # Configures the endpoint
 config :two_way, TwoWayWeb.Endpoint,

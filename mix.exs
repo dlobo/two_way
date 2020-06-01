@@ -54,6 +54,7 @@ defmodule TwoWay.MixProject do
       {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 1.6"},
       {:poison, "~> 3.1"},
+      {:ex_rated, "~> 1.2"},
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
       {:absinthe_phoenix, "~> 2.0"},
@@ -75,6 +76,7 @@ defmodule TwoWay.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
+      reset: ["deps.get", "compile", "ecto.reset", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
