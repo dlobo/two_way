@@ -52,5 +52,6 @@ defmodule TwoWayWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug Pow.Plug.Session, otp_app: :two_way
+  plug CORSPlug
   plug TwoWayWeb.Router
 end
