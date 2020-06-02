@@ -45,6 +45,6 @@ defmodule TwoWay.Communications.BSP.Gupshup.Worker do
   def backoff(attempt) do
     # We backoff exponentially but always delay by at least 60 seconds
     # this needs more work and tweaking
-    :math.pow(attempt, 4) + 60 + :rand.uniform(30) * attempt
+    trunc(:math.pow(attempt, 4) + 60 + :rand.uniform(30) * attempt)
   end
 end
