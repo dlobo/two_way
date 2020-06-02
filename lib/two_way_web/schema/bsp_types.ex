@@ -1,8 +1,6 @@
 defmodule TwoWayWeb.Schema.BSPTypes do
   use Absinthe.Schema.Notation
-  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
-  alias TwoWay.{Organizations.BSP}
   alias TwoWayWeb.{Resolvers}
 
   object :bsp_result do

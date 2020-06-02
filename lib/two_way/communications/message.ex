@@ -53,6 +53,7 @@ defmodule TwoWay.Communications.Message do
       recipient_id: get_recipient_id_for_inbound()
     })
     |> Messages.create_message()
+    |> publish_message()
   end
 
   def receive_media(message_params) do
@@ -66,7 +67,17 @@ defmodule TwoWay.Communications.Message do
       recipient_id: get_recipient_id_for_inbound()
     })
     |> Messages.create_message()
+    |> publish_message()
   end
+
+  defp publish_message({:ok, message}) do
+    Absinthe.Subscription.publish(
+      TwoWayWeb.Endpoint,
+      message,
+      received_message: "*")
+    {:ok, message}
+  end
+  defp publish_message(err), do: err
 
   def bsp_module() do
     bsp = TwoWay.Communications.effective_bsp()

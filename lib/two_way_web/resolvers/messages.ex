@@ -13,6 +13,12 @@ defmodule TwoWayWeb.Resolvers.Messages do
 
   def create_message(_, %{input: params}, _) do
     with {:ok, message} <- Messages.create_message(params) do
+      {:ok, %{message: message}}
+    end
+  end
+
+  def send_message(_, %{input: params}, _) do
+    with {:ok, message} <- Messages.create_message(params) do
       Repo.preload(message, [:recipient, :sender, :media])
       |> Communications.send_message()
 

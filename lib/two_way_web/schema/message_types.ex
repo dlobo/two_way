@@ -88,6 +88,11 @@ defmodule TwoWayWeb.Schema.MessageTypes do
       resolve(&Resolvers.Messages.create_message/3)
     end
 
+    field :send_message, :message_result do
+      arg(:input, non_null(:message_input))
+      resolve(&Resolvers.Messages.send_message/3)
+    end
+
     field :update_message, :message_result do
       arg(:id, non_null(:id))
       arg(:input, :message_input)
@@ -101,10 +106,29 @@ defmodule TwoWayWeb.Schema.MessageTypes do
   end
 
   object :message_subscriptions do
-    field :receive_message, :message do
-      config(fn _args, _info ->
+    field :received_message, :message do
+      config fn _args, _info ->
         {:ok, topic: "*"}
-      end)
+      end
     end
+
+    field :sent_message, :message do
+      arg :id, non_null(:id)
+
+      config fn args, _info ->
+        {:ok, topic: args.id}
+      end
+
+      trigger [:send_message], topic: fn
+        %{message: message} -> message.id
+        _ -> []
+      end
+
+      resolve fn %{message: message}, _, _ ->
+        {:ok, message}
+      end
+
+    end
+
   end
 end
